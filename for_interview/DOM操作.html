@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM操作</title>
+</head>
+<body>
+<ul id="list">
+    <li class="text">1</li>
+    <li class="text">2</li>
+    <li class="text">3</li>
+    <li class="text">4</li>
+</ul>
+<script>
+    var listDom = document.getElementById("list");
+    var listDom1 = document.querySelector("#list");
+    var listTagDom = document.getElementsByTagName("ul")[0];
+
+    //使用getElementById或者querySelector来获取dom，得到的结果无区别
+    console.log(listDom+"==="+listDom1);  //[object HTMLULListElement]
+
+    var liDom = document.querySelectorAll("li"); //得到一个NodeList数组
+    //可以通过索引来获取到指定dom的精确值
+    console.log(liDom[0].innerHTML); //1
+
+    //创建元素
+    var pDom = document.createElement("p");
+    pDom.innerHTML = "测试呢";
+    listDom.appendChild(pDom); //添加子元素
+
+    //创建文本节点
+    var node = document.createTextNode("hello world");
+    listDom.appendChild(node); //添加文本节点
+
+    console.log(listDom.childNodes.forEach((item,idx) => console.log(item.nodeType === 1))) //获取子元素
+</script>
+</body>
+</html>

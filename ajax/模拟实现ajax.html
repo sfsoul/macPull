@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟实现ajax</title>
+</head>
+<body>
+<script>
+    class FakeXMLHttpRequest{
+        constructor(){
+            this.readyState = 0;
+        }
+
+        setReadyState(state){
+            this.readyState = state;
+            if(this.onreadystatechange){
+                this.onreadystatechange();
+            }
+        }
+
+        open(){
+            this.setReadyState(1);
+        }
+
+        send(){
+            this.setReadyState(2); //sending
+            setTimeout(() =>{
+                this.setReadyState(3); //received
+                setTimeout(() => {
+                    this.status = 200;
+                    this.responseText = "GOOD";
+                    this.setReadyState(4); //done
+                },200)
+            },100)
+        }
+    }
+
+    //发送Http请求
+    const xhr = new FakeXMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        console.log("Current state is: ",xhr.readyState);
+        if(xhr.readyState === 4){
+            console.log(xhr.responseText);
+        }
+    }
+    xhr.open("GET","https://www.baidu.com");
+    xhr.send();
+
+    /*
+    * 浏览器的Ajax会有5个阶段：
+    * 1.实例化的时候，readyState设置为0；
+    * 2.调用xhr.open方法的时候，readyState设置为1，并调用一次onreadystatechange;
+    * 3.调用xhr.send方法的时候，readyState设置为2，并调用一次onreadystatechange，并且开始发送请求了;
+    * 4.当请求回来了，readyState设置为3，并调用一次onreadystatechange，但数据还没接受完，xhr.responseText还不能用;
+    * 5.数据接收完了，xhr.responseText可以用了，readyState设置为4，并调用onreadystatechange。
+    */
+
+    //浏览器在Ajax的不同阶段设置readyState的值，并调用onreadystatechange方法。
+
+
+    //JSONP实现原理
+    var scriptDom = document.createElement("script");
+    scriptDom.setAttribute("type","text/javascript");
+    scriptDom.setAttribute("src","../lib/test.js");
+    document.body.appendChild(scriptDom);
+    function test(data){
+        console.log(data);
+    }
+
+    console.log("dumengying");
+</script>
+</body>
+</html>

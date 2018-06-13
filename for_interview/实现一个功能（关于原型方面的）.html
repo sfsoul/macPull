@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现一个函数</title>
+</head>
+<body>
+<script>
+    /*
+    * 实现函数Person，该函数实现功能如下：
+    * var person = new Person("zj");
+    * zj.setAge(21).setPosition("developer").sayHi();
+    * 输出："Hello,my name is zj,21 years old,I am a developer"
+    */
+
+    function Person(name){
+        this.name = name;
+    }
+    Person.prototype = {
+        constructor:Person,
+        setAge(age){
+            this.age = age;
+            return this;
+        },
+        setPosition(pos){
+            this.position = pos;
+            return this;
+        },
+        sayHi(){
+            console.log(`Hello,my name is ${this.name},${this.age} years old,I am a ${this.position}`)
+        }
+    }
+</script>
+</body>
+</html>

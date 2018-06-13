@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS深入之new的模拟实现</title>
+</head>
+<body>
+<script>
+    //构造函数Person
+    function Person(name,age){
+        this.name = name;
+        this.age = age;
+        this.habit = "game";
+    }
+
+    Person.prototype.strength = 60;
+    Person.prototype.sayName = function(){
+        console.log(this.name);
+    }
+
+    var p1 = new Person("zj",24); //实例对象
+
+    //实例p1：1.可以访问到Person构造函数里的属性；2.可以访问Person.prototype中的属性；
+
+    //第一种代码
+    function objectFactory(fn){
+        if(Object.prototype.toString.call(fn) !== "[object Function]") return "";
+        var obj = new Object();
+        var args = [].slice.call(arguments,1);
+        console.log(args);
+        obj.__proto__ = fn.prototype; //实例的 __proto__ 属性会指向构造函数的prototype，也正是因为建立这样的关系，实例可以访问原型上的属性。
+        var ret = fn.apply(obj,args); //改变this指向，为obj添加新的属性
+        console.log(ret);
+        return typeof ret === "object" ? ret || obj : obj; //判断返回值的类型：如果是一个对象就直接返回这个对象；如果没有，就直接返回obj(如果返回值为null也要返回obj)。
+    }
+
+
+
+    //返回值为对象的时候
+    function Test(name){
+        this.name = name;
+        return {
+            sex:"woman"
+        }
+    }
+
+    var test = new Test("zj");
+    console.log(test);
+    //此时test的__proto__属性已经发生了改变,已经不指向构造函数的原型对象了
+    console.log(test.__proto__ === Person.prototype); //false
+    console.log(test.__proto__ === Object.prototype); //true
+</script>
+</body>
+</html>

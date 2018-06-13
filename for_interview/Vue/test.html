@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue中$set的使用场景</title>
+</head>
+<body>
+<div id="app">
+    <p>{{msg}}</p>
+    <h1>{{obj.name}}</h1>
+    <button @click="test">改变名称</button>
+    <h3>{{fullName}}</h3>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    window.vm = new Vue({
+        el:"#app",
+        data:{
+            msg:"测试一下咯",
+            obj:{
+
+            },
+            firstName:"张",
+            lastName:"靖"
+        },
+        computed:{
+            fullName(){
+                return this.firstName + " " + this.lastName;
+            }
+//            fullName:{
+//                get(){
+//                    return this.firstName + " " + this.lastName;
+//                },
+//                set(newValue){
+//                    var names = newValue.split(" ");
+//                    this.firstName = names[0];
+//                    this.lastName = names[names.length-1];
+//                }
+//            }
+        },
+        methods:{
+            test(){
+                alert(this.obj.name);
+            },
+        },
+        updated:function(){
+            console.log(this.obj);
+        },
+        mounted:function(){
+//            this.obj.name = "zj";
+            this.$set(this.obj,"name","zj");
+        }
+    })
+</script>
+</body>
+</html>

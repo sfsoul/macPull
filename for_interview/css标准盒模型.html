@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>标准盒模型</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            width:100px;
+            height:100px;
+            text-align: center;
+            margin:10px;
+            padding:10px;
+            border:1px solid #ccc;
+            box-sizing: border-box;
+            /*box-sizing: content-box;*/
+        }
+        #box1{
+            width:100px;
+            height:100px;
+            text-align: center;
+            margin:10px;
+            padding:10px;
+            border:1px solid #ccc;
+            /*box-sizing: border-box;*/
+            box-sizing: content-box;
+        }
+    </style>
+</head>
+<div id="box" style="width: 300px;"></div>
+<div id="box1"></div>
+<body>
+<script>
+    let box = document.getElementById("box");
+    let box1 = document.getElementById("box1");
+    //只能取到内联样式的宽高
+    console.log("style: " + box.style.width);
+    //内联样式和外联样式的宽高都能取到，几乎所有主流浏览器都支持
+    console.log("getComputedStyle: " + getComputedStyle(box).width);
+    //内联样式和外联样式的宽高都能取到，几乎所有主流浏览器都支持，取到的是盒子总宽度
+    console.log("getBoundingClientRect: " + box.getBoundingClientRect().width);
+
+    console.log("style: " + box1.style.width);
+    console.log("getComputedStyle: " + getComputedStyle(box1).width);
+    console.log("getBoundingClientRect: " + box1.getBoundingClientRect().width);
+</script>
+</body>
+</html>

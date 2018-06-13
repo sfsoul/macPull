@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试继承</title>
+</head>
+<body>
+<script>
+    //原型链继承 -- 有两个缺点：1.引用类型的属性被所有实例共享； 2.在创建Child的实例时，不能向Parent传参
+    function Parent(){
+        this.names = ["zj","dmy"];
+        this.age = 200;
+    }
+    function Child() {
+        
+    }
+    Child.prototype = new Parent();
+    //实例child1和child2能够访问到names这个属性都是通过原型链访问到的，names这个属性是在Child.prototype上的，
+    //指向了同一块内存空间，所以改变属性会引起两个实例值的变化。
+    var child1 = new Child();
+    console.log(child1);
+    child1.names.push("haha");
+    child1.age = 25;
+    var child2 = new Child();
+    console.log(child2);
+
+
+    //借用构造函数（经典继承）-- 优点：1.避免了引用类型的属性被所有实例共享； 2.可以在Child中向Parent传参
+    //之所以避免了引用类型的属性被所有实例共享：是因为执行了Parent.call(this)这个方法从而为每个实例增添了自己的私有属性，互相不影响。
+    function Parent1(){
+        this.names = ["zj","dmy"];
+    }
+    function Child1(){
+        Parent1.call(this);
+    }
+    var son1 = new Child1();
+    son1.names.push("haha");
+    var son2 = new Child1();
+    console.log(son1);
+    console.log(son2);
+
+
+    //寄生组合式继承
+    function A(name){
+        this.name = name;
+        this.loves = ["dmy","ahha"];
+    }
+    A.prototype.getName = function(){
+        console.log(this.name);
+    }
+
+    function B(name,age){
+        A.call(this,name);
+        this.age = age;
+    }
+    B.prototype = Object.create(A.prototype);
+    B.prototype.constructor = B;
+    B.prototype.getAge = function(){
+        console.log(this.age);
+    }
+
+    var b = new B("zj",25);
+    console.log(b);
+
+
+    //Object.create()的模拟实现
+    function object(o){
+        function F(){};
+        F.prototype = o;
+        return new F();
+    }
+
+
+    var aa = object(A.prototype);
+    console.log(aa);
+
+
+    //两道关于Object.create()的经典面试题
+    var a = {name:"kelen"};
+    var b = Object.create(a); //实现了b对a的继承，此时 b.name ===b.__proto__.name === a.name.
+    b.name = "boke"; //手动赋值b.name="boke"后，b对象本身拥有了name属性，再次输出b.name的时候就不会再去原型链上查找了。
+    console.log(a.name); //kelen
+
+
+    var c = {person:{name:"kelen"}};
+    var d = Object.create(c);
+    // d.person.name = "kobe"可以改变c.person.name的值是因为，d.person是一个c.person的对象引用，
+    //当对d.person.name进行赋值，实际上就是对c.person.name进行修改。
+    d.person.name = "kobe";
+    console.log(c.person.name); //kobe
+</script>
+</body>
+</html>

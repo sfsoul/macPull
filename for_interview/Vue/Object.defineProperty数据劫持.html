@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object.defineProperty数据劫持</title>
+</head>
+<body>
+<script>
+    const obj = {
+        name:"zj"
+    }
+
+    Object.keys(obj).forEach(function(item,idx){
+        var val = obj[item];
+        Object.defineProperty(obj,item,{
+            enumerable: true,
+            configurable: true,
+            get(){
+                console.log(val);
+            },
+            set(newVal){
+                if(newVal === val){
+                    return;
+                }
+                val = newVal;
+                console.log("我是新值： " + val);
+            }
+        })
+    })
+</script>
+</body>
+</html>

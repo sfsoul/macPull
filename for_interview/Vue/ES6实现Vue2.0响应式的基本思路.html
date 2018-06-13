@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ES6实现Vue2.0响应式的基本思路</title>
+</head>
+<body>
+<div id="demo">
+    <div v-text="text"></div>
+</div>
+<script>
+    class Vue{
+        constructor(options){
+            this.$options = options;
+            this._data = options.data;
+            this.$el = document.querySelector(options.el);
+            Object.keys(options.data).forEach(key => this._proxy(key));
+            observer(options.data);
+            watch(this,this._render.bind(this),this._update.bind(this));
+        }
+        //代理
+        _proxy(key){
+            const self = this;
+            Object.defineProperty(self,key,{
+                configurable: true,
+                enumerable: true,
+                get:function proxyGetter(){
+                    return self._data[key]
+                },
+                set:function proxySetter(val){
+                    self.data[key] = val;
+                }
+            })
+        }
+        //更新
+        _update(){
+            console.log("我需要更新");
+            this._render.call(this);
+        }
+        //渲染
+        _render(){
+            this._bindText();
+        }
+        _bindText(){
+            let textDOMs = this.$el.querySelectorAll('[v-text]'),
+                bindText;
+            for(var i=0;i<textDOMs.length;i++){
+                bindText = textDOMs[i].getAttribute("v-text");
+                let data = this._data[bindText];
+                if(data){
+                    textDOMs[i].innerHTML = data;
+                }
+            }
+        }
+    }
+
+    //劫持数据
+    function observer(value,cb){
+        Object.keys(value).forEach((key) => defineReactive(value,key,value[key],cb));
+    }
+
+    function defineReactive(obj,key,val,cb){
+        const dep = new Dep();
+        Object.defineProperty(obj,key,{
+            enumerable: true,
+            configurable: true,
+            get:() => {
+                if(Dep.target){
+                    dep.add(Dep.target)
+                }
+                return val;
+            },
+            set:newVal => {
+                if(newVal === val)
+                    return;
+                val = newVal;
+                dep.notify();
+            }
+        })
+    }
+
+    //订阅者
+    function watch(vm,exp,cb){
+        Dep.target = new Watcher(vm,cb);
+        return exp();
+    }
+
+    class Watcher {
+        constructor(vm,cb){
+            this.cb = cb;
+            this.vm = vm;
+        }
+        update(){
+            this.run();
+        }
+        run(){
+            this.cb.call(this.vm);
+        }
+    }
+
+    class Dep {
+        constructor(){
+            this.subs = [];
+        }
+        add(watcher){
+            this.subs.push(watcher);
+        }
+        notify(){
+            this.subs.forEach((watcher) => watcher.cb())
+        }
+    }
+    Dep.target = null;
+
+    window.demo = new Vue({
+        el:"#demo",
+        data:{
+            text:"hello world"
+        }
+    })
+
+//    setTimeout(() => demo.text = "test",1000);
+</script>
+</body>
+</html>

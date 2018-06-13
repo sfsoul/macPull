@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise笔试题</title>
+</head>
+<body>
+<script>
+    //遇到setTimeout，放入宏任务队列
+    setTimeout(function(){
+        console.log(1)
+    },0);
+    //遇到promise，放入微任务队列
+    Promise.resolve(function(){
+        console.log(2);
+    })
+    //这里虽然遇到了promise，但是用new声明，会立即执行，所以先输出3
+    new Promise(function(resolve){
+        console.log(3);
+    })
+    //第二输出4
+    console.log(4);
+
+    //输出： 3 4 undefined 1
+</script>
+</body>
+</html>

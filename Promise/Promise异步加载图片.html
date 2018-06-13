@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用Promise异步加载图片</title>
+</head>
+<body>
+<script>
+    function asyncLoadImg(src){
+        return new Promise((resolve,reject)=>{
+            const img = new Image();
+            img.onload = function(){
+                resolve(img);
+            }
+            img.onerror = function(){
+                reject(new Error("img not exist!"))
+            }
+            img.src = src;
+        })
+    }
+
+    asyncLoadImg("../img/vue-生命周期.jpg").then(data =>{
+    // asyncLoadImg("../../img/vue-生命周期.jpg").then(data =>{
+        document.body.appendChild(data);
+    }).catch(error => console.log(error));
+</script>
+</body>
+</html>

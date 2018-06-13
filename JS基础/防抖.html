@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>防抖</title>
+    <style>
+        #container{
+            width: 100%;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            color: #fff;
+            background: #444;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<button>点击取消debounce</button>
+<script>
+    var count = 1;
+    var container = document.getElementById("container");
+
+    function getUserAction(e){
+        console.log(this);
+        console.log(e);
+        container.innerHTML = count++;
+    }
+
+
+    function debounce(func,wait,immediate){
+        var timeout,result;
+
+        var debounced = function(){
+            var context = this;
+            var args = arguments;
+
+            if(timeout) clearTimeout(timeout);
+            if(immediate){
+                //如果已经执行过，不再执行
+                var callNow = !timeout;
+                timeout = setTimeout(function(){
+                    timeout = null;
+                },wait);
+                if(callNow) func.apply(context,args);
+            }else{
+                timeout = setTimeout(function(){
+                    func.apply(context,args);
+                },wait);
+            }
+            return result;
+        };
+
+        debounced.cancel = function(){
+            clearTimeout(timeout);
+            timeout = null;
+        };
+        return debounced;
+    }
+
+
+    var setUserAction = debounce(getUserAction,10000,true);
+    container.onmousemove = setUserAction;
+
+    document.getElementsByTagName("button")[0].addEventListener("click",function () {
+        setUserAction.cancel();
+    })
+
+    // container.onmousemove = getUserAction;
+    // container.onmousemove = debounce(getUserAction,2000,true);
+</script>
+</body>
+</html>

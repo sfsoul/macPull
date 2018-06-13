@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断一个变量是否为元素节点</title>
+</head>
+<body>
+<div id="msgBox"></div>
+<script>
+    var msgBox = document.getElementById("msgBox");
+
+    //测试
+    var a = {
+        nodeType:1
+    };
+
+    //判断当前节点是否为元素节点
+    function isElement(node){
+        return !!node && node.nodeType === 1; //这个方法的缺陷在于：没有被传进来的变量先进行判断是否为dom对象
+    }
+
+
+    function isElementRight(node){
+        return window.HTMLElement ? node instanceof window.HTMLElement : !!node && node.nodeType === 1;
+    }
+
+    console.log(isElement(msgBox)); //true
+    console.log(isElement(a));  //true
+
+
+    console.log(isElementRight(msgBox)); //true
+    console.log(isElementRight(a));  //true
+</script>
+</body>
+</html>

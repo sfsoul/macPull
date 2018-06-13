@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setTimeout详解</title>
+</head>
+<body>
+    <p>未使用setTimeout函数</p>
+    <p id="one">
+        <input type="text" value="">
+        <span></span>
+    </p>
+    <p>使用setTimeout函数</p>
+    <p id="second">
+        <input type="text" value="">
+        <span></span>
+    </p>
+<script>
+    setTimeout(function(){
+        console.log(1);
+    },0)
+
+    new Promise(function(resolve,reject){
+        console.log(2);
+        for(var i=0;i<10000;i++){
+            if(i === 10){console.log(10)};
+            i == 9999 && resolve();
+        }
+        console.log(3);
+    }).then(function(){
+        console.log(4);
+    })
+
+    console.log(5);
+
+    //输出：2 10 3 5 4 1
+
+
+    function test(){
+        alert("test");
+    }
+
+    setTimeout(function(){
+        test()
+    },1000);
+
+
+    //setTimeout(fn,0) 实际是实现插队操作，要求浏览器尽可能快的进行回调，但是实际能多快就完全取决于浏览器了。
+    //setTimeout(fn,0)的用处：可以改变任务的执行顺序！因为浏览器会在执行完当前任务队列中的任务，再执行setTimeout队列中积累的任务。
+    //通过设置任务在延迟到0s后执行，就能改变任务执行的先后顺序，延迟该任务发生，使之异步执行。
+
+
+
+    /*
+    *   因为当按下按键的时候，JS引擎需要执行keydown的事件处理程序，然后更新文本框的value值，这两个任务也需要按顺序来，
+    *   事件处理程序执行时，更新value值（是在keypress后）的任务则进入队列等待，所以我们在keydown的事件处理程序里无法
+    *   得到更新后的value的，而利用 setTimeout(fn,0)，我们把取value的操作放入队列，放在更新value值以后，这样便可获取
+    *   出文本框的值。
+    */
+    document.querySelector('#one input').onkeydown = function() {
+        document.querySelector('#one span').innerHTML = this.value;
+    }
+    document.querySelector('#second input').onkeydown = function() {
+        setTimeout(function() {
+            document.querySelector('#second span').innerHTML = document.querySelector('#second input').value;
+        }, 0);
+    }
+
+
+
+    var a = 1;
+    var obj = {
+        a: 2,
+        test: function() {
+            var that = this;
+            setTimeout(function(){
+                console.log(this.a);
+                // console.log(that.a);
+            }.bind(this), 0);
+        }
+    };
+
+    obj.test();  //  1
+
+
+    //setTimeout不止两个参数：可以传入第三个参数、第四个参数...,用来表示第一个参数(回调函数)传入的参数。
+    setTimeout(function(a,b){
+        console.log(a);
+        console.log(b);
+    },0,10,100)
+</script>
+</body>
+</html>

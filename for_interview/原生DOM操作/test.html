@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>克隆节点</title>
+</head>
+<body>
+<div id="father">
+    我是父亲
+    <p id="son">我是儿子1</p>
+    <p id="son1">我是儿子2</p>
+    <p id="son2">我是儿子3</p>
+    <p id="son3">我是儿子4</p>
+</div>
+<button>复制</button>
+<script>
+//    var btn = document.querySelector("button");
+//    btn.addEventListener("click",function(){
+//        var dom = document.getElementById("father");
+//        var dom1 = dom.cloneNode(true);
+//        document.body.appendChild(dom1);
+//    })
+        var fatherDom = document.getElementById("father");
+        var btn = document.querySelector("button");
+        var sonsDom = document.querySelectorAll("p");
+        var newNd = document.createElement("h1");
+        newNd.innerHTML = "我是新节点哦";
+        btn.addEventListener("click",function(e){
+            console.log(e);
+            fatherDom.appendChild(sonsDom[0]);
+            fatherDom.insertBefore(newNd,sonsDom[0]);
+        })
+</script>
+</body>
+</html>

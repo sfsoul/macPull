@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" data-use-rem>
+
+<head>
+    <meta charset="UTF-8">
+    <base href="//imgcache.gtimg.cn/vipstyle/game/act/zj/253689/">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover"
+          name="viewport">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="320">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="Description" content="Tencent,腾讯">
+    <meta name="Keywords" content="Tencent,腾讯">
+    <meta itemprop="name" content="">
+    <meta name="description" itemprop="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <title>王者英雄拜年小分队</title>
+    <link rel="stylesheet" href="css/index8.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+
+        #playButton {
+            position: absolute;
+            left: 50%;
+            top: 28%;
+            width: 2.1rem;
+            height: 1.62rem;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+        #wrap{
+            height:100%;
+        }
+        .page{
+            height:100%;
+        }
+       .video-top img{
+            width:100%;
+        }
+        #cont2{
+            height:100%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="play" id="wrap" v-cloak>
+    <!--<span class="w-top"></span>-->
+    <!-- 视频页 E -->
+    <section class="page" id="cont2">
+        <!--<div class="video-top" :style="{background: 'url(img/'+videoBg+'.jpg) no-repeat 50% 35%',backgroundSize: videoStyle}">-->
+        <div class="video-top">
+            <img :src="heroBg" alt="">
+            <img src="tiny-img/play_button.png" alt="播放按钮" id="playButton">
+        </div>
+        <div class="msg-bot">
+				<span class="msg-tp">
+					<img src="tiny-img/logo.png">
+				</span>
+            <strong class="msg-price" v-if="isEqualUin == false">{{redEnvelopeAmount}}<em>元</em></strong>
+            <div class="msg-cont">
+                <!--send_uin和recv_uin不相等时-->
+                <p class="msg-tit" v-if="isEqualUin == false">
+                    <span>{{hostNick}}</span> 的红包已存入好友
+                    <span>{{guestNick}}</span> 的余额
+                </p>
+                <!--send_uin和recv_uin相等时-->
+                <!--<div class="msg-tit" v-if="isEqualUin == true">-->
+                <div class="msg-tit" v-if="isEqualUin == true">
+                    <p>新年快乐</p>
+                </div>
+                <!--第三人称抢红包-->
+                <div class="msg-tit" v-if="isOtherPeople == true">
+                    <span>{{hostNick}}</span>的红包已被领取
+                </div>
+                <!--彩蛋展示-->
+                <template v-if="isOpenEgg == false">
+                    <a href="javascript:void(0)">
+                        <img src="tiny-img/gift_egg.png" class="shake" @click="hitGoldenEgg(lotteryActid,lotteryArgObj)">
+                    </a>
+                    <h4 class="msg-tit2">成功发红包触发唯一彩蛋，赢永久皮肤和7天黄钻</h4>
+                </template>
+                <!--企鹅电竞链接跳转-->
+                <template v-if="isOpenEgg == true">
+                    <div class="msg-box">
+                        <img src="tiny-img/gift_baili.png">
+                        <strong>更多资讯
+                            <br/>尽在企鹅电竞</strong>
+                        <a href="javascript:void(0)" class="btn-go" @click="gotoPage(url[0]['url'],256736)">前往查看
+                            <i></i>
+                        </a>
+                    </div>
+                    <a href="javascript:void(0)" class="link-zi" @click="gotoPage(url[1]['url'],256737)">{{wordInfo[0]["info2"]}}</a>
+                </template>
+                <div class="msg-btn c flex">
+                    <a href="javascript:void(0)" class="btn-click"
+                       @click="gotoPage(url[2]['url'],256474)">领春节礼包</a>
+                    <a href="javascript:void(0)" class="btn-click"
+                       @click="gotoPage(url[3]['url'],256273)">我要发红包</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 视频页 E -->
+</div>
+
+<script src="//imgcache.gtimg.cn/c/=/club/mobile_web/zepto.min-1.1.6.js,/club/game/zero/zero.m.min-6.0.1.js?max_age=86400000&v=5.0"></script>
+<script src="../dist/vue.js"></script>
+<script src="../dist/util.js"></script>
+<script>
+    var htmlFontSize = 16;
+    (function (win) {
+        var doc = win.document,
+            html = doc.documentElement,
+            option = html.getAttribute('data-use-rem');
+        if (option === null) return;
+        var baseWidth = parseInt(option).toString() == 'NaN' ? 750 : parseInt(option),
+            resizeEvt = 'orientationchange' in win ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = html.clientWidth || 375;
+                htmlFontSize = 100 * clientWidth / baseWidth
+                html.style.fontSize = htmlFontSize + 'px';
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        recalc()
+    })(window);
+</script>
+<script>
+    window.page = new qv.zero.Page({
+        jsonid: 253689,
+        game: 'sgame',
+        mqqEnv: true,
+        onlyMobile: true,
+        isOpenSQView: true,
+        redirectUrl: "",
+        preloads: ['SQGameManager', 'cache'],
+        afterInit: function () {
+            var me = this,
+                staticData1 = zMsg.getFormData(1)[0];
+            me.initVue();
+            //分享
+            mqq.ui.setOnShareHandler(function (type) {
+                mqq.ui.shareMessage({
+                        title: staticData1.title,
+                        desc: staticData1.desc,
+                        share_type: type,
+                        share_url: window.location.protocol + "//youxi.vip.qq.com/m/act/201801/zj/wzry_253689/index.html?_wwv=4&_wv=1",
+                        image_url: staticData1.img,
+                        back: true,
+                        sourceName: "QQ手游"
+                    },
+                    function (json) {
+                        if (json.retCode == 0) {
+                            zHttp.send({
+                                actid: 253823
+                            });
+                        }
+                    });
+            });
+            //设置banner顶部样式
+            setTimeout(function(){
+                mqq.ui.setWebViewBehavior({
+                    navBgColor:0xCB1E4B
+                });
+            },500)
+            mqq.invoke('ui', 'webviewCanScroll', {"enable" : false});
+        },
+        initVue: function () {
+            var staticUrlData = zMsg.getFormData(5), //链接跳转
+                staticWordInfo = zMsg.getFormData(6); //文字信息
+
+            window.vm = new Vue({
+                el: "#wrap",
+                data: {
+                    heroBg:"",
+                    redEnvelopeAmount: "",
+                    hostNick: "",
+                    guestNick: "",
+                    uinsObj: {},
+                    platid: zUtil.isIOS() ? 0 : 1,
+                    isOpenEgg: false, //是否打开金蛋
+                    url: staticUrlData,
+                    currentUin: zUtil.getUin() + "",
+                    bidObj: {},
+                    videoSrc: "video/wrbn.mp4",
+                    isPlaying: false, //是否正在播放视频
+                    wordInfo: staticWordInfo,
+                    videoBg: "daji1",
+                    isEqualUin:false,  //判断当前url上返回的字段send_uin是否和recv_uin相同
+                    lotteryActid:"",
+                    lotteryArgObj:{}, //抽奖所需带参数
+                    isOtherPeople:false //第三人称
+                },
+                computed: {},
+                methods: {
+                    //砸金蛋 -- 抽奖
+                    hitGoldenEgg: function (actid,obj) {
+                        var me = this,
+                            send_uin = zURL.get("send_uin"),
+                            url = window.location.protocol + "//youxi.vip.qq.com/m/act/201801/zj/wzry_253689/index.html?_wwv=4&_wv=1";
+                        obj.actid = this.lotteryActid;
+                        obj.autosvr = true;
+                        //若当前登录态等于send_uin则代表可以领礼包
+                        if (this.currentUin == send_uin) {
+                            zHttp.syrequest(obj,function (json,actid,fn) {
+                                if (json.ret == 0) {
+                                    me.isOpenEgg = true;
+                                }else if(json.ret == 10603 || json.ret == 10601){
+                                    me.isOpenEgg = true;
+                                }
+                                zHttp.showResponse(json,json.actid,fn);
+                            })
+                        } else {
+                            zMsg.showMessageBox({
+                                msg: '嘿嘿~成功发送拜年红包才可以领取礼包哦，快去发一个试试呗~',
+                                left: {
+                                    text: '确定',
+                                    click: function(){
+                                        me.isOpenEgg = true;
+                                    }
+                                },
+                                right: {
+                                    text: '发红包',
+                                    click: function () {
+                                        me.gotoPage(url,256273);
+                                    }
+                                }
+                            });
+                        }
+                    },
+                    //我要发红包
+                    gotoPage: function (url, actid) {
+                        this.OzReport(actid);
+                        setTimeout(function(){
+                            zUtil.openUrl(url, 0,1);
+                        },200)
+                    },
+                    //请求终端命名空间方法，获得金额与祝福语
+                    qianghb: function () {
+                        var listid = zURL.get("listid"),
+                            feedsid = zURL.get("feedsid"),
+                            _args = {},
+                            cb = new qv.zero.CallBack(),
+                            me = this;
+
+                        if (this.platid == 0) {
+                            _args = {
+                                "bid": "10", "viewid": "10", "extstr": {"listid": listid + "", "feedsid": feedsid + ""}
+                            };
+                            _args.extstr = JSON.stringify(_args.extstr);
+                        } else {
+                            _args = {
+                                bid: 10,
+                                viewid: 10,
+                                extstr: {
+                                    listid: listid,
+                                    feedsid: feedsid
+                                }
+                            }
+                        }
+                        console.log(_args);
+                        mqq.invoke("qw_charge", "notifyViewUpdate", _args, function (data) {
+                            if (data.code == 0 && data.data) {
+                                cb.execute(data.data);
+                            } else {
+                                cb.execute(false);
+                            }
+                        })
+                        return cb;
+                    },
+                    //验证红包后台返回的url是否合法
+                    checkUrlIsLegal: function (argObj) {
+                        var cb = new qv.zero.CallBack(),
+                            me = this;
+                        zHttp.send(argObj, function (json) {
+                            //模拟数据
+//                            json={
+//                                ret:0,
+//                                data:{
+//                                    op:{
+//                                        uin:792013934,
+//                                        msg:"心想事成",
+//                                        hero:"xiaoqiao",
+//                                        speech:"xxxxxx.mp3",
+//                                        bid:"7920139340000000356"
+//                                    }
+//                                }
+//                            }
+                            if (json.ret == 0 && json.data.op) {
+                                me.bidObj = json.data.op;
+                                me.bidObj.speech = window.location.protocol + "//qgsk.yximg.cn/sgame_hongbao_2018/" + json.data.op.speech;
+//                                me.videoSrc = "video/" + me.bidObj.hero + ".mp4";
+                                me.heroBg = "bg-img/"+me.bidObj.hero+".jpg";
+                                cb.execute(me.bidObj);
+                            } else {
+                                cb.execute(false);
+                            }
+                        })
+                        return cb;
+                    },
+                    getParamsFromUrl: function () {
+                        var cb = new qv.zero.CallBack();
+                        var hostUin = zURL.get("send_uin") || "",
+                            guestUin = zURL.get("recv_uin") || "",
+                            uins = hostUin + "_" + guestUin;
+                        //主人打开红包页面
+                        if(hostUin == guestUin){
+//                            this.isEqualUin = true;
+//                            this.queryIsInpacket();
+                            cb.execute(false);
+                        }else{
+                            this.uinsObj = {
+                                hostUin: hostUin,
+                                guestUin: guestUin
+                            };
+                            cb.execute(uins);
+                        }
+                        return cb;
+                    },
+                    //查询昵称
+                    queryNick: function (uins) {
+                        var me = this;
+                        zHttp.send({
+                            actid: 256480,
+                            f_uin: uins
+                        }, function (json) {
+                            console.log(json);
+                            if (json.ret == 0 && json.data.op) {
+                                me.hostNick = json.data.op[me.uinsObj["hostUin"]];
+                                me.guestNick = json.data.op[me.uinsObj["guestUin"]];
+                            }
+                        })
+                    },
+                    //查询是否参与指定活动,若已经参与设置isOpenEgg为true
+                    queryIsJoinActivity: function () {
+                        var me = this;
+                        zHttp.send({
+                            actid: 257343
+                        }, function (json) {
+                            console.log(json);
+                            if (json.ret == 0) {
+                                me.isOpenEgg = true;
+                            }
+                        })
+                    },
+                    //url参数转对象
+                    parseQueryString: function () {
+                        var cb = new qv.zero.CallBack();
+                        var url = window.location.href; //获取当前页面url
+                        var search = url.substring(url.lastIndexOf('?') + 1);  //得到url参数
+                        console.log(search);
+                        var obj = JSON.parse('{"' + decodeURIComponent(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+                        this.deletePropertyOfObj(obj, "_wv");
+                        this.deletePropertyOfObj(obj, "_wwv");
+                        cb.execute(obj);
+                        return cb;
+                    },
+                    //删除指定对象的属性
+                    deletePropertyOfObj: function (obj, key) {
+                        delete obj[key];
+                        return obj;
+                    },
+                    getValueFromObj: function (obj) {
+                        console.log("test");
+                    },
+                    playVideo: function () {
+                        if(page.bindVideo){
+                            return;
+                        }
+                        page.bindVideo = true;
+                        var media = document.getElementById("audio"),
+                            video = document.getElementById("video"),
+                            me = this;
+
+                        video.addEventListener("ended",function(){
+                            $(".video-top img").show();
+                            me.fullVideo('nofull');
+                        });
+                        video.addEventListener('pause', function() {
+                            $(".video-top img").show();
+                            me.fullVideo('nofull');
+                        });
+
+                        $(".video-top").on("click","img,video",function () {
+                            var media = document.getElementById("audio"),
+                                video = document.getElementById("video");
+                            $(".video-top img").hide();
+//                            //音视频-播放数
+                            me.OzReport(260689);
+                            if (video.paused) {
+                                media.play();
+                                video.play();
+                                me.fullVideo('full');
+                            } else {
+                                me.fullVideo('nofull');
+                                video.pause();
+                                media.pause();
+                            }
+                        })
+                    },
+                    fullVideo : function(type){
+//                        if(zUtil.isIOS()){
+//                            return;
+//                        }
+                        var height = document.documentElement.clientHeight;
+                        var $cont2 = $('#cont2');
+                        var $videoTop = $cont2.find('.video-top');
+                        var marginTop = (height - $videoTop.height())/2;
+                        var $msgHot = $('.msg-bot');
+                        if(type == 'full'){
+                            $msgHot.hide();//隐藏红包皮
+                            $cont2.css({
+                                background : '#000000'
+                            })
+                            $videoTop.css({
+                                'transform': 'translateY('+marginTop+'px)',
+                                '-webkit-transform': 'translateY('+marginTop+'px)',
+                            })
+                        }else{
+                            $msgHot.show();
+                            $cont2.css({
+                                'background': 'url(./tiny-img/bg.jpg) no-repeat 50% 0',
+                                '-webkit-background-size': '100% auto',
+                                'background-size': '100% auto'
+                            })
+                            $videoTop.css({
+                                'transform': 'translateY(0px)',
+                                '-webkit-transform': 'translateY(0px)',
+                            })
+                        }
+                    },
+                    //新建audio标签元素
+                    createAudioDom: function (audioUrl) {
+                        var cb = new qv.zero.CallBack();
+                        var tagName = zUtil.isIOS() ? "audio" : "video";
+                        var audio = document.createElement(tagName);
+                        audio.setAttribute("id", "audio");
+                        audio.setAttribute("preload", "auto");
+                        audio.setAttribute("src", audioUrl);
+                        audio.setAttribute("type", "audio/mpeg");
+                        audio.style.width = "0";
+                        audio.style.height = "0";
+                        $(".video-top").append(audio);
+                        cb.execute(true);
+                        return cb;
+                    },
+                    createVideoDom: function (src) {
+                        var cb = new qv.zero.CallBack();
+                        var video = document.createElement("video");
+
+                        video.setAttribute("id", "video");
+                        video.setAttribute("src", src);
+                        video.setAttribute("preload", "auto");
+                        video.setAttribute('type', "video/mp4");
+                        video.setAttribute('muted', "false");
+                        video.setAttribute('webkit-playsinline','true');
+                        video.setAttribute('playsinline','true');
+                        video.setAttribute('x5-video-orientation','portraint');  //竖屏播放
+                        video.style.width = "100%";
+                        $(".video-top").append(video);
+                        cb.execute(true);
+                        return cb;
+                    },
+                    //上报数据
+                    OzReport:function(actid){
+                        OZ.report({operID:actid});
+                    },
+                    //查询用户是否在号码包内
+                    queryIsInpacket:function(){
+//                        var packetid = "1350_1351_1352",
+                        var packetid = "",
+                            uin = zUtil.getUin(),
+                            cb = new qv.zero.CallBack(),
+                            packetInfo = {},
+                            me = this;
+
+
+                        zMsg.getFormData(10).forEach(function(item,index){
+                            packetInfo[item.packet_id] = item.actid;
+                            packetid += item.packet_id + "_";
+                        })
+                        console.log(packetInfo);
+                        packetid = packetid.slice(0,-1);
+                        console.log(packetid);
+
+                        zHttp.send({
+                            _c:"UserInPacket",
+                            packetid:packetid,
+                            uins:uin
+                        },function(json){
+                            console.log(json);
+                            if(json.ret == 0 && json.data.is_in_packet){
+                                var packet_list = json.data.is_in_packet[uin]["packet_list"],
+                                    in_packet_num = json.data.is_in_packet[uin]["in_packet_num"]
+                                if(in_packet_num == 0){
+                                    me.lotteryActid = zMsg.getFormData(10)[0]["actid"];
+                                    cb.execute(me.lotteryActid);
+                                }else{
+                                    for(var item in packet_list){
+                                        if(packet_list[item] == 1){
+                                            me.lotteryActid = packetInfo[item];
+                                        }
+                                    }
+                                    cb.execute(me.lotteryActid);
+                                }
+                            }else{
+                                me.lotteryActid = 259325;
+                                cb.execute(me.lotteryActid);
+                            }
+                        })
+                        return cb;
+                    }
+                },
+                mounted: function () {
+                    var me = this;
+                    var bid = zURL.get("feedsid") || "",  //业务id信息
+                        listid = zURL.get("listid") || "", //红包id -- 唯一性
+                        sign = zURL.get("sign") || "", //签名
+                        send_uin = zURL.get("send_uin") || "",  //发送红包人的uin
+                        recv_uin = zURL.get("recv_uin") || "";  //抢红包人的uin --  当自己抢时，send_uin=recv_uin=包红包的本人uin.
+                    console.log(bid + "===" + listid + "===" + sign + "===" + send_uin + "===" + recv_uin);
+                    this.lotteryArgObj = {
+                        feedsid: bid,
+                        listid:listid,
+                        sign:sign,
+                        send_uin:send_uin,
+                        recv_uin:recv_uin
+                    };
+                    var argObj = {
+                        actid: 254973,
+                        feedsid: bid,
+                        listid:listid,
+                        sign:sign,
+                        send_uin:send_uin,
+                        recv_uin:recv_uin
+                    }
+                    if (bid && listid && sign && send_uin && recv_uin) {
+                        /*
+                        * 首先请求rule验证url链接的合法性，然后得到对应的bid信息，里面包括uin、speech、msg、bid、hero
+                        * 然后请求mqq方法获得终端的数据：金额和祝福语
+                        */
+                        this.checkUrlIsLegal(argObj).add(function (obj) {
+                            if (obj) {
+//                                console.log(obj);
+                                //从url上查询send_uin和recv_uin
+                                me.getParamsFromUrl().add(function (uins) {
+                                    console.log(uins + "====" + uins.length);
+                                    if (uins && uins.length > 0) {
+                                        me.queryNick(uins);
+                                        me.qianghb().add(function (redEnvelopeInfo) {
+                                            if (redEnvelopeInfo) {
+                                                if(redEnvelopeInfo.total_amount == 0 || redEnvelopeInfo.amount == 0){
+                                                    //代表第三人称抢红包
+                                                    me.isOtherPeople = true;
+                                                    me.isEqualUin = true;
+                                                }else{
+                                                    me.redEnvelopeAmount = (redEnvelopeInfo.total_amount || redEnvelopeInfo.amount) / 100; //安卓返回amount，IOS返回total_amount
+                                                }
+                                            }
+                                        });
+                                    }else{
+                                        me.isEqualUin = true;
+                                        me.queryIsInpacket();
+                                    }
+                                });
+//                                qv.zero.CallBack.all([ me.createAudioDom(obj.speech),me.createVideoDom("video/wrbn.mp4")]).add(function(arr){
+                                qv.zero.CallBack.all([ me.createAudioDom(obj.speech),me.createVideoDom("last_video/"+obj.hero+".mp4")]).add(function(arr){
+                                    if(arr){
+                                        console.log(arr);
+                                        me.playVideo();
+                                    }
+                                })
+                            }else {
+                                window.location.replace(window.location.protocol + "//youxi.vip.qq.com/m/act/201801/zj/wzry_253689/index.html?_wwv=4&_wv=1&adtag=adtag.guesterror");
+                            }
+                        });
+                    }else {
+                        window.location.replace(window.location.protocol + "//youxi.vip.qq.com/m/act/201801/zj/wzry_253689/index.html?_wwv=4&_wv=1&adtag=adtag.guesterror");
+                    }
+                }
+            })
+        }
+    })
+</script>
+</body>
+</html>

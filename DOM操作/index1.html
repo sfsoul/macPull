@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul,li{
+           list-style: none;
+        }
+        #list{
+            background: pink;
+            border:1px solid yellow;
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+        }
+        #list li{
+            margin: 10px;
+            text-align: center;
+            background: gray;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+<ul id="list">
+    <!--<li class="btn">1</li>-->
+    <!--<li class="btn">2</li>-->
+    <!--<li class="btn">3</li>-->
+    <!--<li class="btn">4</li>-->
+    <!--<li class="btn">5</li>-->
+    <!--<li class="btn">6</li>-->
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<script>
+    var listDom = document.getElementById("list");
+    listDom.addEventListener("click",function(e){
+        var ndList = [].slice.call(this.children); //将HTMLCollection转化为数组
+        console.log(ndList);
+        var len = ndList.length;
+        if(e.target.nodeName === "LI"){
+            for(var i=0;i<len;i++){
+                if(e.target === ndList[i]){
+                    alert(i+1);
+                }
+            }
+        }
+    })
+    // var listDom1 = document.querySelector("#list");
+    // console.log(listDom);
+    // console.log(listDom1);
+    // var liDom = document.getElementsByTagName("li");
+    // var liDom2 = document.getElementsByClassName("btn");
+    // var liDom1 = document.querySelectorAll("li");
+    // var liDom4 = document.querySelectorAll(".btn");
+    // var liDom3 = document.querySelector(".btn");
+    // console.log(liDom);  //HTMLCollection
+    // console.log(liDom1); //NodeList对象
+    // console.log(liDom2); //HTMLCollection
+    // console.log(liDom3); //第一个带有.btn类名的li标签
+    // console.log(liDom4); //NodeList对象
+</script>
+</body>
+</html>

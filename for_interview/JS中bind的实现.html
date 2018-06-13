@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js中bind的实现</title>
+</head>
+<body>
+<script>
+    //bind的模拟实现
+    Function.prototype.bind = Function.prototype.bind || function(context){
+        if(typeof this !== "function"){
+            throw new Error("Function.prototype.bind - what is trying to be bound is not callable");
+        }
+        var self = this;
+        var args = Array.prototype.slice.call(arguments,1);
+
+        var fNOP = function(){}
+        var fBound = function(){
+            var bindArgs = Array.prototype.slice.call(arguments);
+            return self.apply(this instanceof fNOP ? this : context,args.concat(bindArgs));
+        }
+        fNOP.prototype = this.prototype;
+        fBound.prototype = new fNOP();
+        return fBound;
+    }
+
+    //函数组合串联compose（koa reduce中间件）
+    // 组合串联
+    let fn1 = (a) => a + 1;
+    let fn2 = (b) => b + 2;
+    let fn3 = (c) => c + 3;
+    let funs = [fn1,fn2,fn3];
+
+    //es6
+    let compose = (func) => {
+        return arg => func.reduceRight((composed,fn) => fn(composed),arg);
+    }
+
+    //es5
+    var compose = function compose(func) {
+        return function(arg){
+            return func.reduceRight(function(composed,fn){
+                console.log(composed+"==="+fn);
+                return fn(composed);
+            },arg);
+        };
+    };
+    console.log(compose(funs)(100)); //相当于 fn1(fn2(fn3(100)))
+
+    //window.requestAnimationFrame兼容性处理
+    window._requestAnimationFrame = (function(){
+        return window.requestAnimationFrame ||
+               window.webkitRequestAnimationFrame ||
+               window.mozRequestAnimationFrame ||
+               function(callback){
+                    setTimeout(callback,1000/60);
+               };
+    })();
+</script>
+</body>
+</html>

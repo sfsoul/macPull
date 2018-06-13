@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>确保一组Promise按顺序执行</title>
+</head>
+<body>
+<div class="outer">
+    1
+    <div class="inner">2</div>
+</div>
+<script>
+    var outer = document.querySelector(".outer");
+    var inner = document.querySelector(".inner");
+
+    //DOM监听器
+    new MutationObserver(function(){
+        console.log("mutate");
+    }).observe(outer,{
+        attributes:true
+    })
+
+    //事件监听器
+    function onClick(){
+        console.log("click");
+
+        setTimeout(function(){
+            console.log("timeout");
+        },0);
+
+        Promise.resolve().then(function(){
+            console.log("promise");
+        })
+
+        outer.setAttribute("data-random",Math.random());
+    }
+
+    inner.addEventListener("click",onClick);
+    outer.addEventListener("click",onClick);
+
+
+    var promises = [a,b,c];
+    var chain;
+
+//    //ES6解法
+    for(let i in promises){
+        if(chain) chain = chain.then(promises[i]);
+        if(!chain) chain = promises[i]();
+    }
+
+    function a(){
+        return new Promise((resolve) =>{
+            setTimeout(function(){
+                console.log("resolve A");
+                resolve();
+            },1000);
+        });
+    }
+    function b(){
+        return new Promise((resolve)=>{
+            setTimeout(function(){
+                console.log('resolve B');
+                resolve();
+            },500);
+        });
+    }
+    function c(){
+        return new Promise((resolve)=>{
+            setTimeout(function(){
+                console.log('resolve C');
+                resolve();
+            },100);
+        });
+    }
+
+    //ES7解法
+    async function executeSequentially(){
+        for(let idx in promises){
+            await promises[idx]();
+        }
+    }
+
+    executeSequentially();
+</script>
+</body>
+</html>

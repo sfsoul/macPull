@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        button{
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1 :atttribute="attr">{{msg}}</h1>
+    <child :child-msg="msg" :check-style="checkFatherStyle"></child>
+    <button @click="changeMsg">改变msg的值</button>
+</div>
+<script src="../../lib/vue.js"></script>
+<script>
+    Vue.component("child",{
+        template:`<div>
+                    {{info}}
+                    <h1>{{childMsg}}</h1>
+                    <h6>{{checkStyle}}</h6>
+                    <button @click="change">改变info的值</button>
+                </div>`,
+        data(){
+            return {
+                info:"Hello，我是子组件哦！",
+                newMsg:this.childMsg
+            }
+        },
+        //声明父组件传递给子组件的值类型
+        props:{
+            checkStyle:{
+                // type:Number,
+                type:String,
+                default:100
+            },
+            childMsg:{
+                type:String
+            }
+        },
+        methods:{
+            change:function(){
+                this.info = "我也变咯！";
+                console.log(this.childMsg);
+                this.newMsg = "测试一下下咯！";
+            }
+        }
+    });
+
+
+    window.vm = new Vue({
+        el:'#app',
+        data:{
+            msg:"Hello，我是父组件哦！",
+            attr:"属性",
+            checkFatherStyle:"检查我的类型"
+        },
+        methods:{
+            changeMsg(){
+                this.msg = "我改变咯！"
+            }
+        }
+    })
+</script>
+</body>
+</html>

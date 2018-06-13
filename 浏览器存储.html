@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>浏览器存储</title>
+</head>
+<body>
+<script>
+    //localStorage,sessionStorage和cookie的区别
+    /*
+    *   共同点：都是保存在浏览器端、仅同源可用的存储方式
+    *   1.数据存储方面
+    *       cookie数据始终在同源的http请求中携带，即cookie在浏览器和服务器间来回传递。
+    *       cookie数据还有路径（path）的概念，可以限制cookie只属于某个路径下。
+    *
+    *       sessionStorage和localStorage不会自动将数据发送到服务器，仅在本地保存。
+    *
+    *   2.存储数据大小
+    *       存储大小限制也不同，cookie数据不能超过4k，同时因为每次http请求都会携带cookie，
+    *       所以cookie只适合保存很小的数据，如会话标识。
+    *
+    *       sessionStorage和localStorage虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大
+    *
+    *   3.数据存储有效期
+    *       sessionStorage：仅在当前浏览器窗口关闭之前有效；
+    *       localStorage：始终有效，窗口或浏览器关闭也一直保存，本地存储，因此用作持久数据；
+    *       cookie：只在设置的cookie过期时间之前有效，即使窗口关闭或浏览器关闭；
+    *
+    *   4.作用域不同
+    *       sessionStorage不在不同的浏览器窗口中共享，即使是同一个页面；
+    *       localStorage在所有同源窗口中都是共享的；也就是说只要浏览器不关闭，数据仍然存在；
+    *       cookie：也是在所有同源窗口中都是共享的.也就是说只要浏览器不关闭，数据仍然存在
+    */
+</script>
+</body>
+</html>

@@ -1,0 +1,1547 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <base href="//imgcache.gtimg.cn/vipstyle/game/act/zj/258367/">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="320">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta itemprop="name" content="飞车集福卡抽豪礼" />
+    <meta name="description" itemprop="description" content="听说大奖是A车黑夜传说，永久！！！" />
+    <meta itemprop="image" content="https://imgcache.gtimg.cn/vipstyle/game/act/zj/258367/img/share.png" />
+    <title>QQ飞车新春福卡</title>
+    <link rel="stylesheet" href="css/style5.css">
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+        .sel-box p{
+            width: 138px;
+            height: 24px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            margin: -12px auto 0;
+            background: #fff;
+            pointer-events: none;
+        }
+        .sel-box p span{
+            width: 115px;
+            height: 22px;
+            position: absolute;
+            left: 1px;
+            top: 50%;
+            margin-top: -11px;
+            background: #200804;
+            color: #996565;
+            font-size: 10px;
+            display: block;
+            text-align: center;
+            line-height: 22px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .sel-box p i{
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 8px solid #200804;
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            display: block;
+        }
+        .c2-con2 .qb{
+            width: 1.3rem;
+            height: 0.95rem;
+            background-size: 100% auto;
+            position: absolute;
+            left: 0.5rem;
+            top: 1.8rem;
+            -webkit-animation: start 1.5s infinite linear;
+            -o-animation: start 1.5s infinite linear;
+            animation: start 1.5s infinite linear;
+        }
+        .c2-con2 .car{
+            width: 1.63rem;
+            height: 1.2rem;
+            background-size: 100% auto;
+            position: absolute;
+            left: 3.8rem;
+            top: 1.8rem;
+            -webkit-animation: start 1.5s infinite linear;
+            -o-animation: start 1.5s infinite linear;
+            animation: start 1.5s infinite linear;
+        }
+        .btn-wypz input {
+            display: block;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+        .c5-list2 p{
+            width: 2rem;
+        }
+        #mask{
+            width:100%;
+            height:100%;
+            position: absolute;
+            top:0;
+            left:0;
+            background: #222;
+            opacity:0.9;
+            z-index:1;
+        }
+        .zy-con6{
+            width: 100%;
+            height: 3.63rem;
+            padding-top: 0.2rem;
+            background-size: 100% auto;
+            position: relative;
+        }
+        .zy-con6 img{
+            width:100%;
+            height:100%;
+        }
+        .zy-con6 .receive{
+            position: absolute;
+            left: 1.3rem;
+            bottom: 0.5rem;
+            width: 5rem;
+            height: 0.81rem;
+            background: #FC6149;
+            text-align: center;
+            line-height: 0.8rem;
+            color: #fedd6b;
+            -webkit-text-stroke: 1px #d03e32;
+            font-size: 0.36rem;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+        .zy-con6 .superMember{
+            position: absolute;
+            left: 2rem;
+            bottom: 1.4rem;
+            text-align: center;
+            color: #FC6149;
+        }
+        .c5-list2 .num{
+            font-size: 0.24rem;
+            line-height: 0.46rem;
+        }
+        #refreshCard{
+                position: absolute;
+                top: 0.82rem;
+                left: 4.4rem;
+                width: 1rem;
+                height: 0.4rem;
+                background: rgb(255, 228, 144);
+                color: #3C8A61;
+                text-align: center;
+                border-radius: 0.2rem;
+                line-height: 0.4rem;
+                font-size: 0.25rem;
+                font-weight: bold
+        }
+        .rankRule{
+        	position: absolute;
+		    top: 5.46rem;    
+		    left: 1rem;
+		    color: #de7062;
+		    font-size: 0.24rem;
+        }
+        .btn-text3{
+            height:0.25rem;
+            line-height:0.15rem;
+        }
+        #receiveRankPrize{
+            position: absolute;
+            color: #fff;
+            background: red;
+            left:50%;
+            -webkit-transform: translate(-50%);
+            -moz-transform: translate(-50%);
+            -ms-transform: translate(-50%);
+            -o-transform: translate(-50%);
+            transform: translate(-50%);
+            padding:0.08rem 0.14rem;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak style="position: relative;">
+    <div class="wrapper">
+        <div class="wrapper1" v-if="index == 1">
+            <section class="sha-con">
+                <!-- 拍照的图片 -->
+                <div class="peo-bg">
+                    <div id="clipArea">
+                        <img src="img/woman.jpg" alt="图片">
+                    </div>
+                </div>
+                <!-- 装饰 -->
+                <div class="zs-img1">
+                   <span class="hide">集福卡抽豪礼</span>
+                    <strong class="zs-bt1">飞</strong>
+                    <strong class="zs-bt2">车</strong>
+                    <strong class="zs-bt3">贺</strong>
+                    <strong class="zs-bt4">新</strong>
+                    <strong class="zs-bt5">春</strong>
+                </div>
+                <div class="l-bp db">左边的鞭炮</div>
+                <div class="r-bp db">右边的鞭炮</div>
+                <div class="yun db">云</div>
+                <!-- 福卡文字 -->
+                <h3 class="fk-bt1">{{greetsInfo["title"]}}福卡</h3>
+                <p class="fk-text">{{greetsInfo["desc"]}}</p>
+                <!--我要拍照-->
+                <a href="javascript:void(0);" class="btn-wypz db" v-if="takePhotoInfo == 0">
+                    <!--选择照片或拍照-->
+                    <input type="file" id="fileImg" accept="image/*" capture="camera" v-on:change="takePhoto">
+                </a>
+                <!--指定好友分享-->
+                <a href="javascript:void(0);" class="btn-song" @click="share(1)">
+                    <!--密友且非同玩好友-->
+                    <span class="tou">
+                        <!--<img src="img/peo-img2.jpg" alt="人物头像">-->
+                        <img :src="friendInfo.friendAvatar" alt="人物头像">
+                    </span>
+                    <span class="s-zs2"></span>
+                    <strong class="s-bt">送TA祝福可抽豪礼</strong>
+                    <span class="s-text"><em>好友也可获得</em>奖励哦～</span>
+                </a>
+                <!--分享给好友或者群-->
+                <a href="javascript:void(0)" class="btn-text" @click="share(2)">选择其他好友/群 》</a>
+            </section>
+        </div>
+        <div class="wrapper2" v-if="index == 0">
+            <!--个人信息-->
+            <section class="zy-con1">
+                <div class="t-peo">
+                    <img :src="myInfo.face" alt="头像">
+                </div>
+                <p class="name">{{myInfo.nike}}</p>
+            </section>
+            <section class="zy-con2">
+                <!-- 没有福卡 -->
+                <div class="c2-con1" style="display:none">
+                    <h3 class="c2-tit1 db">收集福卡抽丰富豪礼</h3>
+                    <p class="c2-text">收集福卡即有机会获得以下奖励</p>
+                    <div class="bao"></div>
+                </div>
+                <!-- 有福卡 -->
+                <div class="c2-con2">
+                    <!-- 已获得几张福卡 -->
+                    <a v-show="isShowCardBtn" href="javascript:void(0);" id="refreshCard" @click="refreshCard">刷新</a>
+                    <h3 class="c2-tit2">您当前还有<strong>{{luckyCardNum}}</strong>张福卡</h3>
+                    <p class="c2-text2">打开并<strong>消耗1张福卡分享给好友</strong> 即有机会获得</p>
+                    <div class="bao"></div>
+                    <span style="position: absolute;left:2.1rem;top:2.7rem;color:#fff;">2018点券</span>
+                    <img src="img/qb.jpg" class="qb">
+                    <span style="position: absolute;left:0.6rem;top:2.7rem;color:#fff;">500Q币</span>
+                    <img src="img/car.jpg" class="car">
+                    <span style="position: absolute;left:3.8rem;top:2.7rem;color:#fff;">黑夜传说(永久)</span>
+                    <!-- btn-kaik未领取 灰色已领取btn-nkai 文字可编辑 -->
+                    <a href="javascript:void(0);" class="btn-kaik" @click="shareAndReceive">分享并领取</a>
+                    <a href="javascript:void(0);" style="position: absolute;right: 0.5rem;bottom: 0.6rem;color: #fff;text-decoration: underline;" @click="viewAllPrizes">查看全部奖品>></a>
+                </div>
+            </section>
+            <!-- 解锁福卡的线索 -->
+            <section class="zy-con3">
+                <div class="c3-box">
+                    <h3 class="c3-tit db">解锁福卡的线索</h3>
+                </div>
+                <!-- 明日解锁福卡的线索 -->
+                <div class="c3-box" style="display:none">
+                    <h3 class="c3-tit2 db">明日解锁福卡的线索</h3>
+                    <p class="c3-text">今日抽福卡机会 <strong>已用完</strong></p>
+                </div>
+                <ul class="c3-list c" style="margin-top: -0.4rem;">
+                    <li class="c3-l1"><img src="img/zb-img.png" alt="图片"></li>
+                    <li class="c3-l2" v-for="(item,index) in clueInfoList">
+                        {{item.clue}}
+                    </li>
+                </ul>
+                <a href="javascript:void(0);" class="btn-play" @click="startGame" style="margin-top: 0.3rem">去玩一把</a>
+            </section>
+            <!--企鹅电竞-->
+            <section class="zy-con4">
+                <h3 class="c4-tit db">登录企鹅电竞领机会</h3>
+                <p class="c4-text">每日登录观看5分钟<strong>QQ飞车直播</strong> 领额外福卡机会</p>
+                <div class="c4-icon db">企鹅电竞超越游戏快乐</div>
+                <!-- 红色btn-play 灰色btn-grey  文案可编辑 -->
+                <a href="javascript:void(0);" class="btn-play" @click="gotoQier" v-if="isHasWatched == false">领取福卡</a>
+                <a href="javascript:void(0);" class="btn-grey" @click="gotoQier" v-else>领取福卡</a>
+            </section>
+            <!--超级会员-->
+            <section class="zy-con6" style="position:relative;">
+                <img src="img/dianjing.jpg" alt="">
+                <a href="javascript:void(0)" @click="gotoLink(urlInfo[4]['url'],263314)" class="superMember">开通超级会员领取新春大礼包》》</a>
+                <a href="javascript:void(0)" class="receive" @click="receive">立即领取</a>
+            </section>
+            <!--飞车全国福卡排行-->
+            <section class="zy-con5">
+                <h3 class="c5-tit"> 福卡接收魅力榜</h3>
+                <!--排行榜前三名-->
+                <ul class="c5-list1 c">
+                    <template v-if="index == 1" v-for="(item,index) in topThreeRankInfo">
+                        <li class="c51-l2">
+                            <img :src="item.face" alt="名次">
+                            <p>{{item.nick}}</p>
+                            <span>{{item.score}}张</span>
+                            <strong :class="'jb'+(index+1)+' db'"></strong>
+                        </li>
+                    </template>
+                    <template v-else>
+                        <li class="c51-l1">
+                            <img :src="item.face" alt="名次">
+                            <p>{{item.nick}}</p>
+                            <span>{{item.score}}张</span>
+                            <strong :class="'jb'+(index+1)+' db'"></strong>
+                        </li>
+                    </template>
+                </ul>
+                <!--自己与好友的排行信息展示-->
+                <div class="c5-list2 c" style="position:relative;">
+                    <div style="width:2rem;display: inline-block;margin: 0.1rem 0 0 0.7rem;">
+                        <img :src="myRankInfo.face" alt="图片">
+                    </div>
+                    <div style="position: absolute;display: inline-block;margin-left: -0.5rem;">
+                        <p style="width: 1.8rem;font-size: 0.24rem;line-height: 0.46rem;overflow: hidden;text-align: left;white-space: nowrap;text-overflow: ellipsis;color:#576981;margin-left: 0;">{{myRankInfo.nick}}</p>
+                        <span class="num">{{myRankInfo.score}}张</span>
+                    </div>
+                    <!--<li class="c52-l1">-->
+                        <!--<img :src="myRankInfo.face" alt="图片">-->
+                        <!--<p>{{myRankInfo.nick}}</p>-->
+                        <!--<strong>{{myRankInfo.score}}张</strong>-->
+                    <!--</li>-->
+                    <!--<li class="c52-l2">-->
+                        <!--&lt;!&ndash;<img src="img/pk-img2.png" alt="图片">&ndash;&gt;-->
+                        <!--<img :src="rankInfo[0]['face']" alt="图片">-->
+                        <!--<p>{{rankInfo[0]['nick']}}</p>-->
+                        <!--<strong>{{rankInfo[0]['score']}}张</strong>-->
+                    <!--</li>-->
+                </div>
+                <!--全部排名-->
+                <a href="javascript:void(0)" class="btn-text2" @click="showRank">全部排名 &gt;</a>
+                <p class="rankRule">每张福卡仅能被1个人接收，自己不能接收自己的哦</p>
+                <p class="c5-text">排行前三奖励</p>
+                <ul class="c5-list3 c">
+                    <li>
+                        <div class="c53-l1"><img src="img/hycs.png" alt=""></div>
+                        <p>黑夜传说(永久)</p>
+                        <strong class="c5-jb1 db">2</strong>
+                    </li>
+                    <li>
+                        <div class="c53-l2"><img src="img/hycs.png" alt=""></div>
+                        <p>黑夜传说(永久)</p>
+                        <strong class="c5-jb2 db">1</strong>
+                    </li>
+                    <li>
+                        <div class="c53-l1"><img src="img/hycs.png" alt=""></div>
+                        <p>黑夜传说(永久)</p>
+                        <strong class="c5-jb3 db">3</strong>
+                    </li>
+                </ul>
+                <!--全部奖品-->
+                <a href="javascript:void(0)" class="btn-text3" @click="showPrize">全部奖品 &gt;</a>
+                <!--新增 排行榜领取奖励按钮-->
+                <div style="text-align: center;position:relative;" v-if="receiveRankPrizeBtn">
+                    <p @click="receiveRankPrize" id="receiveRankPrize">领取排行奖励</p>
+                </div>
+                <div class="c5-btn c">
+                    <a href="javascript:void(0);" class="btn-con5" @click="startGame">启动飞车</a>
+                    <a href="javascript:void(0);" class="btn-con5" @click="gotoLink(urlInfo[0]['url'],259723)">查看更多</a>
+                    <!--测试-->
+                    <!--<a href="javascript:void(0);" class="btn-con5" @click="test">测试区服</a>-->
+                </div>
+                <a href="javascript:void(0);" class="btn-text4" @click="showRule">活动规则 &gt;</a>
+            </section>
+            <p class="bb-text">腾讯公司保留法律定的范围内对上述规则进行解释的权利</p>
+        </div>
+    </div>
+    <!--奖品展示-->
+    <div class="act-pop1" id="pop1" v-show="prizeDialog">
+        <a class="act-close db" href="javascript:void(0);" title="关闭" @click="showPrize">×</a>
+        <h3 class="p-bt1 db">奖品展示</h3>
+        <ul class="p-list c">
+            <li class="c51-l1">
+                <img src="img/hycs.png" alt="亚军">
+                <p>黑夜传说</p>
+                <!--<span>x666</span>-->
+                <strong class="jb1 db">2</strong>
+            </li>
+            <li class="c51-l2">
+                <img src="img/hycs.png" alt="冠军">
+                <p>黑夜传说</p>
+                <!--<span>x888</span>-->
+                <strong class="jb2 db">1</strong>
+            </li>
+            <li class="c51-l1">
+                <img src="img/hycs.png" alt="季军">
+                <p>黑夜传说</p>
+                <!--<span>x1</span>-->
+                <strong class="jb3 db">3</strong>
+            </li>
+        </ul>
+        <div class="p-tab">
+            <ul class="p-list2 c">
+                <li>
+                    <span class="td1">NO.4~10</span>
+                    <span class="td2">888Q币</span>
+                </li>
+                <li>
+                    <span class="td1">NO.11~30</span>
+                    <span class="td2">浩瀚星空礼裙/礼服（永久）</span>
+                </li>
+                <li>
+                    <span class="td1">NO.31~50</span>
+                    <span class="td2">梨落芳华羽翼（永久）</span>
+                </li>
+                <li>
+                    <span class="td1">NO.51~70</span>
+                    <span class="td2">紫电神驹光剑（永久）</span>
+                </li>
+                <li>
+                    <span class="td1">NO.71-100</span>
+                    <span class="td2">彩虹迷蝶戒指（1个）</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--飞车全国福卡排行-->
+    <div class="act-pop2" id="pop2" v-show="rankDialog">
+        <a class="act-close db" href="javascript:void(0)" title="关闭" @click="showRank">×</a>
+        <h3 class="p-bt1 db"> 福卡接收魅力榜</h3>
+        <ul class="p-list c">
+            <template v-if="index == 1" v-for="(item,index) in topThreeRankInfo">
+                <li class="c51-l2">
+                    <img :src="item.face" alt="名次">
+                    <p>{{item.nick}}</p>
+                    <span>{{item.score}}张</span>
+                    <strong :class="'jb'+(index+1)+' db'"></strong>
+                </li>
+            </template>
+            <template v-else>
+                <li class="c51-l1">
+                    <img :src="item.face" alt="名次">
+                    <p>{{item.nick}}</p>
+                    <span>{{item.score}}张</span>
+                    <strong :class="'jb'+(index+1)+' db'"></strong>
+                </li>
+            </template>
+        </ul>
+        <!--排行榜信息(去除前三名信息)-->
+        <div class="p-tab">
+            <ul class="p-list2 c">
+                <li v-for="(item,index) in exceptTopThreeRankInfo">
+                    <span class="td4">No.{{item.rank}}</span>
+                    <span class="td5">{{item.nick}}</span>
+                    <span class="td7">{{item.score}}张</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="mask" v-if="mask == true"></div>
+</div>
+<!--截屏用到的canvas-->
+<canvas id="posterCanvas" class="poster-canvas" style="display: none"></canvas>
+<script src="//imgcache.gtimg.cn/c/=/club/mobile_web/zepto.min-1.1.6.js,/club/game/zero/zero.m.min-6.0.1.js?max_age=86400000&v=5.0"></script>
+<script type="text/javascript" src="js/html2canvas.min.js"></script>
+<script src="../dist/vue.js"></script>
+<script src="../dist/util.js"></script>
+<script src="js/index.js"></script>
+<script>
+    window.page = new qv.zero.Page({
+        jsonid: 258367,
+        game: 'speedm',
+        mqqEnv: true,
+        onlyMobile: true,
+        isOpenSQView: true,
+        redirectUrl: "",
+        preloads: ['SQGameManager', 'cache', 'AreaSvrSelector'],
+        afterInit: function () {
+            var me = this,
+                staticData1 = zMsg.getFormData(1)[0];
+            me.initVue();
+            //判断是ios还是安卓
+            var plat = zUtil.isIOS() ? 1 : 0;
+            if(plat == 1){
+                $('#fileImg').removeAttr('capture');
+            }
+            //解决安卓出现不了三个点的问题
+            setTimeout(function(){
+                mqq.ui.setWebViewBehavior({'navTextColor':'#000'});
+            },1000)
+            //右上角分享
+            mqq.ui.setOnShareHandler(function (type) {
+                mqq.ui.shareMessage({
+                        title: staticData1.title,
+                        desc: staticData1.desc,
+                        share_type: type,
+                        share_url: window.location.protocol + "//youxi.vip.qq.com/m/act/201801/zj/qqfc_258367/index.html?_wwv=4&_wv=1",
+                        image_url: staticData1.img,
+                        back: true,
+                        sourceName: "QQ手游"
+                    },
+                    function (json) {
+                        if (json.retCode == 0) {
+                            zHttp.send({
+                                actid: 260068
+                            });
+                        }
+                    });
+            });
+
+            //设置页面返回按钮事件
+            setTimeout(function () {
+                mqq.ui.setTitleButtons({
+                    left: {
+                        callback: function () {
+                            if (window.vm.index === 1) {
+                                window.vm.index = 0;
+                            }else {
+                                mqq.ui.popBack();
+                            }
+                        }
+                    },
+                    right: {
+                        hidden: false,//是否隐藏分享按钮
+                        iconID: 4,
+                        callback: function () {
+                            mqq.ui.showShareMenu();
+                        }
+                    }
+                });
+            }, 500)
+            mqq.invoke('ui', 'webviewCanScroll', {"enable" : false});
+        },
+        initVue: function () {
+            var urlInfo = zMsg.getFormData(2),  //页面链接跳转
+                clueInfo = zMsg.getFormData(3), //今日线索
+                ruleInfo = zMsg.getFormData(4), //活动规则
+                greetsInfo = zMsg.getFormData(5), //祝福语文案
+                takePhotoInfo = zMsg.getFormData(10) ? zMsg.getFormData(10)[0]['switch'] : 0,
+                isAutoIdip = zUtil.getValueFromObj( (zMsg.getFormData(10)[1] || {}), 'switch' )== 1;
+                isAutoIdip = isAutoIdip && zURL.get("adtag") == 'game'
+
+            var luckyCardKey = page.jsonid+"_luckyCardKey_"+zUtil.getUin(),  //福卡key
+                myInfoKey = page.jsonid+"_myInfoKey_"+zUtil.getUin(), //个人信息key
+                btnObjKey = page.jsonid + "_btnObjKey_" + zUtil.getUin(), //按钮key
+                CloseFriendKey = page.jsonid + "_CloseFriendKey_" + zUtil.getUin(),  //密友key
+                GameFriendKey = page.jsonid + "_GameFriendKey_" + zUtil.getUin();  //同玩好友key
+
+                window.vm = new Vue({
+                el: "#app",
+                data: {
+                    index: 0, //页面索引
+                    luckyCardNum: 0, //用户拥有福卡数
+                    rankInfo: [
+                        {face:"img/default-avatar.png"}
+                    ], //排行榜信息
+                    urlInfo: urlInfo, //静态数据2(页面url跳转)
+                    clueInfoList: clueInfo, //今日线索文案
+                    myInfo: {
+                        face:window.location.protocol+"//q.qlogo.cn/g?b=qq&s=100&nk="+zUtil.getUin(),
+                        nike:""
+                    }, //当前登录态信息(头像和昵称)
+                    serverListInfo: [{
+                        roleName: "xxx"
+                    }],
+                    platid: zUtil.isIOS() ? 0 : 1,
+                    argObj:{},
+                    rankDialog:false,
+                    prizeDialog:false,
+                    luckyCardInfo:{}, //福卡信息(包含sign、uin、timestamp)
+                    greetsInfo:{
+                        title:"恭喜发财",
+                        desc:"狗来也，福来也，旺旺旺~~"
+                    }, //祝福语
+                    isHasWatched:false, //是否有在企鹅电竞观看5分钟Q飞直播
+                    greetIdx:0, //祝福语索引
+                    friendInfo:{
+                        friendAvatar:"img/default-avatar.png",
+                        friendUin:""
+                    }, //密友但非同玩好友信息(包含头像和uin)
+                    dealImg:"",  //经过天天P图处理后的图片url
+                    mask:false,
+                    isShowCardBtn : !isAutoIdip,
+                    takePhotoInfo:takePhotoInfo,
+                    isAutoIdip : isAutoIdip,
+                    receiveRankPrizeBtn:false //领取排行榜奖励按钮
+                },
+                computed:{
+                    //我的排行榜信息(通过is_me字段是否为1来判断我的排行)
+                    myRankInfo:function(){
+                        var infoObj = {};
+                        this.rankInfo.forEach(function(item,index){
+                            if(item["is_me"] == 1){
+                                infoObj = item;
+                            }
+                        });
+                        return infoObj;
+                    },
+                    //福卡接收榜前三名信息
+                    topThreeRankInfo:function(){
+                        var temp = "", //中间变量
+                            len = this.rankInfo.length,
+                            obj = [
+                                {face:"img/default-avatar.png",nick:"虚位以待",score:0},
+                                {face:"img/default-avatar.png",nick:"虚位以待",score:0},
+                                {face:"img/default-avatar.png",nick:"虚位以待",score:0}
+                        ]
+                        if(len == 1){
+                           if(this.rankInfo[0]["rank"] == 1){
+                               obj[1] = this.rankInfo[0];
+                               return obj;
+                           }else{
+                               return obj;
+                           }
+                        }else if(len == 2){
+                            obj[1] = this.rankInfo[0];
+                            obj[0] = this.rankInfo[1];
+                            return obj;
+                        }else if(len >= 3){
+                            var arr = this.rankInfo.slice(0,3);
+                            temp = arr[0]; //将第一名存在temp中
+                            arr[0] = arr[1]; //将第一名和第二名位置互换
+                            arr[1] = temp; //重新对数组的第二个元素赋值为第一名
+                            return arr;
+                        }
+                    },
+                    //除了前三名之外的福卡接收榜信息
+                    exceptTopThreeRankInfo:function(){
+                        var me = this,
+                            idx = 0,
+                            len = this.rankInfo.length;
+                        this.rankInfo.forEach(function(item,index){
+                            if(item["rank"] == 0){
+                                idx =index;
+                            }
+                        })
+                        if(idx == len-1){
+                            return this.rankInfo.slice(3,idx);
+                        }else{
+                            return this.rankInfo.slice(3);
+                        }
+                    }
+                },
+                methods: {
+                    //add for -- 排行榜前100名用户领取奖励
+                    receiveRankPrize:function(){
+                        var info = zMsg.getFormData(11),
+                            packetlist,
+                            arr = [],
+                            packetObj = {};
+                        info.forEach(function(item,i){
+                            packetObj[item.packetid] = item["actid"];
+                            arr.push(item["packetid"]);
+                        })
+                        packetlist = arr.join("_");
+                        console.log(packetObj);
+                        console.log(packetlist);
+                        zHttp.send({
+                            _c:"UserInPacket",
+                            packetid:packetlist //1442_1443
+                        },function(json){
+                            console.log(json);
+                            if(json.ret == 0){
+                                var in_packet_num = json.data["is_in_packet"][zUtil.getUin()]["in_packet_num"];
+                                //在号码包内
+                                if(in_packet_num){
+                                    var packet_list = json.data["is_in_packet"][zUtil.getUin()]["packet_list"];
+                                    for(var item in packet_list){
+                                        if(packet_list[item] == 1){
+                                            //不是4-10名用户
+                                            if(item != 1445){
+                                                var actid = packetObj[item];
+                                                console.log(actid);
+                                                //请求对应奖励子活动
+                                                zHttp.syrequest({
+                                                    actid:actid,
+                                                    autosvr:true
+                                                },function(json,actid,fn){
+                                                    console.log(json);
+                                                    zHttp.showResponse(json,json.actid,fn);
+                                                })
+                                            }else{
+                                                //4-10用户请求两个子活动(分别为500QB和388QB)
+                                                zHttp.syrequest({
+                                                    actid:263693,
+                                                },function(json,actid,fn){
+                                                    zHttp.syrequest({
+                                                        actid:264317,
+                                                    });
+                                                });
+                                            }
+                                        }
+                                    }
+                                }else{
+                                    zMsg.show("对不起，只有在排行榜前100名的用户才有资格领取奖励！");
+                                }
+                            }
+                        })
+                    },
+                    viewAllPrizes:function(){
+                        zMsg.show(zMsg.getFormData(9)[0]["text"]);
+                    },
+                    //超级QQ--立即领取
+                    receive:function(){
+                        var me = this;
+                        zHttp.syrequest({
+                            actid:263310
+                        },function(json,actid,fn){
+                            console.log(json);
+                            if(json.ret == 0){
+                                me.luckyCardNum += 1;
+                            }
+                            zHttp.showResponse(json,json.actid,fn);
+                        })
+                    },
+                    //拍照
+                    takePhoto:function(){
+                        $("#clipArea img").attr("src", URL.createObjectURL($("#fileImg")[0].files[0]));
+                        this.readFile($("#fileImg")[0].files[0])
+                    },
+                    readFile:function(files){
+                        var reader = new FileReader(),
+                            me = this;
+                        reader.readAsDataURL(files);
+                        reader.onprogress = function(e){
+                            var bfb = Math.round((e.loaded / e.total) * 100).toString();
+                            console.log('图片读取中'+bfb+'%...');
+                        }
+                        reader.onloadend  = function(e) {
+                            qv.zero.LoadingMark.show("图片生成中~");
+                            var baseImg_ = e.target.result; //base64格式的图片
+                            //通过游戏中心的接口将base64的图片转化为url返回
+                            qv.zero.common.upload({data:baseImg_,imageID:""},function(data){
+                                //                                data = {
+                                //ret:0,
+                                //url:"//p.qpic.cn/gc_act/R615RtLap061nD0WbtOSjNIE0IAuP5kqa566BmEyYYicEUlZ1qibjG0g/800"
+                                // }
+                                if(data.ret == 0 && data.url){
+                                    me.queryPTu(data.url);
+                                }else{
+                                    qv.zero.LoadingMark.hide();
+                                    me.dealImg = "img/woman.jpg";  //游戏中心接口挂了(base64转化为url失效)
+                                }
+                            });
+                        }
+                    },
+                    //天天P图测试：http://activity-10053123.image.myqcloud.com/StzHNdZt340M
+                    //天天P图正式：http://shp.qpic.cn/tu_act_pic/0/xnKNUBJjnPJu/0
+                    //游戏中心://p.qpic.cn/gc_act/R615RtLap061nD0WbtOSjNIE0IAuP5kqa566BmEyYYicEUlZ1qibjG0g/800
+                    //请求天天P图接口
+                    queryPTu:function(imgUrl){
+                        var me = this,
+                            arr = ["hezuo_qqfeicheshouyou_20180209174411","hezuo_qqfeicheshouyou_20180209174348"],//(男生,女生)
+                            idx = this.randomIdx(2);
+                        zHttp.send({
+                            actid:261938,
+                            img_url:"http:"+imgUrl, //图片链接
+                            opstr:"doFaceMerge:model_id:"+arr[idx] //3.6人脸融合
+                        },function(json){
+                            console.log(json);
+                            //                            json = {
+                            //                                ret:1000,
+                            //                                data:{
+                            //                                    op:"http://activity-10053123.image.myqcloud.com/StzHNdZt340M",
+                            //                                    op:"http://shp.qpic.cn/tu_act_pic/0/lirOpRaJ94Px/0"
+                            //                                }
+                            //                            }
+                            qv.zero.LoadingMark.hide();
+                            if(json.ret == 0 && json.data.op){
+                                //p图返回的imgUrl
+                                me.dealImg = json.data.op;
+                                $("#clipArea img").attr("src",me.dealImg);
+                            }else if(json.ret == 1000){
+                                zMsg.show("请拍摄或上传人脸照片！");
+                                return false;
+                            }else{
+                                mqq.ui.showTips({
+                                    text: "当前网络繁忙，请重新尝试！"
+                                })
+                                me.dealImg = "img/woman.jpg";
+                                $("#clipArea img").attr("src",me.dealImg);
+                            }
+                        })
+                    },
+                    //产生随机索引，向下取整
+                    randomIdx:function(len){
+                        return Math.floor(Math.random()*len);
+                    },
+                    //观看企鹅电竞直播
+                    gotoQier: function () {
+                        var me = this;
+                        var currentTimeStamp = new Date().getTime(), //当前时间戳
+                            earlyMorningTimeStamp = new Date().setHours(23,59,59,0);  //当天23:59:59的时间戳
+
+                        if (this.isHasWatched) {
+                            zMsg.show("亲，您今天已经领取一张福卡啦！")
+                            return false;
+                        } else {
+                            zHttp.send({actid: 259332}, function (json,actid,fn) {
+                                console.log(json);
+                                //                                json = {
+                                //                                    ret: 0,
+                                //                                    data: {
+                                //                                        op: {
+                                //                                            num: 1
+                                //                                        },
+                                //                                        rule: {
+                                //                                            get_user_view_data_new: 650
+                                //                                        }
+                                //                                    }
+                                //                                }
+                                if (json.ret == 0 && json.data.rule.get_user_view_data_new >= 300) {
+                                    me.isHasWatched = true;
+                                    qv.zero.cache.add(btnObjKey, 1, earlyMorningTimeStamp-currentTimeStamp);
+                                }
+                                zHttp.showResponse(json,json.actid,fn)
+                            })
+                        }
+                    },
+                    //分享并领取(1.找到同玩好友和密友中的差异；2.随机产生祝福语；3.跳转到分享页面)
+                    shareAndReceive: function () {
+                        var me = this;
+                        if(this.luckyCardNum <= 0){
+                            zMsg.show("活动已结束~");
+                        }else{
+
+                            //生成随机祝福语
+                            var len = greetsInfo.length;
+                            this.greetIdx = this.randomIdx(len);
+                            this.greetsInfo.title = greetsInfo[this.greetIdx]["title"];
+                            this.greetsInfo.desc = greetsInfo[this.greetIdx]["desc"];
+                            this.index = 1;
+                            //查询密友和同玩好友（得到密友且非同玩）
+                            qv.zero.CallBack.all([this.queryCloseFriend(),this.queryGameFriend()]).add(function(arr){
+                                console.log(arr);
+                                //得到两个数组的差异集合
+                                var diffArr = Object.keys(arr[0]).filter(function (v) {
+                                    return !(Object.keys(arr[1]).indexOf(v) > -1)
+                                })
+                                var len = diffArr.length;
+                                console.log(diffArr);
+                                if(len <= 0){
+                                    //当拉取的密友正好都等于同玩时，则默认随机展示密友
+                                    diffArr = Object.keys(arr[0]);
+                                    len = diffArr.length;
+                                }
+                                var idx = me.randomIdx(len);
+                                me.friendInfo.friendUin = diffArr[idx]; //uin
+                                me.friendInfo.friendAvatar = window.location.protocol+"//q.qlogo.cn/g?b=qq&s=100&nk="+diffArr[idx]; //头像
+                            })
+                        }
+                    },
+                    //查询当前用户拥有福卡数
+                    queryLuckyCard: function (argObj) {
+                        var cb = new qv.zero.CallBack(),
+                            me = this;
+
+                        zHttp.syrequest(argObj, function (json) {
+                            console.log(json);
+                            if (json.ret == 0 && json.data.op) {
+                                me.luckyCardNum = +json.data.op.num;
+                                cb.execute(me.luckyCardNum);
+                            }else{
+                                cb.execute(false);
+                            }
+                        })
+                        return cb;
+                    },
+                    //分享活动
+                    share: function (logo) {
+                        var me = this;
+                        qv.zero.Msg.showMessageBox({
+                            msg: '是否确认分享福卡？若分享途中取消也会扣除福卡哦！',
+                            left: {text: '取消', click: false},
+                            right: {
+                                text: '确认分享 ',
+                                click: function () {
+                                    //生成福卡ID
+                                    me.createLuckyCardID().add(function(data){
+                                        if(data){
+                                            if(logo == 1){
+                                                data.uin = me.friendInfo.friendUin;
+                                                zHttp.send({
+                                                    actid:259867,
+                                                    uins:[data.uin]
+                                                },function(json){
+                                                    console.log(json);
+                                                    if(json.ret == 0 && json.data.op){
+                                                        data.nike = json.data.op.friend[data.uin]["nike"];
+                                                    }
+                                                })
+                                            }
+                                            //分享Ark消息
+                                            me.shareArkMessage(data);
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    },
+                    //生成福卡ID（返回sign-秘钥、timestamp-时间戳、uin-当前用户uin）
+                    createLuckyCardID:function(){
+                        var me = this,
+                            cb = new qv.zero.CallBack();
+                        zHttp.syrequest({
+                            actid:261432,
+                            mode:false
+                        },function(json,actid,fn){
+                            console.log(json);
+                            //模拟数据
+                            //                            json = {
+                            //                                ret:0,
+                            //                                data:{
+                            //                                    op:{
+                            //                                        sign:"d5cfd8e17c42eb91b1e3d72a9c73bc68", //秘钥
+                            //                                        var:{
+                            //                                           uin:792013934,  //当前人的uin
+                            //                                           timestamp:"1517979323"  //时间戳
+                            //                                        }
+                            //                                    }
+                            //                                }
+                            //                            }
+                            if(json.ret == 0 && json.data.op){
+                                me.luckyCardInfo = json.data.op; //福卡签名信息(包含sign、timestamp、uin)
+                                if(me.luckyCardNum > 0){
+                                    me.luckyCardNum = me.luckyCardNum-1;
+                                }
+                                cb.execute(me.luckyCardInfo);
+                            }else{
+                                zHttp.showResponse(json,json.actid,fn);
+                                cb.execute(false);
+                            }
+                        })
+                        return cb;
+                    },
+                    //分享ARK消息
+                    shareArkMessage: function (data) {
+                        var me = this,
+                            img = "",
+                            url = "";
+
+                        //如果是P图后台返回的图片(格式为http://activity-10053123.image.myqcloud.com/xgOZ0wih9M5Y或者http://shp.qpic.cn/tu_act_pic/0/xnKNUBJjnPJu/0)
+                        if(this.dealImg.match(/.*activity-10053123\.image\.myqcloud\.com\/([0-9a-zA-Z]+)/)){
+                            //天天P图
+                            img = this.dealImg.split("/")[3]+"&imgtype=pt1";
+                            url = encodeURIComponent(window.location.protocol + "//youxi.vip.qq.com/m/act/201801/zj/qqfc_258367/share.html?_wwv=4&_wv=1&card_id=" + data.sign + "&share_uin=" + data.var.uin + "&timestamp=" + data.var.timestamp + "&idx=" + this.greetIdx + "&img=" + img+"&adtag=adtag.share");
+                        }else if(this.dealImg.match(/.*shp\.qpic\.cn\/tu_act_pic\/0\/([0-9a-zA-Z]+)\/0/)){
+                            //天天P图
+                            img = this.dealImg.split("/")[5]+"&imgtype=pt2";
+                            url = encodeURIComponent(window.location.protocol + "//youxi.vip.qq.com/m/act/201801/zj/qqfc_258367/share.html?_wwv=4&_wv=1&card_id=" + data.sign + "&share_uin=" + data.var.uin + "&timestamp=" + data.var.timestamp + "&idx=" + this.greetIdx + "&img=" + img+"&adtag=adtag.share");
+                        }else if(this.dealImg.match(/.*p\.qpic\.cn\/gc_act\/([0-9a-zA-Z]+)\/800/)){
+                            //(游戏中心格式:http://p.qpic.cn/gc_act/R615RtLap061nD0WbtOSjNIE0IAuP5kqa566BmEyYYicEUlZ1qibjG0g/800)
+                            img = this.dealImg.split("/")[4]+"&imgtype=gc";
+                            url = encodeURIComponent(window.location.protocol + "//youxi.vip.qq.com/m/act/201801/zj/qqfc_258367/share.html?_wwv=4&_wv=1&card_id=" + data.sign + "&share_uin=" + data.var.uin + "&timestamp=" + data.var.timestamp + "&idx=" + this.greetIdx + "&img=" + img+"&adtag=adtag.share");
+                        }else{
+                            //游戏中心接口挂了(展示默认图片)
+                            url = encodeURIComponent(window.location.protocol + "//youxi.vip.qq.com/m/act/201801/zj/qqfc_258367/share.html?_wwv=4&_wv=1&card_id=" + data.sign + "&share_uin=" + data.var.uin + "&timestamp=" + data.var.timestamp + "&idx=" + this.greetIdx+"&adtag=adtag.share");
+                        }
+                        //对跳转url进行编码（链接上需要带上sign、share_uin、timestamp三个字段当做签名校验）
+                        var shareImg = zMsg.getFormData(7)[0]["imgUrl"]; //分享图片
+                        shareImg = encodeURIComponent(shareImg);
+                        if (data.uin) {
+                            mqq.invoke("QQApi", "shareArkMessage", {
+                                "appName": "com.tencent.gamecenter.gameshare", //ArkApp的名称
+                                "appView": "noDataView", //要展示的ArkApp视图
+                                "uinType":0, //分享给指定的好友或群：0：好友；1：群
+                                "toUin":data.uin, //分享给指定的好友或者群
+                                "toNickName": data.nike,   //分享给指定好友昵称或群名称
+                                "appDesc": "ark分享消息", //Ark消息的描述
+                                "promptText": "飞车贺新年,抽永久黑夜传说", //Ark消息的提示文案，表现为消息列表中每条消息的外显文案
+                                "appMinVersion": "1.0.0.1", //ArkApp支持的最小版本
+                                "appConfig": JSON.stringify({
+                                    "type": "normal",
+                                    "forward": 1 // 是否允许转发
+                                }), //Ark消息的配置信息
+                                "metaData": JSON.stringify({
+                                    "shareData": {
+                                        "appid": "1104922185", //游戏APPid
+                                        "type": "image", //分享类型(image或者video)
+                                        "url": shareImg, //图片url
+                                        "width": 601,
+                                        "height": 330,
+                                        "buttons": [{"text": "打开福卡", "url": url}] //url需要encode(Ark跳转url)
+                                    }
+                                }), //展示Ark消息需要的元数据
+                                "callback": mqq.callback(function (result) {
+                                    if (result.data.result == 0) {
+                                        me.index = 0;
+                                        if (me.index == 0) {
+                                            me.receiveLotteryPrize(data);
+                                        }
+                                    }
+                                })
+                            })
+                        } else {
+                            mqq.invoke("QQApi", "shareArkMessage", {
+                                "appName": "com.tencent.gamecenter.gameshare", //ArkApp的名称
+                                "appView": "noDataView", //要展示的ArkApp视图
+                                "appDesc": "ark分享消息", //Ark消息的描述
+                                "promptText": "飞车贺新年,抽永久黑夜传说", //Ark消息的提示文案，表现为消息列表中每条消息的外显文案
+                                "appMinVersion": "1.0.0.1", //ArkApp支持的最小版本
+                                "appConfig": JSON.stringify({
+                                    "type": "normal",
+                                    "forward": 1 // 是否允许转发
+                                }), //Ark消息的配置信息
+                                "metaData": JSON.stringify({
+                                    "shareData": {
+                                        "appid": "1104922185", //游戏APPid
+                                        "type": "image", //分享类型(image或者video)
+                                        "url": shareImg, //图片url
+                                        "width": 601,
+                                        "height": 330,
+                            //                                        "width": 450,
+                            //                                        "height": 450,
+                                        "buttons": [{"text": "打开福卡", "url": url}] //url需要encode(Ark跳转url)
+                                    }
+                                }), //展示Ark消息需要的元数据
+                                "callback": mqq.callback(function (result) {
+                                    //成功分享，跳回第一页进行抽奖
+                                    if (result.data.result == 0) {
+                                        me.index = 0;
+                                        if (me.index == 0) {
+                                            me.receiveLotteryPrize(data);
+                                        }
+                                    }
+                                })
+                            })
+                        }
+                    },
+                    //领取抽奖礼包(op:AMS发货 rule:校验第三方签名)
+                    receiveLotteryPrize:function(obj){
+                        var me = this,
+                            argObj = {
+                                actid: 262928,
+                                autosvr: true,
+                                share_uin:obj["var"]["uin"],
+                                timestamp:obj["var"]["timestamp"],
+                                card_id:obj.sign,
+                            }
+                        zHttp.syrequest(argObj,function(json,actid,fn){
+                            if(json.ret == 0 && json.data.op){
+                                var level = json.data.op.diamonds; //中奖等级
+                            }
+                            zHttp.showResponse(json,json.actid,fn);
+                        })
+                    },
+                    showRank:function(){
+                        this.rankDialog = !this.rankDialog;
+                        this.mask = !this.mask;
+                    },
+                    showPrize:function(){
+                        this.prizeDialog = !this.prizeDialog;
+                        this.mask = !this.mask;
+                    },
+                    //查询福卡接收榜信息(op--拉取新版排行榜)
+                    queryRankInfo: function () {
+                        var me = this,
+                            cb = new qv.zero.CallBack();
+                        zHttp.send({
+                            actid: 259719,
+                            uins: Number(zUtil.getUin())
+                        }, function (json) {
+                            console.log(json);
+                            if (json.ret == 0 && json.data.op) {
+                                me.rankInfo = json.data.op;
+                                /*
+                                    add for 导入排行榜前100名QQ号
+                                    var arr = [];
+                                    me.rankInfo.forEach(function(item,i){
+                                        arr.push(item["qq"]);
+                                    })
+                                    console.log(arr);
+                                    var arr1 = arr.slice(0,3);
+                                    var arr2 = arr.slice(3,10);
+                                    var arr3 = arr.slice(10,30);
+                                    var arr4 = arr.slice(30,50);
+                                    var arr5 = arr.slice(50,70);
+                                    var arr6 = arr.slice(70,100);
+                                    console.log(arr1+"==="+arr1.length);
+                                    console.log(arr2+"==="+arr2.length);
+                                    console.log(arr3+"==="+arr3.length);
+                                    console.log(arr4+"==="+arr4.length);
+                                    console.log(arr5+"==="+arr5.length);
+                                    console.log(arr6+"==="+arr6.length);
+                                 */
+                                cb.execute(me.rankInfo);
+                            }else{
+                                cb.execute(false);
+                            }
+                        })
+                        return cb;
+                    },
+                    //查询当前登录态的昵称和头像
+                    queryMyInfo: function () {
+                        var uin = zUtil.getUin(),
+                            me = this;
+                        zHttp.send({
+                            actid: 259867,
+                            uins: [uin]
+                        }, function (json) {
+                            if (json.ret == 0 && json.data.op) {
+                                me.$set(me.myInfo,"nike",json.data.op.friend[uin]["nike"]);
+                                qv.zero.cache.add(myInfoKey,me.myInfo,1000*60*60*24*30);
+                            }else{
+                                me.$set(me.myInfo,"nike",uin);  //待处理
+                            }
+                        })
+                    },
+                    //游戏中心cgi(查询QQ飞车中最近玩过的角色昵称)---查询指定游戏最近在玩的区服
+                    queryRecentServerInfo: function () {
+                        var me = this,
+                            cb = new qv.zero.CallBack();
+                        var param = {
+                            "key": {
+                                "param": {
+                                    "tt": this.platid,
+                                    "appid": "1104922185",
+                                    "version": 2
+                                },
+                                "module": "gc_play_info",
+                                "method": "getServerList"
+                            }
+                        }
+                        var cgi_url = 'http://info.gamecenter.qq.com/cgi-bin/gc_play_info_fcgi?param=' + JSON.stringify(param) + '&g_tk=' + zUtil.getToken();
+                        $.ajax({
+                            url: cgi_url,
+                            cache: false,
+                            dataType: "json",
+                            type: "post",
+                            timeout: 5000,
+                            beforeSend: function (xhr) {
+                                xhr.withCredentials = true;
+                            },
+                            success: function (json) {
+                                console.log(json);
+                                //模拟数据
+                                        //                                json = {
+                                        //                                    data:{
+                                        //                                        key:{
+                                        //                                            retBody:{
+                                        //                                                data:[{
+                                        //                                                    area:2,
+                                        //                                                    partition:3014,
+                                        //                                                    partitionName:"手Q4区_阳光码头",
+                                        //                                                    plat:1,
+                                        //                                                    roleId:"4798020292110241",
+                                        //                                                    roleName:"秀外+慧中=我"
+                                        //                                                }]
+                                        //                                            }
+                                        //                                        }
+                                        //                                    }
+                                        //                                }
+                                if (json.data.key.retCode == 0 && json.data.key.retBody.data) {
+                                    me.serverListInfo = json.data.key.retBody.data;
+                                    cb.execute(true);
+                                } else {
+                                    cb.execute(false);
+                                }
+                            }
+                        })
+                        return cb;
+                    },
+                    //启动游戏
+                    startGame: function () {
+                        if (mqq.iOS) {
+                            qv.zero.SQGameManager.start(page);
+                            zHttp.send({actid: 259724});
+                        } else {
+                            qv.zero.SQGameManager.isInstalled(page, function (result) {
+                                if (result) {
+                                    qv.zero.SQGameManager.start(page);
+                                    zHttp.send({actid: 259724});
+                                } else {
+                                    mqq.device.getNetworkType(function (result) {
+                                        if (result != 1) {
+                                            //非wifi情况下
+                                            qv.zero.Msg.showMessageBox({
+                                                msg: '车手您好~您当前处于非WIFI环境，下载需要耗费流量，是否继续下载',
+                                                left: {text: '取消', click: false},
+                                                right: {
+                                                    text: '继续下载 ',
+                                                    click: function () {
+                                                        qv.zero.SQGameManager.start(page);
+                                                        zHttp.send({actid: 259724});
+                                                    }
+                                                }
+                                            });
+                                        } else {
+                                            //wifi情况下
+                                            qv.zero.SQGameManager.start(page);
+                                            zHttp.send({actid: 259724});
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    },
+                    gotoLink: function (url, actid) {
+                        zUtil.openUrl(url, actid, 1);
+                    },
+                    showRule: function () {
+                        zMsg.show(ruleInfo[0]["text"]);
+                    },
+                    //查密友(拉取头像、uin、昵称)
+                    queryCloseFriend:function(){
+                        var callback = new qv.zero.CallBack(),
+                            obj = {},
+                            cache = qv.zero.cache.get(CloseFriendKey);
+                        if(cache){
+                            setTimeout(function(){
+                                callback.execute(cache);
+                            },0)
+                            return callback;
+                        }
+                        zHttp.send({
+                            _c:"JustCloseFriend",
+                            num:20,
+                            type:0
+                        },function(json){
+                            var data = zUtil.getValueFromObj(json,"data");
+                            if(json.ret==0 && data && data.length){
+                                data.forEach(function(item,index){
+                                    obj[item.uin] = item.name;
+                                });
+                                qv.zero.cache.add(CloseFriendKey,obj,1000*3600*24*5);
+                                callback.execute(obj);
+                            }else{
+                                callback.execute({});
+                            }
+                        })
+                        return callback;
+                    },
+                    //查同玩(拉取uin、昵称和最近在玩的时间戳)
+                    queryGameFriend:function(){
+                        var callback = new qv.zero.CallBack(),
+                            obj = {},
+                            cache = qv.zero.cache.get(GameFriendKey),
+                            me = this;
+                        if(cache){
+                            setTimeout(function(){
+                                callback.execute(cache);
+                            },0)
+                            return callback;
+                        }
+                        zHttp.send({
+                            _c:"GameFriendsInfo",
+                            num:20,
+                            appid:1104922185,
+                            type:1
+                        },function(json){
+                            var data = zUtil.getValueFromObj(json,"data");
+                            console.log(data);
+                            if(json.ret == 0 && data && data.length){
+                                data.forEach(function(item,index){
+                                    obj[item.uin] = item.name;
+                                });
+                                qv.zero.cache.add(GameFriendKey,obj,1000*3600*30*5);
+                                callback.execute(obj);
+                            }else{
+                                callback.execute({});
+                            }
+                        })
+                        return callback;
+                    },
+                    //检查partition是否合法
+                    checkPartition:function(obj){
+                        var partition = obj.partition;
+                        var platid = zUtil.isIOS() ? "ios" : "and",
+                            serverList = qv.zero.Idip.speedm.serverList[platid], //对应设备的区服列表
+                            cb = new qv.zero.CallBack(),
+                            arr = [];
+
+                        serverList.forEach(function(item,index){
+                            arr.push(item[1]);
+                        })
+                        if(arr.indexOf(partition) == -1 || [0,1].indexOf(obj.platid) == -1){
+                            cb.execute(false);
+                        }else{
+                            cb.execute(true);
+                        }
+                        return cb;
+                    },
+                    refreshCard : function(type){
+                        var me = this;
+                        var argObj = {};  //查询福卡--前端所带参数
+                        var platid = zURL.get("platid") ? Number(zURL.get("platid")) : "",  //0代表IOS，1代表安卓
+                            adtag = zURL.get("adtag") || "", //标明页面来源(game:游戏内，gamecenter:游戏中心)
+                            partition = zURL.get("partition") ? Number(zURL.get("partition")) : "",
+
+                            taskId1 = Number(zURL.get("9000002")),
+                            taskId2 = Number(zURL.get("9000003")),
+                            taskId3 = Number(zURL.get("9000004")),
+                            task_id = [];
+                        if(Math.abs(taskId1) == 1){
+                            task_id.push("9000002");
+                        }
+                        if(Math.abs(taskId2) == 1){
+                            task_id.push("9000003");
+                        }
+                        if(Math.abs(taskId3) == 1){
+                            task_id.push("9000004");
+                        }
+                        console.log(task_id);
+                        task_id = task_id.join(","); //转化为"9000002,9000003,9000004"格式
+
+                        //选区服后再请求福卡
+                        var showArea = function(args,cb){
+                        	var assnkey = 'src' + page.game;
+				            if (!page[assnkey]) {
+				              page[assnkey] = new qv.zero.AreaSvrSelector({
+				                name: page.game
+				              });
+				            }
+				            page[assnkey].show({
+				              send: function (area_args) {
+				              	args.task_id = ["9000002","9000003","9000004"].join(',');
+				                args.roleid = area_args.roleid;
+				                args.partition = area_args.partition;
+				                args.platid = area_args.platid;
+				                args.area = area_args.area;
+				                args.opengamecenter = true;
+				                cb && cb(args);
+				              }
+				            });
+                        }
+
+                        //游戏内（先检查partition是否存在，再去查询福卡数）
+                        if(adtag == "game"){
+                            argObj = {
+                                platid:platid,
+                                partition:partition,
+                                actid:259489,
+                                task_id:task_id,
+                            };
+                            console.log(argObj);
+                            //检查区服信息是否合法
+                            this.checkPartition(argObj).add(function(data){
+                                if(data){
+                                    me.queryLuckyCard(argObj).add(function(cardNum){ (type != 'auto') && me.showMyCard(cardNum)});
+                                }else{
+                                	showArea({
+                                        actid:259489
+                                    },function(args){
+                                    	me.queryLuckyCard(args).add(function(cardNum){(type != 'auto') &&  me.showMyCard(cardNum)});
+                                    });
+                                }
+                            });
+                        }else {
+                    		showArea({
+                    	        actid:259489
+                    	    },function(args){
+                    	    	me.queryLuckyCard(args).add(function(cardNum){
+                                    (type != 'auto') &&  me.showMyCard(cardNum)
+                                });
+                    	    });
+                        }
+                    },
+                    showMyCard : function(cardNum){
+                        this.isShowCardBtn = false;
+                        if(cardNum === false){
+                            //查询失败
+                            zMsg.showWithBtnGame('当前网络繁忙，请先到游戏内开一局稍后再试吧~',game);
+                        }else if(cardNum>=0){
+                            var msg = cardNum == 0 ? '没有可以发放的福卡啦~请在游戏内完成指定任务或在页面观看直播获得福卡' :'您当前的福卡数：'+cardNum+'张'
+                            zMsg.show(msg);
+                        }
+                    }
+                },
+                mounted: function () {
+                    var me = this;
+
+//                    zHttp.send({
+//                        actid:264889
+//                    },function(json){
+//                        console.log(json);
+//                        if(json.ret == 0 && json.data.rule.bwlist == 1){
+                            //判断当前时间是否大于3月3号凌晨
+                            var currentTimeStamp = new Date().getTime();
+                            var startTime = zMsg.getFormData(12)[0]["time"].replace(/-/g,'/');  //2018/03/03 00:00:00
+                            if(currentTimeStamp > new Date(startTime).getTime()){
+                                me.receiveRankPrizeBtn = true;
+                            }
+                            console.log(currentTimeStamp+"==="+new Date(startTime).getTime());
+//                        }
+//                    })
+
+
+
+
+
+
+
+                    //判断是否自动请求IDIP
+                    if(this.isAutoIdip){
+                    	this.refreshCard('auto');
+                    }
+
+                    var myInfoCache = qv.zero.cache.get(myInfoKey),
+                        btnObjCache = qv.zero.cache.get(btnObjKey);
+
+                    //领取福卡(企鹅电竞)
+                    if(btnObjCache){
+                        this.isHasWatched = true;
+                    }
+
+                    //查询个人信息(头像，昵称)
+                    if(myInfoCache){
+                        this.myInfo = myInfoCache;
+                    }else{
+                        this.queryMyInfo();
+                    }
+                    //查询排行榜信息
+                    this.queryRankInfo().add(function(data){
+                        if(data){
+                            console.log(data);
+                            var uinsArr = [];
+                            //遍历得到排行榜上用户的uin(需要修改)
+                            data.forEach(function(item,index){
+                                me.$set(item,"face",window.location.protocol+"//q.qlogo.cn/g?b=qq&s=100&nk="+item.qq);
+                            })
+                        }
+                    });
+
+                }
+            })
+        }
+    })
+</script>
+<script>
+    ;(function(exports, $) {
+        function b64toBlob(b64Data, contentType, sliceSize) {
+            contentType = contentType || '';
+            sliceSize = sliceSize || 512;
+
+            var byteCharacters = atob(b64Data);
+            var byteArrays = [];
+
+            for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+                var byteNumbers = new Array(slice.length);
+                for (var i = 0; i < slice.length; i++) {
+                    byteNumbers[i] = slice.charCodeAt(i);
+                }
+
+                var byteArray = new Uint8Array(byteNumbers);
+
+                byteArrays.push(byteArray);
+            }
+
+            var blob = new Blob(byteArrays, { type: contentType });
+            return blob;
+        }
+        function getDataFromBase64(str) {
+            if (~str.indexOf(', ')) {
+                return str.split(", ")[1];
+            } else if (~str.indexOf(',')) {
+                return str.split(",")[1];
+            } else {
+                return str;
+            }
+        }
+        function getValueFromObj(context, keypath){
+            var keys = keypath.split('.'), key, cur = context, REG = /^(\w+)\[(\d+)\]$/;
+            while(key = keys.shift()){
+                if(cur === void 0){
+                    return cur;
+                }
+                if(~key.indexOf('[')){
+                    if(REG.test(key)){
+                        var k1 = RegExp.$1, k2 = RegExp.$2;
+                        cur = cur[k1];
+                        if(cur){
+                            cur = cur[k2];
+                        }
+                    } else {
+                        throw 'argument: '+ key +' error'
+                    }
+                } else {
+                    cur = cur[key];
+                }
+            }
+            return cur;
+        }
+        function uploadImg(b64Data, filepath ,cb) {
+            var cgi  = '//info.gamecenter.qq.com/cgi-bin/comic_upload_pic?g_tk='
+            var formData = new FormData();
+            formData.append('image', b64toBlob(getDataFromBase64(b64Data)), filepath.substr(filepath.lastIndexOf('/') + 1));
+            formData.append('param', JSON.stringify({
+                "key1": {
+                    "param": {
+                        "str_bid": "gc_act",
+                        "str_img_id": "",
+                        "is_base64_encode": false,
+                        "str_img_data": ""
+                    },
+                    "module": "pgg_comm_mt_svr",
+                    "method": "store_img"
+                }
+            }));
+            $.ajax({
+                type: 'POST',
+                url:  cgi + zUtil.getToken(),
+                data: formData,
+                processData: false,
+                contentType: false,
+                xhrFields: {
+                    withCredentials: true
+                },
+                beforeSend: function(xhr) {
+                    xhr.withCredentials = true;
+                },
+                success: function(json) {
+                    //console.log(json);
+                    if(getValueFromObj(json, 'data.key1.retBody.result') === 0) {
+                        //最后一个参数是图片大小，300、400、800、950等4种大小
+                        cb({ret : 0, id : json.data.key1.retBody.data.str_img_id, url : '//p.qpic.cn/gc_act/' + json.data.key1.retBody.data.str_img_id + '/800'});
+                    } else {
+                        cb({ret : -1, msg : '上传失败，请稍候重试！'});
+                    }
+                },
+                error: function(json) {
+                    cb({ret : -5, msg : '网络错误，请稍候重试！'});
+                }
+            });
+        }
+        var common = {
+            /**
+             * 上传图片
+             * data = {max : 最大张数限制 , source :  控制来源的，0：相册；1：拍照}
+             */
+            upload : function(image,callback) {
+//                    console.log(image.data);
+                var me = this;
+                uploadImg(image.data, image.imageID, function(data){
+                    callback(data);
+                    // if(data.ret !== 0 ){ //存在失败
+                    //     zMsg.show('图片上传保存失败！请稍后重试~');
+                    // } else {
+                    //     callback(data);
+                    // }
+                });
+            }
+        }
+        exports.common = common;
+
+    })(qv.zero, Zepto)
+
+</script>
+</body>
+</html>

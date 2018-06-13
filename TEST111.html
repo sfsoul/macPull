@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Person(name){
+        this.name = name;
+    }
+    Person.prototype.getName = function(){
+        console.log(this.name);
+    }
+
+    var a = new Person("zj");
+    var b = new Person("dmy");
+    // a.getName = function(){
+    //     console.log("test");
+    // }
+    console.log(a == b); //false   两个实例不是指向同一个内存空间
+    console.log(a.getName == b.getName) //true  因为getName方法都是继承于Person.prototype上
+</script>
+</body>
+</html>

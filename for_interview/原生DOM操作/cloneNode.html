@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cloneNode</title>
+</head>
+<body>
+<div id="parent" onclick="show()">
+    <h1>子元素</h1>
+</div>
+<button>复制</button>
+<button>删除</button>
+<script>
+    /*
+    *   cloneNode用来返回调用的节点的一个副本，接收一个bool参数，用来表示是否复制子元素。
+    *   注意:(1)和createElement一样，cloneNode创建的节点只是游离在html文档外的节点，要调用appendChild方法才能添加到文档树中。
+    *   (2)如果复制的元素有id，则其副本同样会包含该id，由于id具有唯一性，所以在复制节点后必须修改其id。
+    *   (3)调用接收的bool参数最好传入，如果不传入该参数，不同浏览器对其默认值的处理可能不同。
+    *   如果被复制的节点绑定了事件，则副本也会跟着绑定该事件吗？
+    *   (1)如果是通过addEventListener或者onclick进行绑定的事件，副本节点不会绑定该事件。
+    *   (2)若是内联方式绑定的点击事件，副本节点同样会触发事件
+    */
+    let parentDom = document.getElementById("parent");
+    let buttonDom = document.getElementsByTagName("button");
+    console.log(buttonDom);
+
+    buttonDom[0].addEventListener("click",function(e){
+        console.log(e);
+        var parent2 = parentDom.cloneNode(true);
+        parent2.id = "parent2";
+        document.body.appendChild(parent2);
+    },false)
+
+    function show(){
+        alert("show");
+    }
+</script>
+</body>
+</html>

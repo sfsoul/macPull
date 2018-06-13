@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <base href="//imgcache.gtimg.cn/vipstyle/game/act/zj/253689/">
+    <meta name="author" content="Tencent-CP">
+    <meta name="Copyright" content="Tencent">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="viewport" id="viewport" content="initial-scale=1, maximum-scale=5, minimum-scale=0.5, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <title>王者语音demo</title>
+    <meta itemprop="name" content="忍者档案大揭秘！"/>
+    <meta name="description" itemprop="description" content="全新忍者,全新玩法,邀您揭秘火影周年盛宴！"/>
+    <meta itemprop="image" content="https://imgcache.gtimg.cn/vipstyle/game/act/zj/253689/img/share.png"/>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .chooseHero {
+            background-color: pink;
+            text-align: center;
+        }
+
+        ul {
+            background-color: pink;
+        }
+
+        ul li {
+            display: inline-block;
+            width: 23%;
+            text-align: center;
+            margin-right: 5px;
+        }
+
+        ul li img {
+            width: 100%;
+            height: 100%;
+        }
+
+        footer {
+            text-align: center;
+        }
+
+        .start {
+            background-color: #333;
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+            padding: 5px 0;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <!--<p class="chooseHero" @click="chooseHero">选择英雄</p>-->
+    <ul>
+        <li v-for="(item,index) in heroInfo" @click="chooseHero(index)">
+            <img :src="item.heroPic" alt="英雄图片">
+        </li>
+    </ul>
+    <div style="text-align: center;">
+        <select name="" v-model="greetSelect">
+            <option value="新年快乐！">新年快乐！</option>
+            <option value="我来给你送钱送礼啦！">我来给你送钱送礼啦！</option>
+            <option value="恭喜发财！">恭喜发财！</option>
+            <option value="新年好啊！一起开黑啊！">新年好啊！一起开黑啊！</option>
+            <option value="心想事成！">心想事成！</option>
+        </select>
+        <button @click="wordToAudio">一键生成</button>
+        <!--<input type="text" placeholder="请输入/选择想让英雄送的祝福..." id="text" onchange="console.log(this.value)">-->
+        <input type="text" placeholder="请输入/选择想让英雄送的祝福..." id="text" oninput="page.limit(this.value)">
+    </div>
+    <!--视频、音频播放区域-->
+    <div style="margin-top: 30px;text-align: center;color:#F9D49D;">
+        <video src="video/video.mp4" id="video" muted="muted" preload="auto" width="100%" webkit-playsinline="true"
+               playsinline="true" poster="video/videoBg.jpg"></video>
+        <audio src="video/test.mp3" id="audio">点击播放歌曲</audio>
+        <!--展示祝福语-->
+        <p>{{greetSelect}}</p>
+        <!--红包金额-->
+        <p style="font-size: 38px;">{{randomMoney}}<span style="font-size: 16px;">元</span></p>
+        <p style="text-decoration: underline" @click="changeMoney">换个金额</p>
+        <button style="color: #C5314B;" @click="sendRedEnvelope">赏红包</button>
+    </div>
+    <footer>
+        <div class="start" @click="startGame">启动游戏</div>
+    </footer>
+</div>
+<script src="//imgcache.gtimg.cn/c/=/club/mobile_web/zepto.min-1.1.6.js,/club/game/zero/zero.m.min-6.0.1.js?max_age=86400000&v=5.0"></script>
+<script src="../dist/vue.js"></script>
+<script src="../dist/util.js"></script>
+<script>
+    var cwid = document.documentElement.clientWidth || document.body.clientWidth,
+        viewport = document.getElementById('viewport');
+    if (navigator.appVersion.indexOf('iPhone') != -1 || navigator.appVersion.indexOf('iPad') != -1) {
+        viewport.setAttribute('content', 'width=375,minimum-scale=0.5,maximum-scale=5,user-scalable=no');
+    } else if (navigator.appVersion.indexOf('Android') != -1) {
+        document.getElementById('app').style.zoom = cwid / 375;
+    }
+</script>
+<script>
+
+    var page = new qv.zero.Page({
+        jsonid: 253689,
+        game: 'sgame',
+        mqqEnv: true,
+        onlyMobile: true,
+        isOpenSQView: true,
+        redirectUrl: "",
+        preloads: ['SQGameManager', 'cache'],
+        afterInit: function () {
+            var me = this;
+<<<<<<< .mine
+||||||| .r334725
+
+            //获取当前手Q的版本号
+//            window.QQVersion = mqq.QQVersion;
+//            alert(window.QQVersion);
+
+=======
+
+            //获取当前手Q的版本号
+            window.QQVersion = mqq.QQVersion;
+            alert(window.QQVersion);
+
+>>>>>>> .r335198
+            me.initVue();
+            //audio对象
+            var media = document.getElementById("audio");
+            $("#video").click(function () {
+                if (this.paused) {
+                    this.play();
+                    media.play();
+                } else {
+                    this.pause();
+                    media.pause();
+                }
+            })
+        },
+        initVue: function () {
+            //英雄信息
+            var heroInfo = zMsg.getFormData(2);
+            window.vm = new Vue({
+                el: "#app",
+                data: {
+                    //英雄id与英雄名称一一对应
+                    heroInfo: heroInfo,
+                    platid: zUtil.isIOS() ? 0 : 1,
+                    choosedHeroId: 0, //被选中的英雄id
+                    greetSelect: "", //祝福语
+                    randomMoney: 0.01, //随机红包金额
+                    loginUserInfo: "", //用户登录信息
+                    QQVersion: 0, //当前QQ版本号
+                    closeFriends: []  //3位密友
+                },
+                computed: {},
+
+                methods: {
+                    //查询密友(3个)
+                    queryCloseFriends: function () {
+                        var cb = new qv.zero.CallBack(),
+                            me = this;
+
+                        zHttp.send({
+                            _c: "JustCloseFriend",
+                            num: 3,
+                            type: 0
+                        }, function (json) {
+                            console.log(json);
+                            var data = json.ret == 0 && zUtil.getValueFromObj(json, "data"),
+                                uinsArr = [];
+                            console.log(data);
+                            if (data && data.length) {
+                                me.closeFriends = data;
+                            }
+                        })
+                        return cb;
+                    },
+                    chooseHero: function (index) {
+                        this.choosedHeroId = this.heroInfo[index]["heroId"];
+                    },
+                    startGame: function () {
+                        zHttp.send({actid: 253851}, function () {
+                            qv.zero.SQGameManager.start(page);
+                        })
+                    },
+                    //文字转音频
+                    wordToAudio: function () {
+                        var len = this.greetSelect.length,
+                            callback = new qv.zero.CallBack();
+
+                        if (len == 0) {
+                            zMsg.show("请先选择祝福语哦~");
+                            return;
+                        } else {
+                            zHttp.send({
+                                actid: 253852,
+                                heroid: this.choosedHeroId,
+                                greet: this.greetSelect //用户祝福语
+                            }, function (json) {
+                                console.log(json);
+                                if (json.ret == 0 && json.data.op) {
+                                    var audioUrl = json.data.op.url, //音频url链接
+                                        bid = json.data.op.bid; //存储对应的heroid、音频url和用户祝福语
+                                    callback.execute(audioUrl);
+                                }
+                            })
+                        }
+                        return callback;
+                    },
+                    //限制用户输入的祝福语字数
+                    limitWordLength: function (str) {
+                        var len = str.length;
+                        if (len >= 10) {
+                            zMsg.show("祝福语输入过长哦~")
+                        }
+                    },
+                    //换个金额
+                    changeMoney: function () {
+                        var money = Math.floor(Math.random() * 10);
+                        this.randomMoney = money;
+                    },
+                    //查询当前手Q版本
+                    searchQQVersion: function () {
+                        this.QQVersion = mqq.QQVersion;
+                        return this.QQVersion
+                    },
+                    //赏红包(请求红包接口)
+                    sendRedEnvelope: function () {
+//                        if (this.QQVersion < 735) {
+//                            zMsg.show("当前QQ版本过低，建议升级!");
+//                            return;
+//                        }
+                        var me = this;
+                        qv.zero.LoadingMark.show();
+                        this.getUserInfo().add(function (loginUserInfo) {
+                            if (loginUserInfo) {
+                                me.loginUserInfo = loginUserInfo;
+                                var args = {
+                                    userId: me.loginUserInfo.uin,
+                                    userName: me.loginUserInfo.nick,
+                                    viewTag: "makeHongbao",
+                                    appInfo: "appid#0|bargainor_id#0|channel#wangzherongyao2018",  //业务标识（需找产品对齐）
+                                    come_from: "2",
+                                    extra_data: {
+                                        bus_type: 1,
+                                        feedsid: "test", //填写bid（ams这块存储信息的对应id）
+                                        hb_from: "1", //标识红包来自哪个业务（需找产品对齐）
+                                        hb_sendtype: 0,
+                                        makeHb_type: "1",
+                                        skey: me.loginUserInfo.skey,
+                                        skey_type: "2",
+//                                        skin_id: "1025",  英雄id
+                                        skin_id: "20",  //英雄id(测试环境)
+                                        total_amount: "1",  //红包总金额，以"分"为单位
+                                        total_num: "1",     //红包个数
+                                        wishing: me.greetSelect //祝福语
+                                    }
+                                }
+                                alert(JSON.stringify(args));
+                                me.openTenpayView(args).add(function (json) {
+                                    qv.zero.LoadingMark.hide();
+                                    alert(JSON.stringify(json));
+                                })
+                            }
+                        })
+                    },
+                    //检测页面是否在手机QQ内
+                    isMQQ: function () {
+                        return mqq.device.isMobileQQ();
+                    },
+                    //购买道具
+                    openTenpayView: function (args) {
+                        var cb = new qv.zero.CallBack();
+                        if (!this.isMQQ()) {
+                            setTimeout(function () {
+                                cb.execute(false);
+                            }, 0);
+                            return cb;
+                        }
+                        mqq.tenpay.openTenpayView(args, function (result) {
+                            console.log(result);
+                            cb.execute(result);
+                        })
+                    },
+                    //获取用户资料(uin,nick,skey)
+                    getUserInfo: function () {
+                        var cb = new qv.zero.CallBack();
+                        if (!this.isMQQ()) {
+                            setTimeout(function () {
+                                cb.execute({
+                                    uin: +zUtil.getUin() + '',
+                                    nick: +zUtil.getUin() + '',
+                                    skey: zUtil.getcookie('skey') + ''
+                                });
+                            }, 0)
+                            return cb;
+                        }
+
+                        mqq.data.getUserInfo(function (result) {
+                            if (result.code == 0) {
+                                var userInfo = result.data;
+                                alert(JSON.stringify(userInfo));
+                                cb.execute(userInfo);
+                            }
+                        });
+                        return cb;
+                    },
+                    //抢红包
+                    grabRedEnvelope: function () {
+                        var bid = (zURL.get('bid') || 10) + "",
+                            viewid = (zURL.get('viewid') || 10) + "",
+                            listid = zURL.get('listid'),
+                            feedsid = zURL.get('feedsid');
+                        if (listid == "") {
+                            zMsg.show('url params [listid] is empty');
+                            return;
+                        }
+                        if (feedsid == "") {
+                            zMsg.show('url params [feedsid] is empty');
+                            return;
+                        }
+                        //{"bid":"10","viewid":"10","extstr":{"listid":"1","feedsid":"1234"}}
+                        var _args = {
+                            "bid": bid,
+                            "viewid": viewid,
+                            "extstr": {"listid": listid + "", "feedsid": feedsid + ""}
+                        };
+                        _args.extstr = JSON.stringify(_args.extstr);
+                    },
+                    // mqq核心方法，用于调用客户端接口。
+                    _mqqInvoke: function (namespace, method, params, callback) {
+                        if (mqq.__isWkWebView) {
+                            params.callback = mqq.callback(callback);
+                            mqq.invoke(namespace, method, params);
+                        } else {
+                            mqq.invoke(namespace, method, params, callback);
+                        }
+                    }
+                },
+                mounted: function () {
+                    var closeFriendsKey = page.jsonid + "_closeFriendsKey_" + zUtil.getUin(),
+                        cache = qv.zero.cache.get(closeFriendsKey);
+                    if (cache) {
+                        return;
+                    } else {
+                        this.queryCloseFriends().add(function (arr) {
+
+                        })
+                    }
+                }
+            })
+        },
+        limit: function (str) {
+            var len = str.length;
+            console.log(len);
+            if (len >= 10) {
+                zMsg.show("您当前输入的祝福语已超过限制!");
+            }
+        }
+    })
+</script>
+</body>
+</html>

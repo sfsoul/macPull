@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <p>{{msg}}</p>
+    <h1>我叫{{obj.name}},今年 <span>{{obj.age}} 岁</span></h1>
+    <h3>{{obj.sex}}</h3>
+    <h1>{{list}}</h1>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    window.vm = new Vue({
+        el:"#app",
+        data:{
+            msg:"测试一下",
+            obj:{
+                name:"张靖",
+                age:25
+            },
+            list:[1,2,3]
+        },
+        mounted:function(){
+//            this.obj.sex = "man";
+            this.$set(this.obj,"sex","woman");
+            this.list[3] = 100;
+        }
+    })
+</script>
+</body>
+</html>

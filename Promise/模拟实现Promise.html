@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟实现Promise</title>
+</head>
+<body>
+<script>
+    //链式调用
+    /*
+    *   实现链式调用，首先想到就是then方法返回this。返回this存在的问题是：你经过第一个then方法之后，
+    *   你的状态改变了，那你继续使用this.then,Promise转变状态一次就不能更改了，所以它传入的参数都无法执行，
+    *   后面跟再多的then都不会执行，这显然不行。所以我们只有通过返回一个新的promise，为啥呢，promise有then方法啊！！！
+    */
+
+
+    function Promise(executor) {
+        if(!(this instanceof Promise)){
+            return new Promise(executor);
+        }
+
+        if(typeof executor !== "function"){
+            throw new TypeError("Promise executor is not a function");
+        }
+
+        let _this = this;
+        _this.status = 'pending';
+        _this.value = null;
+        _this.reason = null;
+
+        //新增两个回调数组
+        _this.onFulfilledCallbacks = [];
+        _this.onRejectedCallbacks = [];
+
+        function resolve(value) {
+            if (_this.status === 'pending') {
+                _this.status = 'fulfilled';
+                _this.value = value;
+                _this.onFulfilledCallbacks.forEach(function (fn) {
+                    fn()
+                })
+            }
+        }
+
+        function reject(reason) {
+            if (_this.status === 'pending') {
+                _this.status = 'rejected';
+                _this.reason = reason;
+                _this.onRejectedCallbacks.forEach(function (fn) {
+                    fn()
+                })
+            }
+        }
+
+        try{
+            executor(function(value){
+                resolve(value);
+            },function(reason){
+                reject(reason);
+            })
+        }catch (e) {
+            reject(e);
+        }
+
+        //暂时不要问为什么写那么啰嗦，山人自有妙计，文末分解
+        // executor(function (value) {
+        //     resolve(value)
+        // }, function (reason) {
+        //     reject(reason)
+        // },)
+    }
+
+    Promise.prototype.then = function (onFulfilled, onRejected) {
+        onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : function (value) {
+            return value
+        }
+        onRejected = typeof onRejected === 'function' ? onRejected : function (err) {
+            throw err
+        }
+
+        let _this = this;
+        let newPromise;
+
+        if (_this.status == 'fulfilled') {
+            newPromise = new Promise(function(resolve,reject){
+                setTimeout(function(){
+                    try{
+                        let x = onFulfilled(_this.value);
+                        resolve(x);
+                    }catch (e) {
+                        reject(e);
+                    }
+                })
+            })
+        }
+
+        if (_this.status == 'rejected') {
+            newPromise = new Promise(function(resolve,reject){
+                setTimeout(function(){
+                    try{
+                        let x = onRejected(_this.reason);
+                        resolve(x);
+                    }catch (e) {
+                        reject(e);
+                    }
+                })
+            })
+        }
+
+        if(_this.status == "pending"){
+            newPromise = new Promise(function(resolve,reject){
+                _this.onFulfilledCallbacks.push(function(){
+                    setTimeout(function(){
+                        try{
+                            let x = onFulfilled(_this.value);
+                            resolve(x);
+                        }catch (e) {
+                            reject(e);
+                        }
+                    })
+                });
+                _this.onRejectedCallbacks.push(function(){
+                    setTimeout(function(){
+                        try{
+                            let x = onRejected(_this.reason)
+                            resolve(x)
+                        }catch (e) {
+                            reject(e)
+                        }
+                    })
+                })
+            })
+        }
+        return newPromise;
+    }
+
+    // var promise = new Promise((resolve,reject) =>{
+    //     setTimeout(function(){
+    //         resolve("test simplePromise resolve");
+    //     },100);
+    // });
+    //
+    // console.log(promise);
+    //
+    // promise.then(function(value){
+    //     console.log("success:",value);
+    // },function(reason){
+    //     console.log("failed:",reason);
+    // })
+
+
+    // let promise = new Promise((resolve,reject) => {
+    //     throw new Error('error')
+    // })
+    // promise.then((value)=>{
+    //     console.log('success:',value)
+    // },(reason)=>{
+    //     console.log('reject:',reason)
+    // })
+
+
+    // new Promise((resolve,reject)=>{
+    //     resolve(1);
+    // }).then().then().then((value)=>{
+    //     console.log(value);
+    // },(reason)=>{console.log(reason)})
+
+
+    //异步调用then回调函数
+    // var promise = new Promise((resolve,reject)=>{
+    //     setTimeout(function(){
+    //         resolve("test simplePromise resolve");
+    //     },100)
+    // })
+    //
+    // setTimeout(()=>{
+    //     promise.then(function(value){
+    //         console.log("success:",value);
+    //     },function(reason){
+    //         console.log("failed:",reason);
+    //     });
+    //     console.log("end");
+    // },200)
+
+
+
+    setTimeout(()=>{
+        console.log(5);
+    })
+    new Promise((resolve,reject)=>{
+        console.log(1);
+        resolve(3);
+        Promise.resolve(4).then((value)=>{
+            console.log(value);
+        })
+    }).then((value)=>{
+        console.log(value);
+    })
+    console.log(2);
+</script>
+</body>
+</html>

@@ -1,0 +1,1213 @@
+﻿<!DOCTYPE html> 
+<html> 
+<head>
+  <meta charset="utf-8">
+  <title>谁是全军之王？由你决定！</title>
+  <base href="//imgcache.gtimg.cn/vipstyle/game/act/zj/273026/">
+  <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta itemprop="name" content="神秘人、彭于晏邀请你加入他的战队！" />
+  <meta itemprop="image" content="//imgcache.gtimg.cn/vipstyle/game/act/zj/273026/images/share.jpg" />
+  <meta name="description" itemprop="description" content="神秘人VS彭于晏争夺全军之王，赶快加入他们，成为明星战队的一员吧！" />
+  <meta content="webkit" name="renderer">
+  <meta content="width=750,maximum-scale=1,user-scalable=no" name="viewport">
+  <link href="style/reset.css" rel="stylesheet" rev="stylesheet" type="text/css" />
+  <link href="style/global.css" rel="stylesheet" rev="stylesheet" type="text/css" />
+  <style>
+    /*
+      移动端页面点击出现色块解决方法
+    */
+    html{
+      -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+    }
+    /*.mod-txt{*/
+      /*height: 500px;*/
+      /*overflow: scroll;*/
+    /*}*/
+    [v-cloak]{
+      display: none;
+    }
+    .mod-game-dialog{
+      -webkit-transform: scale(1.8);
+      -moz-transform: scale(1.8);
+      -ms-transform: scale(1.8);
+      -o-transform: scale(1.8);
+      transform: scale(1.8);
+    }
+    .kfiiwz p{
+      font-size: 40px;
+      font-weight: bold;
+      color: #fff;
+      line-height: 60px;
+    }
+    .center{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="loading"><span class="loadingfa xuanzhuan"><em class="fa fa-spinner"></em></span></div>
+    <!--首页-->
+    <div id="innerbox">
+      <div class="banner"></div>
+      <div>
+        <a href="javascript:void(0);" class="download" @click="startQier" v-text="isInstallQier ? '启动企鹅电竞':'下载企鹅电竞'">启动企鹅电竞</a>
+        <a href="javascript:void(0);" class="download" v-text="isInstall ? '启动游戏':'下载游戏'" @click="startGame">下载游戏</a>
+      </div>
+      <div class="contebx">
+        <div class="tabeqie">
+          <!--tab切换-->
+          <a href="javascript:void(0);" class="qie1" :class="{cur:index === 0}" @click="tabSwitch(index)"></a>
+          <a href="javascript:void(0);" class="qie2" :class="{cur:index === 1}" @click="tabSwitch(index)"></a>
+        </div>
+        <!--谁是电竞之王-->
+        <div class="tabqitm" :class="{cur:index === 0}">
+          <div class="jiaoguns" v-if="+new Date() < rematchTimeStamp">
+            <div class="jiaoguns-1" v-for="(item,index) in mockSignUpData">
+              <div class="jiaoguns-1a">
+                <img :src="item.src" alt="队长照片" v-if="index === 1" id="playVideo">
+                <img :src="item.src" alt="队长照片" v-else>
+              </div>
+              <div class="jiaoguns-1b">{{item.human}}</div>
+              <div class="jiaoguns-1c" @click="signUp(index,item.isClick)" :class="{over:item.isDisabled}">{{item.btn}}</div>
+              <div class="jiaoguns-1d">{{item.join}}</div>
+              <div class="jiaoguns-1e" style="width: 12rem;">
+                {{item.teamName}}等
+                <span>{{item.num}}</span>支队<br>伍已加入
+              </div>
+            </div>
+          </div>
+
+          <!--复赛排行榜-->
+          <div class="contebx" v-if="+new Date() >= rematchTimeStamp && +new Date() < finalsTimeStamp">
+            <div class="tabqitm cur">
+              <div class="fusai"></div>
+              <div class="tlbox"><img src="images/tl1.png" alt=""/></div>
+              <div class="gengx">4月20日-4月25日每天12点更新</div>
+              <div class="jiaoguns">
+                <div class="jiaoguns-1">
+                  <div class="jiaoguns-1a"><img src="images/tu1.png" alt=""/></div>
+                  <div class="jiaoguns-1b">神秘人X</div>
+                </div>
+                <div class="jiaoguns-1">
+                  <div class="jiaoguns-1a"><img src="images/tu2.png" alt=""/></div>
+                  <div class="jiaoguns-1b">彭于晏</div>
+                </div>
+              </div>
+              <!-- <div class="genge"></div> -->
+              <div class="paihang">
+                <div class="paiitb">
+                  <table>
+                    <tr class="tabtou">
+                      <td>排名</td>
+                      <td>战队</td>
+                      <td>分数</td>
+                    </tr>
+                    <tr class="">
+                      <td>1</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>2</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="paiitb">
+                  <table>
+                    <tr class="tabtou">
+                      <td>排名</td>
+                      <td>战队</td>
+                      <td>分数</td>
+                    </tr>
+                    <tr class="">
+                      <td>1</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>2</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <a href="#" class="cksnlxing">查看赛事录像</a>
+            </div>
+          </div>
+          <!--决赛排行榜-->
+          <div class="contebx" v-if="+new Date() >= finalsTimeStamp">
+            <div class="tabqitm cur">
+              <div class="fusai jsai"></div>
+              <div class="tlbox"><img src="images/tl2.png" alt=""/></div>
+              <div class="gengx">4月27日</div>
+              <div class="jiangli jianglix">
+                <div class="jilitm jilitma1">
+                  <div class="jilitm-2">2</div>
+                  <div class="jilitm-3">战队名字<br>最好预留12个字<br>65888888 分</div>
+                </div>
+                <div class="jilitm jilitma2">
+                  <div class="jilitm-2">1</div>
+                  <div class="jilitm-3">
+                    战队名字<br>最好预留12个字<br>99303760分
+                  </div>
+                </div>
+                <div class="jilitm jilitma3">
+                  <div class="jilitm-2">3</div>
+                  <div class="jilitm-3">战队名字<br>最好预留12个字<br>37269172 分</div>
+                </div>
+              </div>
+              <div class="gensm"></div>
+              <div class="paihang">
+                <div class="paiitb flex1 paiitb-cur">
+                  <table>
+                    <tr class="tabtou">
+                      <td>排名</td>
+                      <td>战队</td>
+                      <td>分数</td>
+                    </tr>
+                    <tr class="">
+                      <td>4</td>
+                      <td>
+                        <div class="zhdmsz">战队名字最好到预留12个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 88666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>3</td>
+                      <td>
+                        <div class="zhdmsz">战队名字6个字</div>
+                      </td>
+                      <td>
+                        <div class="fenshu"> 666666</div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <a href="#" class="cksnlxing">查看赛事录像</a>
+            </div>
+          </div>
+
+          <div class="genge"></div>
+          <div class="tlbox"><img src="images/tlx.png" alt=""/></div>
+          <div class="jiangli">
+            <div class="jilitm jilitma1">
+              <div class="jilitm-1">第二名</div>
+              <div class="jilitm-2"></div>
+              <div class="jilitm-3">50000Q币</div>
+            </div>
+            <div class="jilitm jilitma2">
+              <div class="jilitm-1">第一名</div>
+              <div class="jilitm-2"></div>
+              <div class="jilitm-3">
+                100000Q币<br>及加入代言人<br>全军出击战队机会
+              </div>
+            </div>
+            <div class="jilitm jilitma3">
+              <div class="jilitm-1">第三名</div>
+              <div class="jilitm-2"></div>
+              <div class="jilitm-3">10000Q币</div>
+            </div>
+          </div>
+          <div class="tlbox"><img src="images/tlxy.png" alt=""/></div>
+          <div class="liuccheng">
+            <img src="images/liucheng.png" alt=""/>
+          </div>
+        </div>
+
+        <!--谁是人气之王-->
+        <div class="tabqitm" :class="{cur:index === 1}">
+          <div class="jiaoguns">
+            <div class="jiaoguns-1">
+              <div class="jiaoguns-1a"><img src="images/tu1.png" alt=""/></div>
+              <div class="jiaoguns-1b">神秘人X</div>
+            </div>
+            <div class="jiaoguns-1">
+              <div class="jiaoguns-1a"><img src="images/tu2.png" alt=""/></div>
+              <div class="jiaoguns-1b">彭于晏</div>
+            </div>
+          </div>
+
+          <!--进度条-->
+          <div class="jindut">
+            <div class="jindutin" :style="{'width':progressBar+'%'}">
+            </div>
+            <div class="piaish piaish-1">
+              {{voteNum.z}}票
+            </div>
+            <div class="piaish piaish-2">
+              {{voteNum.p}}票
+            </div>
+          </div>
+
+          <div class="wpyjru">
+            <a href="javascript:void(0);" v-for="(item,index) in voteList" @click="joinGroup(index,item.actid)">{{item.content}}</a>
+          </div>
+          <div class="tlbox"><img src="images/zhenying.png" alt=""/></div>
+          <div class="libox">
+            <div class="libox-1" v-for="(item,index) in prizeList">
+              <div class="libox-1a">
+                <img :src="item.src" alt="">
+              </div>
+              <div class="libox-1b">{{item.prizeName}}</div>
+            </div>
+          </div>
+          <div class="tlbox"><img src="images/dacall.png" alt=""/></div>
+          <!--获取额外票数为他打call模块-->
+          <div class="yuyuelist">
+            <ul>
+              <li v-for="(item,index) in yuyueList">
+                <div class="yuyuelist-1">
+                  <div class="yuyuelist-1a">
+                    {{item.content}}
+                    <img src="images/jiantou.png" alt="">
+                    <span @click="task(index)">{{item.start}}</span>
+                  </div>
+                  <!--<div class="yuyuelist-1b">打Call机会 x {{item.lotteryNum}}</div>-->
+                  <div class="yuyuelist-1b">{{item.lotteryNum}}</div>
+                </div>
+                <a href="javascript:void(0);" class="yuyuelist-2" @click="playCall(item.actid)">{{item.btn}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <a href="javascript:void(0);" class="guize" @click="showRule">赛事规则</a>
+    </div>
+
+    <!--视频模块-->
+    <div class="shiptanch" v-if="isPlay">
+      <div class="cicloe"><em class="fa fa-close"></em></div>
+      <div class="viobox" @click="closeVideo">
+        <video src="videos/HomeVideo.mp4" controls="true" playsinline="isiPhoneShowPlaysinline"
+               webkit-playsinline="isiPhoneShowPlaysinline" x-webkit-airplay="" preload="none" data-role="txp_video_tag"
+               class="veinbax">
+          your browser does not support the video tag
+        </video>
+      </div>
+    </div>
+
+  <!--邀请好友组建战队-->
+  <div class="tanchuce tanchuce-1" v-if="isShow">
+    <!--<div class="aluclose"><em class="fa fa-close"></em></div>-->
+    <div class="tanchucein">
+      <div class="contebx">
+        <div class="tabqitm cur">
+          <div class="tlbox">
+            <img src="images/tl3.png" alt=""/>
+          </div>
+          <ol class="zujnsul">
+            <li>队伍必须集齐4人才能成为战队，快邀请您的好友一同参赛吧！</li>
+            <li>本次活动仅对手Q玩家开放，如果您还不是手Q玩家，请在<a href="javascript:void(0);" @click="gotoLink(linkInfo[0]['url'],linkInfo[0]['actid'])">手Q游戏中心</a>下载并注册。</li>
+            <li>报名成功后将会根据游戏角色实力，各筛选出40只队伍成为代表队进入复赛。</li>
+          </ol>
+          <ul class="dhshzx">
+            <li v-for="(item,index) in teamInfo">
+              <span class="dhshzx-1">{{item.content}}</span>
+              <span class="dhshzx-2">
+                <input type="text" class="zhsnndpt" v-model="item.uin" v-if="index == 2" :readonly="item.readonly">
+                <input type="text" class="zhsnndpt" v-model="item.partitionInfo" v-else-if="index == 1" :readonly="item.readonly">
+                <input type="number" class="zhsnndpt" v-model="item.phoneNumber" v-else-if="index == 3" :readonly="item.readonly">
+                <!--<input type="text" class="zhsnndpt" v-else v-model="item.teamName" :readonly="item.readonly" v-on:input="inputFunc">-->
+                <input type="text" class="zhsnndpt" v-else v-model="item.teamName" :readonly="item.readonly">
+              </span>
+            </li>
+          </ul>
+          <div class="chezi">
+          <img src="images/chezi.png" alt=""/>
+          <!--战队头像-->
+          <div class="cheziin">
+            <div class="xtoux" v-for="(item,index) in avatarList">
+              <img :src="avatarList[index]" alt="队员头像">
+            </div>
+          </div>
+        </div>
+          <div class="yaoqingbt yaoqingbtx">
+            <a href="javascript:void(0);" class="yqbtn" @click="inviteFriends" v-if="inviteFriendsBtn">邀请好友</a>
+            <a href="javascript:void(0);" class="yqbtn" @click="sureSignUp" v-if="!this.myInfo.isHasSignUp">确认报名</a>
+          </div>
+        </div>
+        <div style="position:absolute;right:17px;top: 11px;width: 35px;">
+          <img src="images/close1.png" alt="关闭按钮" style="width: 100%;" @click="closeShowDialog">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--客态接受邀请-->
+  <div class="tanchuce tanchuce-2" v-if="isGuest">
+    <!--<div class="aluclose"><em class="fa fa-close"></em></div>-->
+    <div class="tanchucein df ac">
+      <div class="contebx" style="width: 100%;">
+        <div class="tabqitm cur">
+          <div class="kfiiwz">
+            <!--通过myInfo.isHasSignUp来控制展示-->
+            <p v-if="!myInfo.isHasSignUp">您的好友：<span class="cur">{{guestInfo.nick}}</span></p>
+            <p v-if="!myInfo.isHasSignUp">邀请您加入战队</p>
+            <p :class="{center:myInfo.isHasSignUp}">战队名：<span>{{guestInfo.teamName}}</span></p>
+          </div>
+
+          <div class="chezi">
+            <img src="images/chezi.png" alt=""/>
+            <!--战队头像-->
+            <div class="cheziin">
+              <div class="xtoux" v-for="(item,index) in avatarList">
+                <img :src="guestInfo.avatarList[index]" alt="队员头像">
+              </div>
+            </div>
+          </div>
+          <div class="yaoqingbt" v-if="!myInfo.isHasSignUp">
+          <!--<div class="yaoqingbt">-->
+            <a href="javascript:void(0);" class="yqbtn1" @click="acceptInvitation">接受邀请</a>
+            <a href="javascript:void(0);" class="yqbtn2" @click="refuse">残忍拒绝</a>
+          </div>
+        </div>
+        <!--关闭按钮-->
+        <div style="position:absolute;right:17px;top: 11px;width: 35px;">
+          <img src="images/close1.png" alt="关闭按钮" style="width: 100%;" @click="closeGuestDialog">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script src="//imgcache.gtimg.cn/c/=/club/mobile_web/zepto.min-1.1.6.js,/club/game/zero/zero.m.min-6.0.1.js?max_age=86400000&v=5.0"></script>
+<script src="../dist/tool.js"></script>
+<script src="../dist/vue.js"></script>
+<script src="script/index.js" type="text/javascript"></script>
+<script>
+    window.page = new qv.zero.Page({
+        jsonid:273026,
+        game: 'pubgm',
+        mqqEnv: true,
+        onlyMobile: true,
+        isOpenSQView: true,
+        redirectUrl: "",
+        preloads: ['SQGameManager',"videoPlayer"],
+        afterInit: function () {
+            qv.zero.Login.ensure();
+            this.initVue();
+            //解决安卓出现不了三个点的问题
+            setTimeout(function () {
+                mqq.ui.setWebViewBehavior({'navTextColor': '#000'});
+            }, 500)
+            //右上角分享
+            tool.shareMessage();
+            mqq.invoke('ui', 'webviewCanScroll', {"enable": false});
+        },
+        initVue:function(){
+            var addActivityMoneyKey = page.jsonid + "_addActivityMoneyKey_" + zUtil.getUin();
+            var isHasJoinGroupKey = page.jsonid + "_isHasJoinGroupKey_" + zUtil.getUin();
+            window.vm = new Vue({
+                el:"#app",
+                data:{
+                    index:0,
+                    isShow:false,
+                    team:0, //0代表神秘人X，1代表彭于晏
+                    ruleInfo:tool.getStaticData(2)[0]["text"],
+                    isSignUp:false,
+                    //模拟报名数据
+                    mockSignUpData:[
+                        {src:"images/tu1.png",human:"神秘人X",teamName:tool.getStaticData(3)[0]["teamName"],num:tool.getStaticData(3)[0]["num"],btn:"报名",join:"加入他的战队",isDisabled:false,isClick:true},
+                        {src:"images/tu2.png",human:"彭于晏",teamName:tool.getStaticData(3)[1]["teamName"],num:tool.getStaticData(3)[1]["num"],btn:"报名",join:"加入他的战队",isDisabled:false,isClick:true}
+                    ],
+                    //组队信息
+                    teamInfo:[
+                        {content:"战队名称：",teamName:""},
+                        {content:"大  区：",partitionInfo:"QQ大区",readonly:"readonly"},
+                        {content:"QQ  号：",uin:zUtil.getUin(),readonly:"readonly"},
+                        {content:" 手机号：",phoneNumber:""}
+                    ],
+                    //投票子活动号
+                    voteList:[
+                        {actid:273080,content:"加入他的阵营"},
+                        {actid:273081,content:"加入他的阵营"}
+                    ],
+                    //获得投票数
+                    voteNum:{
+                        z:0,
+                        p:0
+                    },
+                    //预约模块
+                    yuyueList:[
+                        {content:"每日登陆游戏",lotteryNum:"打Call机会 x 1",btn:"点击领取",actid:273096,start:"启动游戏"},
+                        {content:"每日登陆企鹅电竞",lotteryNum:"打Call机会 x 1",btn:"点击领取",actid:273097,start:"登录企鹅电竞"},
+                        {content:"每日分享好友",lotteryNum:"打Call机会 x 3",btn:"点击领取",actid:273099,start:"立即分享"},
+                        {content:"成功吃鸡一次",lotteryNum:"打Call机会 x 5（每个QQ号只能领取一次）",btn:"点击领取",actid:273101,start:"启动游戏"}
+                    ],
+                    //主人态战队头像信息
+                    avatarList:["images/chezi.png","images/chezi.png","images/chezi.png","images/chezi.png"],
+                    //是否展示客态页面
+                    isGuest:false,
+                    //我的个人信息
+                    myInfo:{
+                        isHasSignUp:false,
+                        type:"",
+                        teamName:"",
+                        phone:"",
+                        teamId:"",
+                        teamInfo:[],
+                        nick:""
+                    },
+                    //客态信息
+                    guestInfo:{
+                        nick:"",
+                        teamName:"",
+                        teamInfo:[],
+                        teamId:"",
+                        avatarList:["images/chezi.png","images/chezi.png","images/chezi.png","images/chezi.png"],
+                        type:""
+                    },
+                    //主态 邀请好友按钮
+                    inviteFriendsBtn:true,
+                    //链接信息
+                    linkInfo:tool.getStaticData(4),
+                    //当前时间戳
+                    currentTimeStamp:tool.getStaticData(5),
+                    isPlay:false, //是否播放视频
+                    isHasSwitch:false, //是否已经切换
+                    isInstall:false, //是否已经下载过该游戏
+                    //奖品展示
+                    prizeList:tool.getStaticData(6),
+                    isHasJoinGroup:false,
+                    isInstallQier:false,
+                    isInvited:false //是否被邀请
+                },
+                computed:{
+                    //复赛时间戳
+                    rematchTimeStamp:function(){
+                        var date = this.currentTimeStamp[0]["date"].replace(/-/g,'/');
+                        var timeStamp = +new Date(date);
+                        return timeStamp;
+                    },
+                    //决赛时间戳
+                    finalsTimeStamp:function(){
+                        var date = this.currentTimeStamp[1]["date"].replace(/-/g,'/');
+                        var timeStamp = +new Date(date);
+                        return timeStamp;
+                    },
+                    progressBar:function(){
+                        var rate = this.voteNum.z/(+this.voteNum.z+ (+this.voteNum.p));
+                        return rate*100;
+                    }
+                },
+                methods:{
+                    //完成任务为他打Call
+                    task:function(idx){
+                        if(idx == 0 || idx == 3){
+                            this.startGame();
+                        }else if(idx == 1){
+                            this.startQier();
+                        }else if(idx == 2){
+                            mqq.ui.shareMessage({
+                                title: "神秘人、彭于晏邀请你加入他的战队！",
+                                desc: "神秘人VS彭于晏争夺全军之王，赶快加入他们，成为明星战队的一员吧！",
+                                share_type: 0,
+                                share_url:window.location.protocol+"//youxi.vip.qq.com/m/act/201804/zj/qjcj_273026/index.html?_wv=4&_wv=1&adtag=adtag.share&invite_uin="+zUtil.getUin(),
+                                image_url: window.location.protocol+"//imgcache.gtimg.cn/vipstyle/game/act/zj/273026/images/share.jpg",
+                                back: true,
+                                sourceName: "QQ手游"
+                            },function(json){
+                                if(json.ret == 0){
+                                    zHttp.send({actid:273027})
+                                }
+                            });
+                        }
+                    },
+                    //启动企鹅电竞
+                    startQier:function(){
+                        qv.zero.SQGameManager.start({game: 'egame',jsonid:page.jsonid});
+                    },
+                    //判断用户是否下载该游戏
+                    judgeIsDownload:function(config,cb){
+                        var me = this;
+                        qv.zero.SQGameManager.isInstalled(config,function(result){
+                            cb && cb(result);
+                        })
+                    },
+                    //启动或者下载游戏
+                    startGame:function(){
+                        tool.startGame();
+                    },
+                    //关闭主人态创建战队信息弹窗
+                    closeShowDialog:function(){
+                        this.isShow = false;
+                    },
+                    //关闭客态弹窗
+                    closeGuestDialog:function(){
+                        this.isGuest = false;
+                    },
+                    closeVideo:function(){
+                        this.isPlay = false;
+                    },
+                    //手Q游戏中心
+                    gotoLink:function(url,actid){
+                        tool.gotoLink(url,actid);
+                    },
+                    //tab切换
+                    tabSwitch:function(index){
+                        var me = this;
+                        var cache = qv.zero.cache.get(isHasJoinGroupKey);
+                        if(cache == 0){
+                            this.voteList[0]["content"] = "为他打Call";
+                        }else if(cache == 1){
+                            this.voteList[1]["content"] = "为他打Call";
+                        }
+                        if(index === 0){
+                            this.index = 1;
+                            //若本次已经查询子活动总放量，不刷新页面进行切换tab将不会再次请求子活动
+                            if(!this.isHasSwitch){
+                                this.queryVoteNum().add(function(json){
+                                    if(json){
+                                        me.voteNum.z = json["273080"]["total"];
+                                        me.voteNum.p = json["273081"]["total"];
+                                        me.isHasSwitch = true;
+                                    }
+                                });
+                            }
+                        }else{
+                            this.index = 0;
+                        }
+                    },
+                    //查询投票子活动的参与次数
+                    queryVoteNum:function(){
+                        var arr = [273080,273081];
+                        var cb = new qv.zero.CallBack();
+                        zHttp.send({
+                            actid:arr.join("_"),
+                            _c:"counter"
+                        },function(json){
+                            console.log(json);
+                            if(json.ret == 0){
+                                cb.execute(json.data);
+                            }else{
+                                cb.execute(false);
+                            }
+                        })
+                        return cb;
+                    },
+                    //加入阵营（投票）
+                    joinGroup:function(index,actid){
+                        var me = this;
+                        //添加活动货币
+                        this.addActivityMoney().add(function(flag){
+                            if(flag){
+                                zHttp.send({actid:actid},function(json,actid,fn){
+                                    if(json.ret == 0) {
+                                        if (index == 0) {
+                                            me.voteNum.z += 1;
+                                        } else {
+                                            me.voteNum.p += 1;
+                                        }
+                                        me.isHasJoinGroup = true;
+                                        me.voteList[index]["content"] = "为他打Call";
+                                        qv.zero.cache.add(isHasJoinGroupKey,index,1000*3600*24*100);
+                                    }
+                                    zHttp.showResponse(json,json.actid,fn);
+                                })
+                            }
+                        });
+                    },
+                    //每日为玩家添加活动货币
+                    addActivityMoney:function(){
+                        var cache = qv.zero.cache.get(addActivityMoneyKey);
+                        var cb = new qv.zero.CallBack();
+                        var me = this;
+
+                        if(cache){
+                            cb.execute(true);
+                        }else{
+                            zHttp.send({actid:273077},function(json){
+                                console.log(json);
+                                if(json.ret == 0){
+                                    var now = +new Date(); //当前时间戳
+                                    var currentTimeStamp = new Date(new Date().setHours(0, 0, 0, 0)) / 1000; //当天凌晨的时间戳（计数单位为秒）
+                                    var tomorrowTimeStamp = currentTimeStamp*1000 + 86400*1000;  //第二天凌晨0点（一天共有86400秒）
+                                    qv.zero.cache.add(addActivityMoneyKey,true,tomorrowTimeStamp); //缓存到第二天凌晨0点
+                                }
+                                cb.execute(json);
+                            })
+                        }
+                        return cb;
+                    },
+                    //获取打Call机会
+                    playCall:function(actid){
+//                        if(actid == 273099){
+//                            alert("分享");
+//                            mqq.ui.showShareMenu();
+//                        }else{
+                            zHttp.syrequest({
+                                actid:actid
+                            },function(json,actid,fn){
+                                zHttp.showResponse(json,json.actid,fn);
+                            })
+//                        }
+                    },
+                    //校验战队名称输入
+//                    inputFunc:function(){
+//                        this.teamInfo[0]["teamName"] = this.teamInfo[0]["teamName"].replace(/\ud83d[\udc00-\ude4f\ude80-\udfff]/g, ''); //禁止输入表情
+//                        this.teamInfo[0]["teamName"] = this.teamInfo[0]["teamName"].replace(/[^\u4E00-\u9FA5\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b\uff01\d]/g, ''); //只能用户输入汉字和"。；，：“”（）、？《》！"这些符号
+//                    },
+                    //校验战队名称
+                    checkTeamName:function(name){
+                      if(!name || name.length <= 0){
+                          zMsg.show("请填写战队名称！");
+                          return false;
+                      }
+                      if(name.length > 12){
+                          zMsg.show("战队名称不允许超过12个字符！");
+                          vm.teamInfo[0]["teamName"] = "";
+                          return false;
+                      }
+                      return true;
+                    },
+                    //校验手机号
+                    checkPhoneNumber:function(phone){
+                        if(!phone || phone.length <= 0){
+                            zMsg.show("请填写你的手机号码！");
+                            return false;
+                        }
+                        if(phone.length > 11){
+                            zMsg.show("请输入正确的手机号码！");
+                            this.teamInfo[3]["phoneNumber"] = "";
+                            return false;
+                        }
+                        if(!(/^1[3456789]\d{9}$/.test(phone))){
+                            zMsg.show("请输入正确的手机号码！");
+                            this.teamInfo[3]["phoneNumber"] = "";
+                            return false;
+                        }
+                        return true;
+                    },
+                    //确认报名
+                    sureSignUp:function(){
+                        var me = this;
+
+                        if(!this.checkTeamName(this.teamInfo[0]["teamName"])){
+                            return false;
+                        }
+                        if(!this.checkPhoneNumber(this.teamInfo[3]["phoneNumber"])){
+                            return false;
+                        };
+
+                        zHttp.syrequest({
+                            actid:273229,
+                            type:this.team,
+                            name:this.teamInfo[0]["teamName"],
+//                            msgField:this.teamInfo[0]["teamName"].trim(),
+                            phone:this.teamInfo[3]["phoneNumber"].trim()
+                        },function(json,actid,fn){
+                            console.log(json);
+                            //模拟数据
+//                            json = {
+//                                ret:0,
+//                                data:{
+//                                    op:"xxx434234" //唯一战队ID
+//                                }
+//                            }
+//                            json = {
+//                                ret:342423
+//                            }
+                            if(json.ret == 0){
+                                me.myInfo.teamId = json.data.op; //返回战队ID
+                                me.$set(me.avatarList,0,window.location.protocol+"//q.qlogo.cn/g?b=qq&s=100&nk="+zUtil.getUin());
+                                me.myInfo.isHasSignUp = true;
+                            }else if(json.ret == 70252){
+                                //若输入有敏感词或者脏词
+                                me.teamInfo[0]["teamName"]  = ""
+                            }
+                            zHttp.showResponse(json,json.actid,fn);
+                        })
+                    },
+                    //邀请好友
+                    inviteFriends:function(){
+                        //需要先判断用户是否确认报名了(有teamId了就确认报名了)
+                        if(!this.myInfo.teamId){
+                            zMsg.show("要先创建好战队，才能邀请好友加入哦！");
+                            return false;
+                        }
+                        //拉起手Q分享面板（分享链接上带上invite_uin和teamid信息）
+                        mqq.ui.shareMessage({
+                            title: "神秘人、彭于晏邀请你加入他的战队！",
+                            desc: "神秘人VS彭于晏争夺全军之王，赶快加入他们，成为明星战队的一员吧！",
+                            share_type: 0,
+//                            share_url:window.location.protocol+"//youxi.vip.qq.com/m/act/201804/zj/qjcj_273026/index.html?_wv=4&_wv=1&adtag=adtag.share&invite_uin="+zUtil.getUin()+"&teamid="+this.myInfo.teamId+"&type="+this.myInfo.type,
+                            share_url:window.location.protocol+"//youxi.vip.qq.com/m/act/201804/zj/qjcj_273026/index.html?_wv=4&_wv=1&adtag=adtag.share&invite_uin="+zUtil.getUin()+"&teamid="+this.myInfo.teamId,
+                            image_url: window.location.protocol+"//imgcache.gtimg.cn/vipstyle/game/act/zj/273026/images/share.jpg",
+                            back: true,
+                            sourceName: "QQ手游"
+                        });
+                    },
+                    //查询我的战队信息(查询当前登录态是否组队，以及队员信息)
+                    queryTeamInfo:function(){
+                        var cb = new qv.zero.CallBack();
+                        var me = this;
+                        zHttp.send({
+                            actid:273257
+                        },function(json){
+                            console.log(json);
+                            //模拟数据(玩家有战队信息)
+//                            json = {
+//                                ret:0,
+//                                data:{
+//                                    op:{
+//                                        type:1,
+//                                        id:423423423, //teamId唯一
+//                                        name:"自己战队",
+////                                        members:[792013934,3126300353,1257407454,384840951],
+//                                        members:[792013934,3126300353,1257407454],
+//                                        phone:18818417085, //队长电话(客态进入的时候，不会返回phone字段)
+//                                        nick:"assassinZJ", //队长昵称
+//                                    }
+//                                }
+//                            }
+                            //玩家无战队
+//                            json = {
+//                                ret:70307,
+//                                data:{
+//                                    op:""
+//                                }
+//                            }
+                            if(json.ret == 0 && json.data.op.id){
+                              var info = json.data.op;
+                              //若当前登录态为队长
+                              if(zUtil.getUin() == info.members[0]){
+                                  me.myInfo.phone = info.phone;
+                              }
+                                me.myInfo.teamId = info.id;
+                                me.myInfo.nick = info.nick;
+                                me.myInfo.teamName = me.filterWord(info.name);
+                                me.myInfo.type = info.type;
+                                me.myInfo.isHasSignUp = true;
+                                me.myInfo.teamInfo = info.members;
+                                me.teamInfo[0]["teamName"] = me.myInfo.teamName;
+                                me.teamInfo[3]["phoneNumber"] = me.myInfo.phone;
+                              //根据后台返回选中的type来展示 高亮或者置灰
+                              if(me.myInfo.type){
+                                  me.mockSignUpData[0]["isDisabled"] = true;
+                                  me.mockSignUpData[0]["isClick"] = false;
+                              }else{
+                                  me.mockSignUpData[1]["isDisabled"] = true;
+                                  me.mockSignUpData[1]["isClick"] = false;
+                              }
+                              //修改页面结构
+                              me.mockSignUpData[me.myInfo.type]["btn"] = "查看战队信息";
+                              me.mockSignUpData.forEach(function(item,index){
+                                  item["join"] = "";
+                              });
+                              cb.execute(true);
+                            }else if(json.ret == 70307){
+                                cb.execute(false);
+                                console.log("玩家无战队~");
+                            }else{
+                                cb.execute(false);
+                            }
+                        })
+                        return cb;
+                    },
+                    //报名(两种情况：1.已报名（查看战队信息）2.未报名)
+                    signUp:function(index,isClick){
+                        var me = this;
+                        this.team = index;
+                        //先判断是否可点击（isClick字段判断）
+                        if(isClick){
+                            //已经报名
+                            if(this.myInfo.isHasSignUp){
+                                //且登录态为队长
+                                if(zUtil.getUin() == this.myInfo.teamInfo[0]){
+                                    this.isShow = true;
+                                    //设置input框为只读属性
+                                    this.teamInfo[0]["readonly"] = "readonly";
+                                    this.teamInfo[3]["readonly"] = "readonly";
+                                    //如果当前队伍人数满4人，隐藏"邀请好友"按钮
+                                    if(this.myInfo.teamInfo.length >= 4){
+                                        this.inviteFriendsBtn = false;
+                                    }
+                                    //展示队伍队员头像
+                                    this.myInfo.teamInfo.forEach(function(item,idx){
+                                        me.avatarList[idx] = tool.getAvatar(item);
+                                    });
+                                }else{
+                                    //登录态为队员(只展示)
+//                                    if(!this.isInvited){
+                                        this.guestInfo.nick = this.myInfo.nick;
+                                        this.guestInfo.teamName = this.myInfo.teamName;
+                                        this.myInfo.teamInfo.forEach(function(item,idx){
+                                            me.guestInfo.avatarList[idx] = tool.getAvatar(item);
+                                        });
+//                                    }else{
+//                                        var len = this.guestInfo.teamInfo.length
+//                                        if(len< 4){
+//                                            this.guestInfo.teamInfo.forEach(function(item,idx){
+//                                                me.guestInfo.avatarList[idx] = tool.getAvatar(item);
+//                                            });
+//                                            me.$set(me.guestInfo.avatarList,len,tool.getAvatar(zUtil.getUin()));
+//                                        }
+//                                    }
+                                    this.isGuest = true;
+                                }
+                            }else{
+                                this.isShow = true;
+                            }
+                        }else{
+                            return false;
+                        }
+                    },
+                    //展示赛事规则
+                    showRule:function(){
+                        zMsg.show("<div style='height: 500px;overflow: scroll;'>"+
+                                    "活动规则：<br/>"+
+                                    "<p>1、活动时间：4月14日-4月27日，4月14日-4月19日为报名阶段，4月20日12：00-4月25日12：00为初赛阶段，4月27日为总决赛阶段。 </p>"+
+                                    "<p>2、报名阶段：玩家选择明星阵营创建战队成为队长，创建成功后将无法退出战队，且无法更换阵营。创建战队后需邀请好友加入您的战队，成功组满4人后才能进入初赛（注：本次活动仅针对手Q平台用户，如您还不是手Q平台用户，请先进入手Q游戏中心下载并登录报名）。 </p>"+
+                                    "<p>3、报名成功的用户可以领取报名奖一份，2000金币+手Q专属T恤（30天）+企鹅电竞T恤（30天），单Q限1次。</p>"+
+                                    "<p>4、初赛阶段：根据战队分数进行排行，战队分数为队内每位成员的积分平均值。 </p>"+
+                                    "<p>5、初赛结束后，官方根据报名QQ联系排行榜中各阵营前10名队伍参与决赛，决赛将在企鹅电竞进行线上直播；若26日12：00前无法联系则视为弃权，主办方会邀请优秀战队填补空缺。 </p>"+
+                                    "<p>6、所有参与决赛的用户可以领取精英奖励一份，20000金币+永久对应明星服装+手Q限定降落伞（90天） </p>"+
+                                    "<p>7、总决赛冠军队伍可获得10万Q币奖励，亚军获得5万Q币奖励，季军获得1万Q币奖励。 </p>"+
+                                    "<p>8、本次赛事活动仅限手机玩家参与，系统后台将自动检测参赛设备，一旦发现参赛玩家有使用模拟器或辅助插件等违规行为，将直接取消参赛资格。 </p>"+
+                              "</div>"
+                        );
+                    },
+                    //检查url信息(若链接上含有invite_uin和teamid字段，则认为是合法的客人态邀请)
+                    checkUrlInfo:function(){
+                        var me = this;
+                        var invite_uin = zURL.get("invite_uin") ? Number(zURL.get("invite_uin")) : 0; //邀请人QQ号
+                        var teamId = zURL.get("teamid") ? zURL.get("teamid") : ""; //战队唯一ID
+//                        var type = zURL.get("type") ? zURL.get("type") : "";
+                        //如果有战队id和invite_uin信息
+                        if(teamId && invite_uin && invite_uin !== zUtil.getUin()){
+                            zHttp.syrequest({
+                                actid:273807,
+                                teamId:teamId //String类型
+                            },function(json){
+                                console.log(json);
+                                //模拟数据
+//                                json = {
+//                                    ret:0,
+//                                    data:{
+//                                        op:{
+//                                            type:0,
+//                                            id:423423423, //teamId唯一
+//                                            name:"自己战队",
+//                                            members:[792013934,1257407454],
+//                                            nick:"assassinZJ" //队长昵称
+//                                        }
+//                                    }
+//                                };
+//                                json = {
+//                                    ret:70308
+//                                }
+                                if(json.ret == 0){
+                                    var info = json.data.op;
+                                    me.guestInfo.nick = info.nick;
+                                    me.guestInfo.teamId = info.id;
+                                    me.guestInfo.type = info.type;
+                                    me.guestInfo.teamName = me.filterWord(info.name);
+                                    me.guestInfo.teamInfo = info.members;
+                                    me.guestInfo.teamInfo.forEach(function(item,idx){
+                                        me.$set(me.guestInfo.avatarList,idx,tool.getAvatar(item));
+                                    });
+                                    me.isGuest = true;
+                                }
+                            })
+                        }
+                    },
+                    //客态--残忍拒绝
+                    refuse:function(){
+                        this.isGuest = false;
+                    },
+                    //客态--接受邀请
+                    acceptInvitation:function(){
+                        var me = this;
+                        zHttp.send({
+                            actid:273269,
+                            teamId:this.guestInfo.teamId
+                        },function(json,actid,fn){
+                            console.log(json);
+                            if(json.ret == 0){
+                                if(me.guestInfo.type == "0"){
+                                    me.mockSignUpData[1]["isDisabled"] = true;
+                                }else if(me.guestInfo.type == "1"){
+                                    me.mockSignUpData[0]["isDisabled"] = true;
+                                }
+                                me.mockSignUpData[me.guestInfo.type]["btn"] = "查看战队信息";
+                                me.isGuest = false;
+                                //成功之后将自己的QQ号push进去
+                                var len = this.guestInfo.teamInfo.length
+                                if(len< 4){
+                                    this.guestInfo.teamInfo.forEach(function(item,idx){
+                                        me.guestInfo.avatarList[idx] = tool.getAvatar(item);
+                                    });
+                                    me.$set(me.guestInfo.avatarList,len,tool.getAvatar(zUtil.getUin()));
+                                }
+                                me.myInfo.isHasSignUp = true; //确认已经报名
+                                me.isInvited = true;
+                            }else if(json.ret == 70309){
+                                zMsg.show("该战队成员人数已满！");
+                                return false;
+                            }else if(json.ret == 70306){
+                                zMsg.show("您已经加入了一个战队！");
+                                return false;
+                            }
+                            zHttp.showResponse(json,json.actid,fn);
+                        })
+                    },
+                    //过滤特殊字符
+                    filterWord:function(str){
+                        var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）&mdash;—|{}【】‘；：”“'。，、？]");
+                        var rs = "";
+                        for (var i = 0; i < str.length; i++) {
+                            rs = rs + str.substr(i, 1).replace(pattern, '');
+                        }
+                        return rs;
+                    },
+                    playVideo:function(){
+                        var vp = new qv.zero.videoPlayer({
+                            playWay : 1,
+                            domId : 'playVideo',
+                            autoPlay : false,
+                            coverImg : '/images/video.jpg',
+                            afterInit : function(obj){},
+                            videoId : tool.getStaticData(2)[1]["field"],
+                            afterInit : function(){
+                                vp.dom.$dom.click(function(){
+                                    zHttp.send({actid:274025});
+                                });
+                            }
+                        });
+                    }
+                },
+                mounted:function(){
+                    var me = this;
+                    //判断是否下载
+                    this.judgeIsDownload(page, function (gameIsInstall) {
+                        me.isInstall = gameIsInstall;
+                        me.judgeIsDownload({game:"egame"}, function (egameIsInstall) {
+                            me.isInstallQier = egameIsInstall;
+                        });
+                    });
+                    //查看战队信息
+                    this.queryTeamInfo().add(function(json){
+                        if(!json){
+                            me.checkUrlInfo();  //验证url信息（校验主客人态）
+                        }
+                    });
+                    this.playVideo();
+                }
+            })
+        }
+    })
+</script>
+</html>

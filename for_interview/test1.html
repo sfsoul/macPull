@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="father">
+    父亲
+    <p id="son">儿子</p>
+</div>
+<ul id="list">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+</ul>
+<script>
+    var fatherNd = document.getElementById("father");
+    var sonNd = document.getElementById("son");
+    function father(){
+        alert("我是父亲");
+    }
+    function son(){
+
+        alert("我是儿子");
+    }
+
+//    fatherNd.addEventListener("click",father,true);
+//    sonNd.addEventListener("click",son,true);
+    fatherNd.addEventListener("click",father,false);
+    sonNd.addEventListener("click",function(e){
+        e.stopPropagation();
+        alert("哈哈");
+    },false);
+
+    var listNd = document.getElementById("list");
+    listNd.addEventListener("click",function(e){
+        console.log(e);
+        console.log(e.currentTarget);
+        var event = e || window.event;
+        var target = event.target || event.srcElement;
+        if(target.tagName === "LI"){
+            alert(target.innerText);
+        }
+    })
+</script>
+</body>
+</html>

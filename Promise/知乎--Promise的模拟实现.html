@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise模拟实现</title>
+    <style>
+
+    </style>
+</head>
+<ul id="list">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+
+<div id="outer" style="background: #099;">
+    click outer
+    <p id="inner" style="background: #9C0">click inner</p>
+</div>
+<body>
+<script>
+    var ulList = document.querySelector("#list");
+    ulList.addEventListener("click",function(e){
+        console.log(e.currentTarget);
+        console.log(e.target);
+    })
+
+
+    // currentTarget与target的区别
+    var outer = document.querySelector("#outer");
+    var inner = document.querySelector("#inner");
+    outer.addEventListener("click",function(e){
+        console.log(e.currentTarget);
+        console.log(e.target);
+    },false);
+
+    function deepClone(obj){
+        if(typeof obj !== "object") return obj;
+        var newObj = obj instanceof Array ? [] : {};
+        for(var item in obj){
+            if(obj.hasOwnProperty(item)){
+                newObj[item] = typeof obj[item] === "object" ? deepClone(obj[item]) : obj[item];
+            }
+        }
+        return newObj;
+    }
+
+    var obj = {
+        name:"zj",
+        age:25,
+        love:{
+            name:"dmy",
+            age:18
+        }
+    }
+
+    var newObj = deepClone(obj);
+    console.log(newObj);
+
+
+    //es6 继承
+    class Person{
+        constructor(name,age){
+            this.name = name;
+            this.age = age;
+        }
+        sayHello(){
+            console.log(`My name is ${this.name},I am ${this.age} years old`)
+        }
+        toString(){
+            console.log(`我是父类toString方法`)
+        }
+    }
+
+    class Student extends Person{
+        //子类中必须在constructor先使用super()来调用父类。
+        //因为是子类通过super获取父类this实现继承，否则后边的this.class因获取不到this会报错。
+        constructor(name,age,cla){
+            super(name,age); //调用父类的constructor(name,age)
+            this.class = cla;
+        }
+        study(){
+            console.log(`I am study in class ${this.class}`)
+        }
+        toString(){
+            // console.log(`${this.class} + " " + ${super.toString()}`)
+            console.log(this.class + ' ' + super.toString()); // 调用父类的toString()
+        }
+    }
+
+    var student = new Student("zj",25,"一班");
+    console.log(student);
+    student.sayHello();
+    student.study();
+    student.toString();
+</script>
+<script>
+    function MyPromise(task){
+        const _this = this;
+        _this.status = "pending"; //设定初始状态
+        _this.value = undefined;
+        _this.onFulfilledsList = []; //onFulfilled函数序列
+        _this.onRejectedsList = [];  //onRejected函数序列
+
+        function resolve(value){
+            if(value instanceof MyPromise){
+                return value.then(resolve,reject);
+            }
+            //异步执行resolve或者reject方法，保证代码的统一性和注册的回调函数按照正确的顺序执行
+            if(_this.status === "pending"){
+                _this.status = "fulfilled";
+                _this.value = value;
+                _this.onFulfilledsList.forEach(cb => cb(value))
+            }
+        }
+
+        function reject(reason){
+            if(_this.status === "pending"){
+                _this.status = 'rejected';
+                _this.reason = reason;
+                _this.onRejectedsList.forEach(cb => cb(reason));
+            }
+        }
+
+        try{
+            task(resolve,reject);
+        }catch(err){
+            throw new Error(err);
+        }
+    }
+
+
+    function resolvePromise(promise2, x, resolve, reject) {
+        if (x === promise2) {
+            return reject(new TypeError('循环引用'));
+        }
+        //如果返回的是一个thenable对象，即一个拥有then方法的对象，那么使用它的then方法去获得它的最终返回值。目的是为了兼容其他Promise库
+        if (x !== null && (typeof x === 'object' || typeof x === 'function')) {
+            let then, called;
+            try {
+                then = x.then;
+                if (typeof then === 'function') {
+                    then.call(x, function (newx) {
+                        if (called) return;   //防止重复调用
+                        called = true;
+                        resolvePromise(promise2, newx, resolve, reject);
+                    }, function (err) {
+                        if (called) return;
+                        called = true;
+                        return reject(err);
+                    });
+                } else {
+                    resolve(x);
+                }
+            } catch (err) {
+                if (called) return;
+                called = true;
+                reject(err);
+            }
+        } else {
+            resolve(x);
+        }
+    }
+
+
+    MyPromise.prototype.then = function(onFulfilled,onRejected){
+        const _this = this;
+        let promise2;
+        onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : function(data){
+            return data;
+        };
+        onRejected = typeof onRejected === "function" ? onRejected : function(data){
+            throw data;
+        };
+        //为了支持同步代码，当then方法注册的时候如果Promise的状态已经改变，则立即执行对应的函数
+        if(_this.status === "fulfilled"){
+            promise2 = new MyPromise(function(resolve,reject){
+                setTimeout(function(){
+                    let x;
+                    try{
+                        x = onFulfilled(_this.value);
+                        resolvePromise(promise2,x,resolve,reject);
+                    }catch(err){
+                        reject(err);
+                    }
+                })
+            })
+        }
+
+        if(_this.status === "rejected"){
+            promise2 = new MyPromise(function(resolve,reject){
+                setTimeout(function(){
+                    let x;
+                    try{
+                        x = onRejected(_this.reason);
+                        resolvePromise(promise2,x,resolve,reject);
+                    }catch(err){
+                        reject(err);
+                    }
+                })
+            })
+        }
+        if(_this.status === "pending"){
+            promise2 = new MyPromise(function(resolve,reject){
+                _this.onFulfilledsList.push(function(value){
+                    setTimeout(function(){
+                        let x;
+                        try{
+                            x = onFulfilled(value);
+                            resolvePromise(promise2,x,resolve,reject);
+                        }catch(err){
+                            reject(err);
+                        }
+                    });
+                });
+                _this.onRejectedsList.push(function(reason){
+                    setTimeout(function(){
+                        try{
+                            let x = onRejected(reason);
+                            resolvePromise(promise2,x,resolve,reject);
+                        }catch(err){
+                            reject(err);
+                        }
+                    });
+                });
+            })
+        }
+        return promise2; //返回一个新的Promise实例，以便支持链接调用
+    };
+
+    MyPromise.prototype.catch = function(onRejected){
+        this.then(null,onRejected);
+    };
+
+    MyPromise.all = function(someValue){
+        let resolveValArr = [];
+        let count = promiseLen = 0;
+        let promise2;
+        promise2 = new MyPromise(function(resolve,reject){
+            let iNow = 0;
+            try{
+                for(let item of someValue){
+                    if(item !== null && typeof item === "object"){
+                        try{
+                            let then = item.then;
+                            let index = iNow;
+                            if(typeof then === "function"){
+                                promiseLen++;
+                                then.call(item,function(value){
+                                    resolveValArr[index] = value;
+                                    if(++count === promiseLen){
+                                        resolve(resolveValArr);
+                                    }
+                                },function(err){
+                                    reject(err);
+                                });
+                            }
+                        }catch(err){
+                            resolveValArr[iNow] = item;
+                        }
+                    }else{
+                        resolveValArr[iNow] = item;
+                    }
+                    iNow++;
+                }
+                if(iNow === 0){
+                    return resolve(someValue);
+                }
+                if(promiseLen === 0){
+                    return resolve(resolveValArr);
+                }
+            }catch(err){
+                reject(new TypeError("无法遍历的类型！"));
+            }
+        });
+        return promise2;
+    };
+
+
+    MyPromise.race = function (someValue) {
+        let promise2;
+        promise2 = new MyPromise(function (resolve, reject) {
+            let iNow = 0;
+            try {
+                for (let item of someValue) {
+                    if (item !== null && typeof item === "object") {
+                        try {
+                            let then = item.then;
+                            then.call(item, function (value) {
+                                resolve(value);
+                            }, function (err) {
+                                reject(err);
+                            });
+                        } catch (err) {
+                            resolve(item);
+                            break;
+                        }
+                    } else {
+                        resolve(item);
+                        break;
+                    }
+                    iNow++;
+                }
+                if (iNow === 0) {
+                    return resolve(someValue);
+                }
+            } catch (err) {
+                reject(new TypeError('无法遍历的类型!'));
+            }
+        });
+        return promise2;
+    };
+
+
+    MyPromise.resolve = function(value){
+        let promise2;
+        if(value !== null && (typeof value === "object" || typeof value === "function")){
+            promise2 = new MyPromise(function(resolve,reject){
+                try{
+                    let then = value.then;
+                    if(typeof value.then === "function"){
+                        then.call(value,function(data){
+                            resolve(data);
+                        },reject);
+                    }else{
+                        resolve(value);
+                    }
+                }catch(err){
+                    reject(err);
+                }
+            })
+        }else{
+            promise2 = new MyPromise(function(resolve){
+                resolve(value);
+            })
+        }
+        return promise2;
+    };
+
+
+    MyPromise.reject = function(reason){
+        return new MyPromise(function(resolve,reject){
+            reject(reason);
+        })
+    };
+
+    // module.exports = MyPromise;
+
+
+    //这是为了让代码能够测试而开放的接口，详见promises-aplus-tests中的相关描述
+    MyPromise.deferred = MyPromise.defer = function () {
+        let deferred = {};
+        deferred.promise = new MyPromise(function (resolve, reject) {
+            deferred.resolve = resolve;
+            deferred.reject = reject;
+        });
+        return deferred
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object.create兼容实现</title>
+</head>
+<body>
+<script>
+    //Object.create()方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__。
+
+    //Object.create实现类式继承
+
+    //Shape - 父类
+    function Shape(x,y){
+        this.x = x;
+        this.y = y;
+    }
+    Shape.prototype.move = function(x,y){
+        this.x += x;
+        this.y += y;
+        console.log("Shape moved");
+    }
+
+    //Rectangle - 子类
+    function Rectangle(){
+        Shape.call(this);
+    }
+
+    //子类继承父类
+    Rectangle.prototype = Object.create(Shape.prototype);
+    Rectangle.prototype.constructor = Rectangle;
+
+    var rect = new Rectangle();
+    rect instanceof Rectangle; //true
+    rect instanceof Shape; //true
+    rect instanceof Object; //true
+
+    //Polyfill - 兼容写法
+    if(typeof Object.create !== "function"){
+        Object.create = function(proto,propertiesObject){
+            if(typeof proto !== "object" && typeof proto !== "function"){
+                throw new TypeError('Object prototype may only be an Object: ' + proto);
+            }else if(proto === null){
+                throw new Error("This browser's implementation of Object.create is a shim and doesn't support 'null' as the first argument.");
+            }
+            if (typeof propertiesObject != 'undefined') throw new Error("This browser's implementation of Object.create is a shim and doesn't support a second argument.");
+
+            function F(){}
+            F.prototype = proto;
+            return new F();
+        }
+    }
+</script>
+</body>
+</html>

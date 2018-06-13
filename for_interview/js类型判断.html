@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js类型判断</title>
+</head>
+<body>
+<script>
+    //写一个type函数检测各种类型的值。如果是基本类型就使用typeof，引用类型就使用toString
+    var class2type = {};
+    // 生成class2type映射
+    "Boolean Number String Function Array Date RegExp Object Error Null Undefined".split(" ").map(function(item, index) {
+        class2type["[object " + item + "]"] = item.toLowerCase();
+    })
+
+    function type(obj){
+        //一箭双雕（在IE6中，null和undefined会被Object.prototype.toString方法识别为[object Object]!）
+        if(obj == null){
+            return obj + "";
+        }
+        return (typeof obj === "object" || typeof obj === "function") ? class2type[Object.prototype.toString.call(obj)] || "object" : typeof obj;
+    }
+
+    console.log(type(new Date()));
+    console.log(type("sb"));
+
+    //isFunction -- 判断是否为Function类型
+    function isFunctions(obj){
+        return type(obj) === "function";
+    }
+
+    //判断是否为数组Array类型
+    function isArray(obj){
+        return Array.isArray || type(obj) === "array";
+    }
+</script>
+</body>
+</html>

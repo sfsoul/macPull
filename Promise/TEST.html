@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var p = new Promise(resolve=>{
+        resolve(100);
+    });
+
+    function test(){
+        return Promise.resolve(1);
+    }
+
+    p.then(()=>{
+       return test();
+       // test(); //undefined.  因为没有把promise实例return出去
+    }).then(data=>console.log(data));
+
+
+    p.then(test()).then(data=>console.log(data)); //输出100.因为then方法只接受function类型的参数，此处会发生值穿透
+
+
+    function safelyResolveThen(self, then) {
+        var called = false;
+        try {
+            then(function (value) {
+                if (called) {
+                    return;
+                }
+                called = true;
+                doResolve(self, value);
+            }, function (error) {
+                if (called) {
+                    return;
+                }
+                called = true;
+                doReject(self, error);
+            });
+        } catch (error) {
+            if (called) {
+                return;
+            }
+            called = true;
+            doReject(self, error);
+        }
+    }
+</script>
+</body>
+</html>

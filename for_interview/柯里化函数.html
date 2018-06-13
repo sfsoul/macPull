@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>柯里化函数</title>
+</head>
+<body>
+<script>
+    var currying = function(fun){
+        var args = Array.prototype.slice.call(arguments,1);
+        return function(){
+            var _args = args.concat(Array.prototype.slice.call(arguments));
+            return fun.apply(null,_args);
+        }
+    }
+
+    var add = currying(function(){
+        var args = Array.prototype.slice.call(arguments);
+        return args.reduce(function(a,b){
+            return a+b;
+        });
+    })
+
+    var str = add(1,2,4);
+    console.log(str);
+</script>
+</body>
+</html>

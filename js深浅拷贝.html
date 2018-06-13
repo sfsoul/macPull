@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js深拷贝</title>
+</head>
+<body>
+<script>
+    var obj = {
+        name:"zj",
+        age:24,
+        love:{
+            name:"dmy",
+            age:24
+        }
+    };
+
+    //深拷贝  法一
+    function _clone(obj){
+        if(typeof obj !== "object") return;
+        var newObj = obj instanceof Array ? [] : {};
+        for(var key in obj){
+            if(obj.hasOwnProperty(key)){
+              newObj[key] = typeof obj[key] === "object" ? _clone(obj[key]) : obj[key];
+            }
+        }
+        return newObj;
+    }
+
+    var newObj = _clone(obj);
+
+    newObj.love.name = "who";
+    console.log(newObj);
+    console.log(obj);
+
+
+    //深拷贝  法二
+    function isArray(arr){
+        return Object.prototype.toString.call(arr) === "[object Array]";
+    }
+
+    function deepClone(obj){
+        if(typeof obj !== "object" && typeof obj !== "function"){
+            return obj; //原始类型直接返回
+        }
+        var o = isArray(obj) ? [] : {};
+        for(var i in obj){
+            if(obj.hasOwnProperty(i)){
+                o[i] = typeof obj[i] === "object" ? deepClone(obj[i]) : obj[i];
+            }
+        }
+        return o;
+    }
+
+
+
+    //浅拷贝
+    //浅拷贝是因为对象只会被克隆最外部的一层，至于更深层的对象，则依然是通过引用指向同一块堆内存
+    function shallowCopy(obj){
+        // 只拷贝对象
+        if(typeof obj !== "object") return;
+        // 根据obj的类型判断是新建一个数组还是对象
+        var newObj = obj instanceof Array ? [] : {};
+        // 遍历obj，并且判断是obj的属性才拷贝
+        for(let key in obj){
+            if(obj.hasOwnProperty(key)){
+                newObj[key] = obj[key];
+            }
+        }
+        return newObj;
+    }
+
+
+    //基本类型比较是否相等，只是单纯的比较值是否相等
+    var a = 100;
+    var b = 100;
+    console.log(a == b); //true
+
+
+    //引用类型比较相等，需要判断值是否相等以及是否都指向同一个堆内存
+    var c = {
+        name:"zj",
+        age:25
+    }
+
+    var d = {
+        name:"zj",
+        age:25
+    }
+
+    var e = c;
+    console.log(c == d); //false   因为c和d指向的不是同一块堆内存
+    console.log(e == c); //true
+</script>
+</body>
+</html>

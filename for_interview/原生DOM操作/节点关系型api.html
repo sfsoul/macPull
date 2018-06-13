@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>节点关系型API</title>
+</head>
+<body>
+<div id="parent">
+    父亲
+    <p id="child">儿子</p>
+    <h1>测试一下下</h1>
+</div>
+<script>
+    /*
+    *   parentNode:每个节点都有一个parentNode属性，表示元素的父节点。Element的父节点可能是Element，Document或DocumentFragment
+    *   parentElement：返回元素的父元素节点，与parentNode区别在于：其父节点必须是一个Element，若不是则返回null。
+    */
+
+    var parent = document.getElementById("parent");
+    var child = document.getElementById("child");
+    console.log(child.parentNode);
+    console.log(child.parentElement);
+
+    /*
+    *   previousSibling:节点的前一个节点，如果该节点是第一个节点，则为null。
+    *   previousElementSibling：返回前一个元素节点，前一个节点必须是Element
+    *
+    *   nextSibling：节点的后一个节点，如果该节点是最后一个节点，则为null。
+    *   nextElementSibling：返回后一个元素节点，后一个节点必须是Element。
+    */
+    console.log(child.previousSibling);
+    console.log(child.previousElementSibling);
+    console.log(child.nextSibling);
+    console.log(child.nextElementSibling);
+
+    /*
+    *   childNodes:返回一个即时的NodeList，表示元素的子节点列表，子节点可能会包含文本节点、注释节点等。
+    *   children:一个即时的HTMLCollection，子节点都是Element。
+    *   firstNode:第一个子节点。
+    *   lastNode:最后一个子节点。
+    *   hasChildNodes:用来判断是否包含子节点。
+    */
+    console.log(parent.childNodes); //NodeList数组
+    console.log(parent.children);   //HTMLCollection
+    console.log(parent.firstChild); //包含文本节点在内
+    console.log(parent.firstElementChild); //只输出元素节点
+    console.log(parent.lastChild);
+    console.log(parent.lastElementChild);
+</script>
+</body>
+</html>

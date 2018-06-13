@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>替换节点</title>
+</head>
+<body>
+<div id="father">
+    我是父亲
+    <p class="son">我是儿子1</p>
+    <p class="son">我是儿子2</p>
+</div>
+<button>替换节点</button>
+<script>
+
+    // replaceChild用于使用一个节点替换另一个节点
+    var fatherDom = document.getElementById("father");
+    var sonsNd = document.querySelectorAll(".son");
+//    var sonsNd = document.getElementsByClassName("son");
+    var btnNd = document.querySelector("button");
+
+    btnNd.addEventListener("click",function(){
+        fatherDom.replaceChild(sonsNd[1],sonsNd[0]);
+        var newNd = document.createElement("h1");
+        newNd.innerText = "新子节点";
+        setTimeout(() => {
+            fatherDom.replaceChild(newNd,sonsNd[1]);
+//            fatherDom.replaceChild(newNd,sonsNd[0]);
+        },3000)
+    });
+</script>
+</body>
+</html>

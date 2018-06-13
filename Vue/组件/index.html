@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基础组件</title>
+    <style>
+        .title-line{
+            border: 1px solid #ccc;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <button-component></button-component>
+    <blog-title :title="titleList"></blog-title>
+    <alert-box>
+        发生了一些不好的事情。
+    </alert-box>
+</div>
+
+<!--blog-title模块-->
+<template id="blog-title">
+    <div>
+        <!--每个组件模板中只能含有一个根元素-->
+        <div v-for="(item,idx) in title" class="title-line">
+            <h1>{{item.name}}</h1>
+            <h2>{{item.num}}</h2>
+        </div>
+        <button @click="deleteTitle">删除title</button>
+    </div>
+</template>
+<script src="../../lib/vue.js"></script>
+<script>
+    Vue.component("button-component",{
+        template:"<button @click='addCount'>增加{{count}}</button>",
+        data(){
+            return {
+                count:0
+            }
+        },
+        methods:{
+            addCount(){
+                this.count += 1;
+            }
+        }
+    });
+
+    Vue.component("blog-title",{
+        template:"#blog-title",
+        data(){
+            return{
+                info:""
+            }
+        },
+        props:{
+            title:{
+                // type:String,
+                type:Array,
+                default:"目前没title"
+            }
+        },
+        methods:{
+            deleteTitle(){
+                // this.$emit()
+                this.info.splice(0,1);
+            }
+        },
+        mounted(){
+            this.info = this.title
+        }
+    })
+
+    Vue.component("alert-box",{
+        template:`
+            <div class ='demo-alert-box'>
+              <strong> Error！</strong>
+              <slot> </slot>
+            </div>
+        `
+    })
+    window.vm = new Vue({
+        el:"#app",
+        data:{
+            // titleList:"赐我理由"
+            titleList:[
+                {name:"赐我理由",num:10},
+                {name:"JS高级程序设计",num:100},
+                {name:"嘻嘻嘻嘻",num:110},
+                {name:"和平世界",num:220}
+            ]
+        }
+    })
+</script>
+</body>
+</html>

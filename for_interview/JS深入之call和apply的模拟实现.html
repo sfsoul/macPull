@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS深入之call和apply的模拟实现</title>
+</head>
+<body>
+<script>
+    /*
+    *   模拟步骤可分为：
+    *   1.将函数设为对象的属性
+    *   2.执行该函数
+    *   3.删除该函数
+    */
+
+    Function.prototype.call2 = function(context){
+        var context = context || window;
+        context.fn = this;
+
+        var args = [];
+        for(var i=1,len = args.length;i<len;i++){
+            args.push('arguments[' + i + ']');
+        }
+        var result = eval('context.fn(' + args + ')');
+        delete context.fn;
+        return result;
+    }
+
+    Function.prototype.apply2 = function(context,arr){
+        var context = Object(context) || window;
+        context.fn = this;
+
+        var result;
+        if(!arr){
+            result = context.fn()
+        }else{
+            var args = [];
+            for(var i=0,len=arr.length;i<len;i++){
+                args.push('arr['+i+']');
+            }
+            result = eval('context.fn('+args+')');
+        }
+        delete context.fn;
+        return result;
+    }
+</script>
+</body>
+</html>

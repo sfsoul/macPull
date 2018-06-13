@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加大量节点</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #list{
+            border:1px solid pink;
+        }
+    </style>
+</head>
+<body>
+<ul id="list"></ul>
+<script>
+//    var addCount = 50;
+//    var addOnceNum = 5;
+//    var nums = 10;
+//    var hasAddNum = 0;
+//    var documentFragment = document.createDocumentFragment();
+//    var listDom = document.getElementById("list");
+//
+//    function addLiDom(){
+//        for(var i=0;i<addOnceNum;i++){
+//            var liDom = document.createElement("li");
+//            liDom.innerText = "当前li为：" + Number((hasAddNum*addOnceNum)+i+1);
+//            documentFragment.appendChild(liDom);
+//        }
+//        listDom.appendChild(documentFragment);
+//        hasAddNum += 1;
+//        hasAdd();
+//    }
+//
+//    function hasAdd(){
+//        if(hasAddNum < nums){
+//            start();
+//        }else{
+//            listDom.appendChild(documentFragment);
+//        }
+//    }
+//
+//    function start(){
+//        if(window.requestAnimationFrame){
+//            window.requestAnimationFrame(addLiDom);
+//        }
+//    }
+
+
+    (() =>{
+        const ndContainer = document.getElementById("list");
+        if(!ndContainer){
+            return;
+        }
+
+        const total = 100;
+        const batchSize = 4; //每次插入的节点次数
+        const batchCount = total/batchSize; //需要批量处理多少次
+        let batchDone = 0; //已经完成的批处理个数
+
+        function appendItems(){
+            const fragment = document.createDocumentFragment();
+            for(let i=0;i<batchSize;i++){
+                const ndItem = document.createElement("li");
+                ndItem.innerText = "当前li的值为：" + Number((batchDone*batchSize)+i+1);
+                fragment.appendChild(ndItem);
+            }
+
+            //每次批处理只修改1次DOM
+            ndContainer.appendChild(fragment);
+
+            batchDone += 1;
+            doBatchAppend();
+        }
+
+        //判断是否已经添加完了元素
+        function doBatchAppend(){
+            if(batchDone < batchCount){
+                if(window.requestAnimationFrame){
+                    window.requestAnimationFrame(appendItems);
+                }else{
+                    setTimeout(appendItems,1000/60);
+                }
+            }
+        }
+
+        doBatchAppend();
+
+        ndContainer.addEventListener("click",function(e){
+            const event = e || window.event;
+            const target = event.target || event.srcElement;
+            if(target.tagName === "LI"){
+                alert(target.innerHTML);
+            }
+        })
+    })()
+</script>
+</body>
+</html>

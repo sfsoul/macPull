@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改DOM</title>
+</head>
+<body>
+<h1 id="theTitle" class="highlight">Hello world</h1>
+<script>
+    let newElement = document.createElement("p");
+    newElement.textContent = "新创建p元素";
+    let scriptNd = document.querySelector("script");
+    // document.body.appendChild(newElement);
+    document.body.insertBefore(newElement,scriptNd);
+
+
+    //在指定元素之后插入你想要插入的元素
+    function insertAfter(target,newElement){
+        target.parentNode.insertBefore(newElement,target.nextSibling);
+    }
+</script>
+</body>
+</html>

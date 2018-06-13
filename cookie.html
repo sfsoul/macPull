@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>快读排序</title>
+</head>
+<body>
+<script>
+    var arr = [100,10,20,40,8,200];
+
+    function quickSort(arr){
+        if(Object.prototype.toString.call(arr) !== "[object Array]") return;
+        if(arr && arr.length <= 1) return arr;
+        var midIdx = Math.floor(arr.length/2);
+        var midVal = arr.splice(midIdx,1)[0];
+        var left = [];
+        var right = [];
+
+        arr.forEach(function(item){
+            if(item <= midVal){
+                left.push(item);
+            }else{
+                right.push(item);
+            }
+        })
+
+        var leftArr = quickSort(left);
+        var rightArr = quickSort(right);
+        return leftArr.concat(midVal,rightArr);
+    }
+
+    var newArr = quickSort(arr);
+    console.log(newArr);
+
+    //异步加载JS文件
+    var scriptDom = document.createElement("script");
+    scriptDom.type = "text/javascript";
+    scriptDom.src = "lib/test.js";
+    document.body.appendChild(scriptDom);
+    scriptDom.onload = function(){
+        console.log("下载完了");
+    }
+    function test(data){
+        console.log(data);
+    }
+
+    //数组去重
+    var arr1 = [1,1,6,6,6,88,88,9,20,20];
+
+    function sortArr(arr){
+        var newArr = arr1.concat().sort(function(a,b){
+            return a - b;
+        })
+        return newArr;
+    }
+
+    var sortedArr = sortArr(arr1);
+    console.log(sortedArr);
+
+
+
+    function removeSame(arr){
+        if(Object.prototype.toString.call(arr) !== "[object Array]") return;
+        if(arr && arr.length <= 1) return arr;
+        var newArr = [];
+        arr.forEach((item,idx)=>{
+            if(newArr.indexOf(item) === -1){
+                newArr.push(item);
+            }
+        })
+        return newArr;
+    }
+
+    var newArr1 = removeSame(arr1);
+    console.log(newArr1);
+
+    //es6
+    var newArr2 = Array.from(new Set(arr1));
+    console.log(newArr2);
+</script>
+</body>
+</html>

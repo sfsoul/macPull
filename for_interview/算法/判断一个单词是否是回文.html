@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断一个单词是否是回文</title>
+</head>
+<body>
+<script>
+    /*
+        回文是指相同的词汇或句子，在下文中调换位置或颠倒过来，产生首尾回环的情趣,
+        叫做回文，也叫回环
+    */
+    function checkPalindrom(str){
+        return str == str.split("").reverse().join("");
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<script>
+    //获取当前时间  格式为 2018-05-22 15:30:30
+    function timeNow(){
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth()+1 >= 10 ? date.getMonth()+1 : "0"+(date.getMonth()+1);
+        var day = date.getDate() >= 10 ? date.getDate() : "0"+date.getDate();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        return (year+"-"+month+"-"+day+"  "+hours+":"+minutes+":"+seconds);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS中继承的多种方式和优缺点</title>
+</head>
+<body>
+<script>
+    //原型链继承
+    /*
+    *   问题：1.引用类型的属性被所有实例共享。
+    *   2.在创建Child实例时，不能向Parent传参。
+    */
+    function Parent(){
+        this.name = "kevin";
+    }
+    Parent.prototype.getNmae = function(){
+        console.log(this.name);
+    }
+    function Child(){
+
+    }
+    Child.prototype = new Parent();
+
+    var child1 = new Child();
+    console.log(child.getName()); //kevin
+
+
+    //构造函数继承
+    /*
+    *   优点：1.避免了引用类型的属性被所有实例共享。
+    *   2.可以在Child中向Parent传参。
+    *   缺点：方法都在构造函数中定义，每次创建实例都会创建一遍方法。
+    */
+    function Parent(){
+        this.names = ["kevin","daisy"];
+    }
+    function Child(){
+        Parent.call(this);
+    }
+
+    var child1 = new Child();
+    child1.names.push("yayu");
+    console.log(child1.names); //["kevin", "daisy", "yayu"]
+    var child2 = new Child();
+    console.log(child2.names); // ["kevin", "daisy"]
+
+
+    //组合继承（原型链继承和经典继承双剑合璧）-- 最常用的继承模式
+    //最大缺点：调用两次父构造函数
+    function Parent(name){
+        this.name = "zj";
+        this.colors = ["red","blue","green"];
+    }
+
+    Parent.prototype.getName = function(){
+        console.log(this.name);
+    }
+
+    function Child(name,age){
+        Parent.call(this,name); //为实例添加属性
+        this.age = age;
+    }
+    Child.prototype = new Parent(); //使实例能够继承到原型上的方法:Child.prototype.__proto__ = Parent.prototype
+    Child.prototype.constructor = Child; //要将子类的constructor重新指向子类本身。
+
+    var child1 = new Child("kevin",18);
+    child1.colors.push("black");
+    console.log(child1.name); // kevin
+    console.log(child1.age); // 18
+    console.log(child1.colors); // ["red", "blue", "green", "black"]
+
+    var child2 = new Child('daisy', '20');
+
+    console.log(child2.name); // daisy
+    console.log(child2.age); // 20
+    console.log(child2.colors); // ["red", "blue", "green"]
+
+    //原型式继承 -- 就是ES5 Object.create的模拟实现，将传入的对象作为创建的对象的原型。
+    //缺点：包含引用类型的属性值始终都会共享相应的值，和原型链继承一样。
+    function createObj(o){
+        function F(){}
+        F.prototype = o;
+        return new F();
+    }
+
+    var person = {
+        name: 'kevin',
+        friends: ['daisy', 'kelly']
+    }
+
+    var person1 = createObj(person);
+    var person2 = createObj(person);
+
+    person1.name = 'person1';
+    console.log(person2.name); // kevin
+
+    person1.friends.push('taylor');
+    console.log(person2.friends); // ["daisy", "kelly", "taylor"]
+
+
+    //寄生组合式继承 -- 减少调用父构造函数的次数
+    /*
+    * 优点:这种方式的高效率体现它只调用了一次 Parent 构造函数，并且因此避免了在 Parent.prototype 上面创建不必要的、多余的属性。
+    * 与此同时，原型链还能保持不变；因此，还能够正常使用 instanceof 和 isPrototypeOf。
+    */
+    function Parent(name){
+        this.name = name;
+        this.colors = ["red","blue","green"];
+    }
+    Parent.prototype.getName = function(){
+        console.log(this.name);
+    }
+
+    function Child(name,age){
+        Parent.call(this,name);
+        this.age = age;
+    }
+
+    //关键的第三步 -- 新建一个中间函数Function f;
+    var F = function(){};
+    F.prototype = Parent.prototype;
+    Child.prototype = new F();
+
+    var child1 = new Child("zj",25); // Child {name:"zj",age:25,color:["red","blue","green"]}
+
+    //最后封装一下这个继承方法
+    function object(o){
+        function F(){}
+        F.prototype = o;
+        return new F();
+    }
+
+    function prototype(child,parent){
+        var prototype = object(parent.prototype);
+        prototype.constructor = child;
+        child.prototype = prototype;
+    }
+
+    //调用
+    prototype(Child,Parent);
+</script>
+</body>
+</html>

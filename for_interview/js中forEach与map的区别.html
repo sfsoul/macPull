@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js中forEach与map的区别</title>
+</head>
+
+<body>
+    <script>
+        /*
+            forEach()：针对每一个元素执行提供的函数。
+            map()：创建一个新的数组，其中每一个元素由调用数组中的每一个元素执行提供的函数得来。
+            区别是：forEach()方法不会返回执行结果，而是undefined。即forEach()会修改原来的数组。而map()
+            方法会得到一个新的数组并返回。
+        */
+
+        var arr = [1, 2, 3,4,5,6];
+
+        //map会生成一个新的数组且不会改变原数组
+        var newArr = arr.map(x => x * x);
+        var arr2 = arr.map(num=>num*2).filter(num=>num>5);
+
+        //filter也是返回一个新的数组且不会改变原数组
+        var arr3 = arr.filter(x=>x>2);
+
+        //reduce(让数组中的前项和后项做某种计算，并累计最终值)做累加计算，返回一个数值
+        var arr4 = arr.reduce((prev,next)=>{
+            return prev+next;
+        })
+
+        console.log(arr);//[1, 2, 3,4,5,6]
+        console.log(newArr);//[1,4,9,16,25,36]
+        console.log(arr2); //[6,8,10,12]
+        console.log(arr3); //[3,4,5,6]
+        console.log(arr4); //21
+
+        //核心要点
+        /*
+            能用forEach()做到的，map()同样可以。反过来也是如此。
+            map()会分配内存空间存储新数组并返回，forEach()不会返回数据。
+            forEach()允许 callback更改原始数组的元素，map()返回新的数组。
+        */
+
+
+        //map的模拟实现
+        Array.prototype.map = function(fn){
+            var newArr = [];
+            var len = this.length;
+            for(var i=0;i<len;i++){
+                newArr[i] = fn.apply(this,[this[i],i,this]);
+            }
+            return newArr;
+        }
+
+        //forEach的模拟实现
+        Array.prototype.forEach = function (fn) {
+            for (var i = 0,len = this.length; i < len ; i++) {
+                fn.apply(this,[this[i],i,this]);
+            }
+        }
+    </script>
+</body>
+
+</html>

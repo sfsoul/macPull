@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta>
+    <title>Vue双向绑定</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <p></p>
+</div>
+<script>
+    /*
+    *   1.实现一个Observer，对数据进行劫持，通知数据的变化；
+    *   2.实现一个Compile，对指令进行解析，初始化视图，并且订阅数据的变更，绑定好更新函数；
+    *   3.实现一个Watcher，将其作为以上两者的一个中介点，在接收到数据变更的同时，让Dep添加当前Watcher，并及时通知视图进行update；
+    *   4.实现MVVM，整合以上三者，作为一个入口函数。
+    */
+
+    function observe(data,asRootData){
+        if(!data || typeof data !== "object"){
+            return;
+        }
+        Object.keys(data).forEach(key => {
+            observeProperty(data,key,data[key]);
+        })
+    }
+
+    function observeProperty(obj,key,val){
+        //深层遍历
+        observe(val);
+        Object.defineProperty(obj,key,{
+            enumerable:true,    //可枚举
+            configurable:true, //可重新定义
+            get:function(){
+                return val;
+            },
+            set:function(newVal){
+                if(val === newVal || (newVal !== newVal && val !== val)){
+                    return;
+                }
+                console.log("数据更新啦 ",val,"=>",newVal);
+                val = newVal;
+            }
+        })
+    }
+
+    var data = {
+        a:"zj"
+    }
+
+    observe(data);
+
+    /*
+    function observer(obj){
+        return new Observer(obj);
+    }
+
+    function Observer(obj){
+        Object.keys(obj).forEach((key) =>{
+            defineReactive(obj,key);
+        })
+    }
+
+    function defineReactive(obj,key){
+        var val = obj[key];
+        //深层遍历
+        if(typeof val === "object"){
+            observer(val);
+        }
+        Object.defineProperty(obj,key,{
+            //收集依赖
+            get(){
+                if(Dep.target){
+                    dep.addSub(Dep.target); //将watcher添加到数组中
+                }
+                console.log("触发get");
+                return val;
+            },
+            set(newVal){
+                if(newVal === val){
+                    return;
+                }
+                val = newVal; //重新赋值
+                console.log("新值是："+val);
+            }
+        })
+    }
+    function Mvvm(options){
+        this.options = options;
+        this.el = options.el ? document.querySelector(el) : "";
+        var data = this.data = options.data;
+        observer(data);
+    }
+
+
+    //代理方法
+    function _proxy(data){
+        Object.keys(data).forEach((key) => {
+            Object.defineProperty(data,key,{
+                get:function proxyGetter(){
+                    return
+                },
+                set:function proxySetter(){
+
+                }
+            })
+        })
+    }
+
+    function Dep(){
+        this.subs = [];
+    };
+    Dep.prototype.addSub = function(watcher){
+        this.subs.push(watcher);
+    };
+    Dep.prototype.notify = function(){
+        this.subs.forEach(sub => sub.update());
+    };
+
+    function Watcher(vm,cb){
+        this.vm = vm;
+    };
+    Watcher.prototype.update = function(){
+
+    }
+
+    window.vue = new Mvvm({
+        el:"#app",
+        data:{
+            name:"zj",
+            age:25
+        }
+    })
+    */
+</script>
+</body>
+</html>

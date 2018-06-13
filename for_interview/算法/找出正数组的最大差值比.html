@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>找出正数组的最大差值比</title>
+</head>
+<body>
+<script>
+    var arr = [10,5,11,7,8,9];
+
+    //法一
+    function getMaxProfit(arr){
+        var maxVal = Math.max.apply(null,arr);
+        var minVal = Math.min.apply(null,arr);
+        console.log(maxVal+"==="+minVal);
+        return maxVal - minVal;
+    }
+
+    var val = getMaxProfit(arr);
+    console.log(val);
+
+
+    //法二
+    function getMaxProfit1(arr){
+        var minPrice = arr[0];
+        var maxProfit = 0;
+
+        for(var i=0;i<arr.length;i++){
+            var currentPrice = arr[i];
+            minPrice = Math.min(minPrice,currentPrice);
+            var potentialProfit = currentPrice - minPrice;
+            maxProfit = Math.max(maxProfit,potentialProfit);
+        }
+
+        return maxProfit;
+    }
+
+    var val1 = getMaxProfit1(arr);
+    console.log(val1);
+</script>
+</body>
+</html>

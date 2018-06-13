@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件（子向父传值）</title>
+</head>
+<body>
+<div id="app">
+    <!--<child @child-to-parent="fatherFunc"></child>-->
+    <child @myclick="fatherFunc"></child>
+</div>
+<script src="../../lib/vue.js"></script>
+<script>
+    Vue.component("child",{
+        template:"<button @click='childFunc'>给父亲传值</button>",
+        methods:{
+            childFunc(){
+                this.$emit("myclick","儿子给父亲的信息");
+            }
+        }
+    })
+
+    window.vm = new Vue({
+        el:"#app",
+        methods:{
+            fatherFunc(info){
+                console.log(info); //打印不出来值
+            }
+        }
+    })
+</script>
+</body>
+</html>

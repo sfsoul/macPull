@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h1></h1>
+    <p></p>
+    <span>{{}}</span>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    window.vm = new Vue({
+        el:'#app',
+        data:{
+            name: 'Jiang',
+            userInfo: {
+                gender: 0
+            },
+            list: []
+        }
+    })
+</script>
+</body>
+</html>

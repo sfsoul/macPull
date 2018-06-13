@@ -1,0 +1,71 @@
+@charset "utf-8";
+.SQShareDialog-style .act-dialog{
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	margin-left: -135px;
+	width: 270px;
+	min-height: 150px;
+	border-radius: 5px;
+	background-color: #f3f3f3;
+}
+.SQShareDialog-style .act-dialog .close{
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	width: 24px;
+	height: 24px;
+	background: url(//imgcache.gtimg.cn/vipstyle/mobile/act/140611_liantong/img/bg_close.jpg) no-repeat;
+	background-size: 24px;
+	border: 0;
+	outline: 0;
+	color: inherit;
+	font-family: inherit;
+}
+
+.SQShareDialog-style .act-dialog .inner{
+	margin-top: 30px;
+	padding: 0 15px;
+	font-size: 15px;
+	color: #808080;
+	min-height: 65px;
+	-webkit-user-select: initial;
+}
+
+
+.SQShareDialog-style .act-dialog .footer{
+	margin-top: 10px;
+	height: 44px;
+	border-top: 1px solid #c2c2c2;
+	border-radius: 0 0 5px 5px;
+	overflow: hidden;
+}
+
+.SQShareDialog-style .act-dialog .footer button:first-child{
+	border-right: 1px solid #c2c2c2;
+}
+
+.SQShareDialog-style .act-dialog .footer button{
+	display: block;
+	float: left;
+	width: 135px;
+	height: 100%;
+	color: #0079ff;
+	font-size: 16px;
+	white-space: nowrap;
+}
+
+.SQShareDialog-style button{
+	border: 0;
+	background: 0;
+	outline: 0;
+	font-family: inherit;
+}
+
+.SQShareDialog-style .act-mask{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background: #000;
+	opacity: 0.6;
+}

@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" data-use-rem>
+
+<head>
+    <meta charset="UTF-8">
+    <base href="//imgcache.gtimg.cn/vipstyle/game/act/zj/253689/">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover"
+          name="viewport">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="320">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="Description" content="Tencent,腾讯">
+    <meta name="Keywords" content="Tencent,腾讯">
+    <meta itemprop="name" content="嘿！王者英雄帮你发语音拜年红包啦" />
+    <meta itemprop="image" content="//imgcache.gtimg.cn/vipstyle/game/act/zj/253689/tiny-img/share.png" />
+    <meta name="description" itemprop="description" content="拜年的重任，就交给我们吧！" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <title>王者英雄拜年小分队</title>
+    <link rel="stylesheet" href="css/index9.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        .wrapper .page, .play .page {
+            height: 100%;
+        }
+
+        .main-list li.lt-rt {
+            margin-left: -0.25rem;
+        }
+        .video-top{
+            z-index: 1;
+        }
+        .video-top img{
+            width:100%;
+        }
+        .hands{
+            left: 0.6rem;
+        }
+        #playButton {
+            position: absolute;
+            left: 50%;
+            top: 31%;
+            width: 2.5rem;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+        .msg-price{
+            font-size:1.1rem;
+        }
+        .main-list-wrap{
+            height:9.44rem;
+            overflow-x: hidden;
+        }
+        .gallery-thumbs{
+            top:6.5rem;
+        }
+        .msg-sel{
+            height:3.65rem;
+        }
+        @media (device-width:375px) {
+            .gallery-thumbs{
+                top: 5.3rem;
+            }
+        }
+        @media (device-width:414px) {
+            .gallery-thumbs{
+                top: 5.3rem;
+            }
+        }
+        .msg-bot{
+            bottom:0rem;
+        }
+
+        .msg-sel-u li{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        #cont3 video {
+            object-fit: cover;
+        }
+        .person-show{
+            width:100%;
+        }
+        /*动画样式*/
+        .play .main-list li:nth-child(1) {-webkit-animation: showShan .2s linear 1s both;animation: showShan .5s linear 1s both;}
+        .play .main-list li:nth-child(2) {-webkit-animation: showShan .2s linear 3s both;animation: showShan .5s linear 3s both; }
+        .play .main-list li:nth-child(3) {-webkit-animation: showShan .2s linear 5s both;animation: showShan .5s linear 5s both; }
+        .play .main-list li:nth-child(4) {-webkit-animation: showShan .2s linear 7s both;animation: showShan .5s linear 7s both; }
+        .play .main-list li:nth-child(5) {-webkit-animation: showShan .2s linear 9s both;animation: showShan .5s linear 9s both;}
+        .play .main-list li:nth-child(6) {-webkit-animation: showShan .2s linear 11s both;animation: showShan .5s linear 11s both; }
+        .play .main-list li:nth-child(7) {-webkit-animation: showShan .2s linear 13s both;animation: showShan .5s linear 13s both; }
+        .play .main-list li:nth-child(8) {-webkit-animation: showShan .2s linear 15s both;animation: showShan .5s linear 15s both; }
+        .play .main-list li:nth-child(9) {-webkit-animation: showShan .2s linear 17s both;animation: showShan .5s linear 17s both; }
+        .play .main-list li:nth-child(10) {-webkit-animation: showShan .2s linear 19s both;animation: showShan .5s linear 19s both; }
+    </style>
+</head>
+
+<body>
+<div class="loading">
+    <strong><span></span>%</strong>
+    <div class="progress"></div>
+</div>
+<div class="wrapper" id="wrap" v-cloak>
+    <audio src="music/m3.wav" class="audio" id="audio3"></audio>
+    <!--消息铃声-->
+    <audio src="music/m1.mp3" class="audio" id="audio1"></audio>
+    <!--请选择你的英雄铃声-->
+    <audio src="music/m2.wav" class="audio" id="audio2"></audio>
+    <!-- 通知页 S -->
+    <section class="page" id="cont1" v-show="index == 1">
+        <div class="main-list-wrap">
+            <ul class="main-list" id="main-lt">
+                <li class="list-yq ss">
+                    <strong>
+                        <em>王者荣耀</em>邀请你加入本群</strong>
+                </li>
+                <li class="c ss">
+						<span class="lt-gj">
+							<i></i>
+							<img :src="closeFriends[0]['url']">
+						</span>
+                    <div class="list-rt">
+							<span class="t-name">
+								<i></i>{{closeFriends[0]['name']}}</span>
+                        <div class="talk-img tk-m1">
+                            <img src="tiny-img/ji_bg.png">
+                        </div>
+                    </div>
+                </li>
+                <li class="c ss">
+						<span class="lt-gj">
+							<i></i>
+                            <!--<img src="img/pic-tx.png">-->
+							<img :src="closeFriends[1]['url']">
+						</span>
+                    <div class="list-rt">
+							<span class="t-name">
+								<i></i>{{closeFriends[1]['name']}}</span>
+                        <div class="talk-img tk-m2">
+                            <img src="tiny-img/ji_bg2.png">
+                        </div>
+                    </div>
+                </li>
+                <li class="c ss">
+						<span class="lt-gj">
+							<i></i>
+                            <!--<img src="img/pic-tx.png">-->
+							<img :src="closeFriends[2]['url']">
+						</span>
+                    <div class="list-rt">
+							<span class="t-name">
+								<i></i>{{closeFriends[2]['name']}}</span>
+                        <div class="talk-img tk-m3">
+                            <img src="tiny-img/ji_bg3.png">
+                        </div>
+                    </div>
+                </li>
+                <li class="c ss">
+						<span class="lt-gj">
+							<i></i>
+                            <!--<img src="img/pic-tx.png">-->
+							<img :src="closeFriends[1]['url']">
+						</span>
+                    <div class="list-rt">
+							<span class="t-name">
+								<i></i>{{closeFriends[1]['name']}}</span>
+                        <div class="talk-img tk-m4">
+                            <img src="tiny-img/ji_bg4.png">
+                        </div>
+                    </div>
+                </li>
+                <!--主人说话-->
+                <li class="lt-rt c ss">
+						<span class="lt-gj">
+							<i></i>
+							<img :src="hostInfo.face">
+						</span>
+                    <div class="list-rt">
+							<span class="t-name">
+								<i></i>{{hostInfo.nike}}</span>
+                        <div class="talk-img tk-m5">
+                            <img src="tiny-img/ji_bg5.png">
+                        </div>
+                    </div>
+                </li>
+                <li class="c ss">
+						<span class="lt-gj">
+							<i></i>
+							<img :src="closeFriends[1]['url']">
+						</span>
+                    <div class="list-rt">
+							<span class="t-name">
+								<i></i>{{closeFriends[1]['name']}}</span>
+                        <div class="talk-img tk-m6">
+                            <img src="tiny-img/ji_bg6.png">
+                        </div>
+                    </div>
+                </li>
+                <!--主人说话-->
+                <li class="lt-rt c ss">
+						<span class="lt-gj">
+							<i></i>
+							<img :src="hostInfo.face">
+						</span>
+                    <div class="list-rt">
+							<span class="t-name">
+								<i></i>{{hostInfo.nike}}</span>
+                        <div class="talk-img tk-m7">
+                            <img src="tiny-img/ji_bg7.png">
+                        </div>
+                    </div>
+                </li>
+                <li class="c ss">
+						<span class="lt-gj">
+							<i></i>
+							<img src="tiny-img/pic-tx.png">
+						</span>
+                    <div class="list-rt">
+							<span class="t-name">
+								<i></i>王者荣耀</span>
+                        <div class="talk-img tk-m8">
+                            <img src="tiny-img/ji_bg8.png">
+                        </div>
+                    </div>
+                </li>
+                <li class="c">
+						<span class="lt-gj">
+							<i></i>
+							<img src="tiny-img/pic-tx.png">
+						</span>
+                    <div class="list-rt">
+							<span class="t-name">
+								<i></i>王者荣耀</span>
+                        <div class="talk-list">
+                            <!--英雄图片列表-->
+                            <ul class="t-list c">
+                                <li v-for="(item,index) in heroInfo">
+                                    <a href="javascript:void(0)">
+                                        <img :src="item.heroPic" alt="英雄图片" @click="chooseHero(index)">
+                                    </a>
+                                    <strong class="hands" v-if="index == 11">
+                                        <span></span>
+                                        <i></i>
+                                        <em></em>
+                                    </strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="main-box"></div>
+    </section>
+    <!-- 通知页 E -->
+    <!-- 视频页 E -->
+    <section class="page" id="cont2" v-show="index == 2">
+        <div class="video-top">
+            <img :src="heroBg" alt="英雄背景图">
+        </div>
+        <div class="msg-bot">
+				<span class="msg-tp">
+					<img src="tiny-img/logo.png">
+				</span>
+            <strong class="msg-price">{{redEnvelopeInfo.redEnvelopeAmount}}<em>元</em></strong>
+            <!--  赏红包 -->
+            <div class="msg-cont">
+                <a href="javascript:void(0)" class="link-price" style="text-decoration: underline;"
+                   @click="changeMoney">换个金额</a>
+                <span class="link-zi3">{{redEnvelopeInfo.redEnvelopeGreet}}</span>
+                <!--<div class="msg-btn c flex">-->
+                    <!--<a href="javascript:javascript:void(0)" class="btn-click2" @click="back">返回</a>-->
+                <!--</div>-->
+                <div class="msg-btn c flex">
+                    <a href="javascript:javascript:void(0)" class="btn-click2" @click="sendRedEnvelope">赏红包</a>
+                </div>
+                <p style="text-align: center;color:#fff1b5;font-size: 0.24rem;">英雄语音由机器合成，鸣谢：</p>
+                <span class="m-copyright"></span>
+            </div>
+        </div>
+    </section>
+    <!-- 视频页 E -->
+    <!-- 祝福语展示页 S -->
+    <section class="page msg-page" id="cont3" v-show="index == 3">
+        <div class="person-show">
+            <!-- Swiper -->
+            <div class="swiper-container gallery-top">
+                <div class="swiper-wrapper">
+                    <!--英雄视频（当视频CDN撑得住的时候展示视频）-->
+                    <template v-if="switchInfo[2]['switch'] == 0">
+                        <div class="swiper-slide" v-for="(item,index) in heroInfo">
+                            <video loop="loop" width="100%" webkit-playsinline="true" playsinline="true" preload="auto">
+                            <!--<video loop="loop" width="100%" webkit-playsinline="true" playsinline="true" preload="auto" :poster="'tiny-img/big/'+item.heroBigPic+'.png'">-->
+                                <source :src="item.heroVideo" type="video/mp4">
+                            </video>
+                        </div>
+                    </template>
+                    <!--英雄大图（当视频CDN挂了的时候展示英雄大图）-->
+                    <template v-if="switchInfo[2]['switch'] == 1">
+                        <div class="swiper-slide" v-for="(item,index) in heroInfo" :style="{backgroundImage:'url(tiny-img/'+item.heroBigPic+'.png)'}">
+
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!--<div class="swiper-container gallery-thumbs">-->
+                <!--<div class="swiper-wrapper">-->
+                    <!--&lt;!&ndash;英雄小图&ndash;&gt;-->
+                    <!--<div class="swiper-slide" v-for="(item,index) in heroInfo">-->
+                        <!--<img :src="item.heroPic" alt="英雄小图片" style="width: 100%;">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+        </div>
+        <div class="person-msg">
+            <div style="position: relative">
+                <div class="swiper-container gallery-thumbs" style="top:-1.55rem;left:-0.35rem;width: 111%;height: 1.2rem">
+                    <div class="swiper-wrapper">
+                        <!--英雄小图-->
+                        <div class="swiper-slide" v-for="(item,index) in heroInfo">
+                            <img :src="item.heroPic" alt="英雄小图片" style="width: 100%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="msg-top flex">
+                <input type="text" placeholder="请输入/选择想让英雄送的祝福..." v-model="selected" v-on:input="inputFunc" id="input">
+                <a href="javascript:void(0)" class="btn-sc" @click="wordToAudio">一键生成</a>
+            </div>
+            <!--备选祝福语-->
+            <div class="msg-sel">
+                <ul class="msg-sel-u">
+                    <li v-for="(item,index) in greetList" :class="{on:item.isActive}" @click="chooseGreet(index)">{{item.greetWord}}</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- 祝福语展示页 E -->
+</div>
+
+<script src="js/swiper.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="//imgcache.gtimg.cn/c/=/club/mobile_web/zepto.min-1.1.6.js,/club/game/zero/zero.m.min-6.0.1.js?max_age=86400000&v=5.0"></script>
+<script src="../dist/vue.js"></script>
+<script src="../dist/util.js"></script>
+<script>
+    var htmlFontSize = 16;
+    var flag =localStorage.getItem("isComing");
+    if(flag) {
+        $('.main-list li').css({
+            'animation': 'none',
+            '--webkit-animation': 'none'
+        })
+    }
+    console.log(flag);
+    //缩放
+    (function (win) {
+        var doc = win.document,
+            html = doc.documentElement,
+            option = html.getAttribute('data-use-rem');
+        if (option === null) return;
+        var baseWidth = parseInt(option).toString() == 'NaN' ? 750 : parseInt(option),
+            resizeEvt = 'orientationchange' in win ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = html.clientWidth || 375;
+                htmlFontSize = 100 * clientWidth / baseWidth
+                html.style.fontSize = htmlFontSize + 'px';
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        recalc()
+    })(window);
+
+    var rateNum = document.querySelector('.loading span'),
+        progress = document.querySelector('.progress'),
+        imgPath = "tiny-img/",
+        sourceArr = [
+            'load-new.gif', 'bg.jpg', 'bg_top_new.jpg', 'back.jpg', 'box_bg.png', 'sp.png', 'ji_bg.png',
+            'ji_bg2.png', 'ji_bg3.png', 'ji_bg4.png', 'ji_bg5.png', 'ji_bg6.png', 'ji_bg7.png', 'ji_bg8.png',
+            'tx_aql.png','tx_blsy.png','tx_cwj.png','tx_dc.png','tx_dj.png','tx_dq.png','tx_hml.png','tx_hx.png','tx_hy.png','tx_kai.png',
+            'tx_lb.png','tx_ln.png','tx_swk.png','tx_wzj.png','tx_xq.png','tx_ys.png','tx_zgl.png','tx_zy.png',
+            'talk_bg.png'
+        ];
+    for (var i = 0; i < sourceArr.length; i++) {
+        sourceArr[i] = imgPath + sourceArr[i];
+    };
+
+
+    console.log(sourceArr);
+    var loadImage = function (path, callback) {
+        var img = new Image();
+        //onload事件在图片加载完成后立即执行
+        img.onload = function () {
+            img.onload = null;
+            callback(path);
+        }
+        img.src = path;
+    }
+    var imgLoader = function (imgs, callback) {
+        var len = imgs.length,
+            i = 0;
+        while (imgs.length) {
+            loadImage(imgs.shift(), function (path) {
+                callback(path, ++i, len);
+            });
+        }
+    }
+    imgLoader(sourceArr, function (path, curNum, total) {
+        var percent = curNum / total;
+        console.log(curNum + "====" + total + "====" + percent);
+        rateNum.innerHTML = Math.floor(percent * 100);
+        progress.style.width = Math.floor(percent * 100) + '%';
+        if (percent >= 1) {
+            setTimeout(showPage, 500);
+        }
+    });
+
+    var showPage = function () {
+        $('.loading').hide();
+        document.getElementById('wrap').className = "play";
+        $(function () {
+//            var li = document.querySelectorAll(".play .main-list .ss"),  //获取首页的li元素 NodeList对象
+            var mainList = document.getElementsByClassName("main-list")[0],
+                liDom = mainList.getElementsByClassName("ss"),
+                li = Array.prototype.slice.call(liDom);
+            var audioDom1 = document.getElementById("audio1"),
+                audioDom2 = document.getElementById("audio2");
+            console.log(li instanceof Array);
+
+            //遍历监听动画开始时的事件触发音频播放
+            li.forEach(function(item,index){
+                if(index == 7){
+                    item.addEventListener("animationStart",function(){
+                        setTimeout(function(){
+                            audioDom2.play();
+                        },1000)
+                    })
+                    return false;
+                }else{
+                    item.addEventListener("animationStart",function(){
+                        setTimeout(function(){
+                            audioDom1.play();
+                        },1000)
+                    })
+                }
+            });
+            li.forEach(function(item,index){
+                if(index == 7){
+                    item.addEventListener("webkitAnimationStart",function(){
+                        setTimeout(function(){
+                            audioDom2.play();
+                        },1000)
+                    })
+                    return false;
+                }else{
+                    item.addEventListener("webkitAnimationStart",function(){
+                        setTimeout(function(){
+                            audioDom1.play();
+                        },1000)
+                    })
+                }
+            })
+            // 滚动动画
+            var mainListMarginTop = 0.24 * htmlFontSize;
+            var $mainListWrap = $('.main-list-wrap');
+            var $mainListLi = $('.main-list li');
+            var positions = [];
+            for (var index = 1; index < 10; index++) {
+                positions.push($mainListLi.eq(index).position().top + mainListMarginTop);
+            }
+            console.log(positions);
+            if(flag){
+                scrollTo();
+            }else{
+                var defaultEvent = function(e) {
+                    e.preventDefault();
+                }
+                //禁止页面滑动
+                document.querySelector('.main-list-wrap').addEventListener('touchmove', defaultEvent);
+                $mainListWrap.delay(9300).animate({
+                    scrollTop: positions[0] - 22
+                }, 500, 'linear', function () {
+                    $mainListWrap.delay(1000).animate({
+                        scrollTop: positions[1]
+                    }, 500, 'linear', function () {
+                        $mainListWrap.delay(1000).animate({
+                            scrollTop: positions[2] + 45
+                        }, 500, 'linear', function () {
+                            $mainListWrap.delay(1000).animate({
+                                scrollTop: positions[3] + 20
+                            }, 500, 'linear', function () {
+                                $mainListWrap.delay(1500).animate({
+                                    scrollTop: positions[4] - 28
+                                }, 500, 'linear', function () {
+                                    var offset = document.documentElement.clientHeight <= 525 ? 600: 200;
+                                    $mainListWrap.delay(1500).animate({
+                                        scrollTop: positions[5] + offset
+                                    }, 500, 'linear', function () {
+                                    })
+                                })
+                            })
+                        })
+                    })
+                });
+            }
+
+            function scrollTo(){
+                $mainListWrap.delay(0).animate({
+                    scrollTop:positions[5]+200
+                },0,'linear',function(){
+
+                })
+            }
+        })
+    }
+</script>
+<script>
+    window.page = new qv.zero.Page({
+        jsonid: 253689,
+        game: 'sgame',
+        mqqEnv: true,
+        onlyMobile: true,
+        isOpenSQView: true,
+        redirectUrl: "",
+        preloads: ['SQGameManager', 'cache'],
+        afterInit: function () {
+            var me = this,
+                staticData1 = zMsg.getFormData(1)[0];
+            me.initVue();
+            var height = document.documentElement.clientHeight;
+            $("#wrap").css("height",height);
+
+            //分享
+            mqq.ui.setOnShareHandler(function (type) {
+                mqq.ui.shareMessage({
+                        title: staticData1.title,
+                        desc: staticData1.desc,
+                        share_type: type,
+                        share_url: window.location.protocol + "//youxi.vip.qq.com/m/act/201801/zj/wzry_253689/index.html?_wwv=4&_wv=1",
+                        image_url: staticData1.img,
+                        back: true,
+                        sourceName: "QQ手游"
+                    },
+                    function (json) {
+                        if (json.retCode == 0) {
+                            zHttp.send({
+                                actid: 253823
+                            });
+                        }
+                    });
+            });
+
+            mqq.invoke('ui', 'webviewCanScroll', {"enable" : false});
+
+            //设置页面返回按钮事件
+            setTimeout(function () {
+                mqq.ui.setTitleButtons({
+                    left: {
+                        callback: function () {
+                            if (window.vm && window.vm.index === 3) {
+                                window.vm.index = 1;
+                            } else if (window.vm && window.vm.index === 2) {
+//                                $(".video-top").children("video").remove();
+                                $(".video-top").find("#video").remove();
+                                window.vm.index = 3;
+                            } else {
+                                mqq.ui.popBack();
+                            }
+                        }
+                    },
+                    right: {
+                        hidden: false,//是否隐藏分享按钮
+                        iconID: 4,
+                        callback: function () {
+                            mqq.ui.showShareMenu();
+                        }
+                    }
+                });
+                //设置banner顶部样式
+                setTimeout(function () {
+                    mqq.ui.setWebViewBehavior({
+                        navBgColor: 0xCB1E4B
+                    });
+                }, 300)
+            }, 500)
+
+
+
+        },
+        initVue: function () {
+            //英雄信息
+            var heroInfo = zMsg.getFormData(2) ? zMsg.getFormData(2) : {},  //静态数据(英雄信息)
+                greetInfo = zMsg.getFormData(3),  //静态数据(默认祝福语)
+                moneyInfo = zMsg.getFormData(4),  //静态数据(红包金额信息)
+                switchInfo = zMsg.getFormData(9), //静态数据(开关保护)
+                closeFriendsKey = page.jsonid +"_closeFriendsKey_"+zUtil.getUin(), //密友缓存
+                hostInfoKey = page.jsonid +"_hostInfoKey_"+zUtil.getUin(), //当前主人态信息缓存
+                FirstComingKey = page.jsonid +"_FirstComingKey_"+zUtil.getUin(); //是否第一次进入该页面
+
+                greetInfo.forEach(function(item,index){
+                    item["isActive"] = false;
+                });
+            window.vm = new Vue({
+                el: "#wrap",
+                data: {
+                    videoKey:"abc",
+//                    isFirstComing:true, //是否第一次进入页面
+                    index: 1,  //当前页面索引
+                    isFirstEnter: false, //判断用户是否第一次进入这个页面
+                    hostInfo: {
+                        face:"",
+                        nike:""
+                    }, //当前登录态信息(头像和昵称)
+                    closeFriends: [
+                        {name:"诸葛亮",url:"tiny-img/zgl_avatar.png"},
+                        {name:"貂蝉",url:"tiny-img/dc_avatar.png"},
+                        {name:"百里守约",url:"tiny-img/blsy_avatar.png"}
+                    ], //3位密友
+                    actids: {
+                        wordToaudio: 253852
+                    },
+                    //英雄id与英雄名称一一对应
+                    heroInfo: heroInfo,
+                    //祝福语列表
+                    greetList: greetInfo,
+                    switchInfo:switchInfo,
+                    selected: "", //选中的祝福语
+                    //红包信息(金额与祝福语)
+                    redEnvelopeInfo: {
+                        redEnvelopeAmount: 1,
+                        redEnvelopeGreet: "恭喜发财咯"
+                    },
+                    randomMoney: [0.01, 0.66, 0.88, 0.99, 1, 2.88, 3.99, 6.66, 8.88, 9.99, 18, 28, 66, 88, 99], //随机红包金额
+                    lotteryIdx: [], //换个金额得到的索引
+                    isPlaying: false, //是否正在播放视频
+                    choosedHeroIdx: 0, //选中英雄的索引
+                    bidObj: {}, //后台返回的信息(音频接口)
+                    flag: true,
+                    heroBg: "", //默认展示小乔
+                    status: "cover",
+                    isInit:false, //是否实例化(判断galleryThumbs是否初始化完)
+                    chooseGreetIdx:"", //选中的祝福语索引
+                    platid: zUtil.isIOS() ? 0 : 1,
+                    loginUserInfo: "", //用户登录信息
+                    QQVersion: 0, //当前QQ版本号
+                    isCreateAudio:false,
+                    isCreateVideo:false,
+                },
+                computed: {},
+                methods: {
+                    //选择祝福语
+                    chooseGreet: function (idx) {
+                        this.chooseGreetIdx = idx;
+                        this.greetList.forEach(function(item,index){
+                            item["isActive"] = false;
+                        })
+                        this.greetList[idx]["isActive"] = true;
+                        this.selected = this.greetList[idx]["greetWord"];
+                    },
+                    //限制用户祝福语长度
+                    inputFunc: function () {
+                        var len = this.selected.length;
+                        this.selected = this.selected.replace(/\ud83d[\udc00-\ude4f\ude80-\udfff]/g, ''); //禁止输入表情
+                        this.selected =
+                            this.selected.replace(/[^\u4E00-\u9FA5\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b]/g, ''); //只能输入汉字
+                        if (len > 35) {
+                            zMsg.show("您当前输入祝福语过长~");
+                            this.selected = this.selected.slice(0, 35);
+                        }
+                    },
+                    isNumber:function(val){
+                        var reg = new RegExp("^[0-9]*$");
+                        return reg.test(val);
+                    },
+                    //页面跳转
+                    chooseHero: function (idx) {
+                        var me = this;
+                        this.choosedHeroIdx = idx;
+                        localStorage.setItem("isComing",1);
+                        // 选择英雄后把第一页的动画属性去掉
+                        $('.main-list li').css({
+                            'animation': 'none',
+                            '--webkit-animation': 'none'
+                        })
+
+                        //生成bid和音频url挂了，直接跳转到包红包页面
+                        if(this.isPass(this.switchInfo[4]["switch"])){
+                            this.index = 2;  // index为1代表聊天页面；2代表包红包页面；3代表一键生成音频页面
+                            this.heroBg = "tiny-img/" +heroInfo[this.choosedHeroIdx]["heroId"]+".jpg";
+                            <!--todo-->
+                            //播放默认祝福语
+                            this.createAudioDom("video/test.mp3");
+                            var media = document.getElementById("audio");
+                            media.play();
+                        }else{
+                            this.index = 3;
+                            //AI LAB接口挂了(只允许用户选择备选祝福语)
+                            if(this.isPass(this.switchInfo[3]["switch"])){
+                                var inputDom = document.getElementById("input");
+                                inputDom.setAttribute("readonly","readonly");
+                            }
+                            Vue.nextTick(function () {
+                                me.initSwiper(idx);
+                            })
+                        }
+                    },
+                    //实例化两个swiper对象
+                    initSwiper:function(idx){
+                        var me = this;
+                        //实例化大图
+                        if (!this.isInit) {
+                            me.galleryTop = new Swiper('.gallery-top', {
+                                slidesPerView: 'auto'
+                            });
+
+                            //实例化小图
+                            me.galleryThumbs = new Swiper('.gallery-thumbs', {
+                                spaceBetween: 10,
+                                centeredSlides: true,
+                                slidesPerView: 'auto',
+                                touchRatio: 0.2,
+                                slideToClickedSlide: true,
+                                on: {
+                                    init: function () {
+                                        me.isInit = true;
+                                    },
+                                    slideChange: function () {
+                                        if (me.isInit) {
+                                            me.choosedHeroIdx = this.activeIndex; //改变小icon的时候重新赋值choosedHeroIdx的值
+                                            if (!me.isPass(me.switchInfo[2]["switch"])) {
+                                                //var galleryTop = document.getElementsByClassName("gallery-top")[0],
+                                                //    video = galleryTop.getElementsByTagName("video");
+												var video = $('.gallery-top video').get(me.choosedHeroIdx);
+                                                video.play();
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                        me.galleryTop.controller.control = me.galleryThumbs;
+                        me.galleryThumbs.controller.control = me.galleryTop;
+                        //跳转到第二页指定英雄
+                        me.galleryTop.slideTo(idx);
+                        me.galleryThumbs.slideTo(idx);
+                        me.galleryThumbs.emit('slideChange'); //手动触发slideChange方法，当索引为0的时候
+                    },
+                    //页面切换跳转
+                    gotoPage: function (idx) {
+                        this.index = idx;
+                    },
+                    //查询自己的昵称和头像
+                    queryMyInfo: function () {
+                        var uin = zUtil.getUin(),
+                            me = this;
+                        zHttp.send({
+                            actid: 256602,
+                            uins: [uin]
+                        }, function (json) {
+                            console.log(json);
+                            if (json.ret == 0 && json.data.op) {
+                                me.hostInfo = json.data.op.friend[uin];
+                                qv.zero.cache.add(hostInfoKey,me.hostInfo,1000*3600*24*30);
+                            }
+                        })
+                    },
+                    /*
+                    * funcName  查询密友
+                    queryCloseFriends: function () {
+                        var cb = new qv.zero.CallBack(),
+                            me = this;
+
+                        zHttp.send({
+                            _c: "JustCloseFriend",
+                            num: 3,
+                            type: 0
+                        }, function (json) {
+                            //模拟测试数据
+//                            json = {
+//                                ret:0,
+//                                data:[
+//                                    {name:"",uin:"",url:""},
+//                                    {name:"",uin:"",url:""},
+//                                    {name:"",uin:"",url:""}
+//                                ]
+//                            }
+                            var data = json.ret == 0 && zUtil.getValueFromObj(json, "data"),
+                                uinsArr = [];
+                            console.log(data);
+                            if (data && data.length === 3) {
+                                me.closeFriends = data;
+                                qv.zero.cache.add(closeFriendsKey,me.closeFriends,1000*3600*24*30);
+                                cb.execute(data);
+                            }
+                        })
+                        return cb;
+                    },
+                     */
+                    //上报数据
+                    OzReport:function(actid){
+                        OZ.report({operID:actid});
+                    },
+                    //文字转音频(只做请求涛哥接口一件事情)
+                    wordToAudio: function () {
+                        var audioDom3 = document.getElementById("audio3");
+                        audioDom3.play();
+                        var me = this;
+                        qv.zero.LoadingMark.show();
+                        this.checkGreetWord().add(function (boolean) {
+                            console.log(boolean);
+                            if (boolean != false) {
+
+                                //超时监控
+                                qv.zero.CallBack.any([me.delay(8000), me.queryWordToAudio()]).add(function (json) {
+                                    console.log(json);
+                                    if (json.index == 0) {
+                                        <!--todo-->
+                                        qv.zero.LoadingMark.hide();
+                                    } else {
+                                        if (json.data.ret == 0 && json.data.data.op) {
+                                            qv.zero.LoadingMark.hide();
+                                            //统计--备选祝福语
+//                                            me.OzReport(me.greetList[me.chooseGreetIdx]["actid"]);
+                                            //统计--用户最终选择英雄
+                                            me.OzReport(me.heroInfo[me.choosedHeroIdx]["actid"]);
+                                            me.bidObj = json.data.data.op;
+                                            me.renderData(me.bidObj).add(function (boolean) {
+                                                if (boolean) {
+                                                    me.gotoPage(2);
+                                                }
+                                            });
+                                        } else if (json.data.ret == 65037) {
+                                            qv.zero.LoadingMark.hide();
+                                            zMsg.show("您当前输入的祝福语过长~");
+                                        } else if (json.data.ret == 70265) {
+                                            qv.zero.LoadingMark.hide();
+                                            zMsg.show("当前祝福语含有敏感词汇!");
+                                        }
+                                    }
+                                })
+                            }
+                        })
+                    },
+                    //延迟执行
+                    delay:function(time){
+                        var cb = new qv.zero.CallBack();
+                        setTimeout(function(){
+                            cb.execute(true);
+                        },time)
+                        return cb;
+                    },
+                    queryWordToAudio:function(){
+                        var cb = new qv.zero.CallBack();
+                        //前端请求参数
+                        var arg = {
+                            actid: this.actids.wordToaudio,
+                            hero: heroInfo[this.choosedHeroIdx]["heroId"],
+                            msg: this.selected //用户祝福语
+                        }
+                        zHttp.send(arg,function(json){
+                            cb.execute(json);
+                        })
+                        return cb;
+                    },
+                    //检查祝福语是否符合规范
+                    checkGreetWord:function(){
+                        var len = (this.selected+"").trim().length,
+                            cb = new qv.zero.CallBack();
+
+                        if (len <= 0) {
+                            qv.zero.LoadingMark.hide();
+                            zMsg.show("请选择或者输入您要发送的祝福语哦！");
+                            cb.execute(false);
+                        }
+                        cb.execute(true);
+                        return cb;
+                    },
+                    //渲染数据(拿到后台返回的查询红包的数据渲染第三页)
+                    renderData:function(obj){
+                        var audioUrl = obj.speech, //音频url链接
+                            videoUrl = this.heroInfo[this.choosedHeroIdx]["video"], //video链接
+                            me = this,
+                            cb = new qv.zero.CallBack();
+
+                        audioUrl = window.location.protocol + "//qgsk.yximg.cn/sgame_hongbao_2018/" + audioUrl; //拼接音频url
+                        console.log(audioUrl);
+                        this.redEnvelopeInfo.redEnvelopeGreet = this.selected; //显示祝福语
+                        this.heroBg = "tiny-img/" +heroInfo[this.choosedHeroIdx]["heroId"]+".jpg";
+                        //判断视频CDN是否支撑得住
+                        if(!this.isPass(this.switchInfo[2]["switch"])){
+                            qv.zero.CallBack.all([ this.createAudioDom(audioUrl),this.createVideoDom("video/wrbn.mp4")]).add(function(arr){
+                                if(arr){
+                                    me.playVideo(audioUrl);
+                                    cb.execute(true);
+                                }
+                            })
+                        }else{
+                            this.createAudioDom(audioUrl).add(function(){
+                                var media = document.getElementById("audio");
+                                media.play();
+                            });
+                            cb.execute(true);
+                        }
+//                        this.createVideoDom(videoUrl); //新建视频Dom
+                        return cb;
+                    },
+                    //新建audio标签元素
+                    createAudioDom: function (audioUrl) {
+                        var cb = new qv.zero.CallBack();
+                        var tagName = zUtil.isIOS() ? "audio" : "video";
+//                        var tagName = "audio";
+
+                        if(this.isCreateAudio){
+                            cb.execute(true);
+                        }else{
+                            var audio = document.createElement(tagName);
+                            audio.setAttribute("id", "audio");
+                            audio.setAttribute("preload", "auto");
+                            audio.setAttribute("src", audioUrl);
+                            audio.setAttribute("type", "audio/mpeg");
+                            audio.style.width = "0";
+                            audio.style.height = "0";
+                            $(".video-top").append(audio);
+                            this.isCreateAudio = true;
+                            cb.execute(true);
+                        }
+                        return cb;
+                    },
+                    createVideoDom: function (src) {
+                        var cb = new qv.zero.CallBack();
+                        var video = document.createElement("video"),
+                            me = this;
+
+                        video.setAttribute("id", "video");
+                        video.setAttribute("src", src);
+                        video.setAttribute("preload", "auto");
+                        video.setAttribute('type', "video/mp4");
+                        video.setAttribute('muted', "false");
+                        video.setAttribute('x5-video-orientation','portraint');  //竖屏播放
+                        video.setAttribute('webkit-playsinline','true');
+                        video.setAttribute('playsinline','true');
+                        video.setAttribute("width","100%");
+                        $(".video-top").append(video);
+                        this.isCreateVideo = true;
+                        cb.execute(true);
+                        return cb;
+                    },
+                    //删除音频和视频dom
+                    removeDom:function(){
+                        var cb = new qv.zero.CallBack();
+                        $(".video-top").children("video").attr("src","");
+                        $(".video-top").children("video").remove();
+                        $(".video-top").children("audio").remove();
+                        cb.execute(true);
+                        return cb;
+                    },
+                    //播放视频
+                    playVideo: function (audioUrl) {
+                        var media = document.getElementById("audio"),
+                            video = document.getElementById("video"),
+                            me = this;
+
+                        media.setAttribute("src",audioUrl);
+                        video.addEventListener("ended",function(){
+                            $(".video-top img").show();
+//                            $(video).hide();
+                            me.fullVideo('nofull');
+
+                        });
+                        video.addEventListener('pause', function() {
+                            $(".video-top img").show();
+//                            $(video).hide();
+                            me.fullVideo('nofull');
+
+                        });
+                        if(page.bindVideo){
+                            return;
+                        }
+                        page.bindVideo = true;
+                        $(".video-top").on("click","img,video",function () {
+                            var media = document.getElementById("audio"),
+                                video = document.getElementById("video");
+                            $(".video-top img").hide();
+//                            $(video).show();
+//                            //音视频-播放数
+                            me.OzReport(258348);
+                            if (video.paused) {
+                                media.play();
+                                video.play();
+                                me.fullVideo('full');
+                            } else {
+                                me.fullVideo('nofull');
+                                video.pause();
+                                media.pause();
+                            }
+                        })
+                    },
+                    //视频全屏控制
+                    fullVideo : function(type){
+//                        if(zUtil.isIOS()){
+//                            return;
+//                        }
+                        var height = document.documentElement.clientHeight;
+                        var $cont2 = $('#cont2');
+                        var $videoTop = $cont2.find('.video-top');
+                        var marginTop = (height - $videoTop.height())/2;
+                        var $msgHot = $('.msg-bot');
+                        if(type == 'full'){
+                            $msgHot.hide();//隐藏红包皮
+                            $cont2.css({
+                                background : '#000000'
+                            })
+                            $videoTop.css({
+                                'transform': 'translateY('+marginTop+'px)',
+                                '-webkit-transform': 'translateY('+marginTop+'px)',
+                            })
+                        }else{
+                            $msgHot.show();
+                            $cont2.css({
+                                'background': 'url(./tiny-img/bg.jpg) no-repeat 50% 0',
+                                '-webkit-background-size': '100% auto',
+                                'background-size': '100% auto'
+                            })
+                            $videoTop.css({
+                                'transform': 'translateY(0px)',
+                                '-webkit-transform': 'translateY(0px)',
+                            })
+                        }
+                    },
+                    //换个金额
+                    changeMoney: function () {
+                        this.redEnvelopeInfo.redEnvelopeAmount = this.getRandomMoney();
+                    },
+                    lastMoney: 1,
+                    getRandomMoney: function() {
+                        var list = [
+                            [99, 1],
+                            [88, 2],
+                            [66, 3],
+                            [28, 6],
+                            [18, 10],
+                            [9.99, 30],
+                            [8.88, 50],
+                            [6.66, 100],
+                            [3.99, 300],
+                            [2.88, 500],
+                            [1, 1000],
+                            [0.99, 2000],
+                            [0.88, 3000],
+                            [0.66, 5000],
+                            [0.01, 10000]
+                        ]
+                        var val = Math.floor(Math.random() * 10000); // 大于等于0， 小于10000
+                        var money;
+                        $.each(list, function(idx, item) {
+                            if(val < item[1]) {
+                                money = item[0];
+                                return false;
+                            }
+                        });
+                        if(this.lastMoney == money) {
+                            return this.getRandomMoney();
+                        }
+                        return this.lastMoney = money;
+                    },
+                    //调用手Q--mqq.compare方法
+                    compareQQVersion: function (QQVersion) {
+                        return mqq.compare(QQVersion);
+                    },
+                    //赏红包(请求红包接口)
+                    sendRedEnvelope: function () {
+                        var me = this;
+                        qv.zero.LoadingMark.show();
+                        if (this.compareQQVersion("7.3.5") > -1) {
+                            this.getUserInfo().add(function (loginUserInfo) {
+                                if (loginUserInfo) {
+                                    //数据上报--选择金额数
+                                    moneyInfo.forEach(function (item, index) {
+                                        if (item.money == me.redEnvelopeInfo.redEnvelopeAmount) {
+                                            me.OzReport(item.actid);
+                                        }
+                                    })
+                                    me.loginUserInfo = loginUserInfo;
+                                    var args = {
+                                        userId: me.loginUserInfo.uin,
+                                        userName: me.loginUserInfo.nick,
+                                        viewTag: "makeHongbao",
+                                        appInfo: "appid#0|bargainor_id#0|channel#wangzherongyao2018",  //业务标识（需找产品对齐）
+                                        come_from: "2",
+                                        extra_data: {
+                                            bus_type: 1,
+                                            feedsid: me.bidObj.bid, //填写bid（ams这块存储信息的对应id）
+                                            hb_from: "1", //标识红包来自哪个业务（需找产品对齐）
+                                            hb_sendtype: 0,
+                                            makeHb_type: "1",
+                                            skey: me.loginUserInfo.skey,
+                                            skey_type: "2",
+                                            skin_id: me.heroInfo[me.choosedHeroIdx]["skin_id"],  //英雄id
+                                            total_amount: (me.redEnvelopeInfo.redEnvelopeAmount * 100).toFixed(0),  //红包总金额，以"分"为单位
+                                            total_num: "1",     //红包个数
+                                            wishing: "新年快乐" //祝福语
+                                        }
+                                    }
+//                                    alert(JSON.stringify(args));
+                                    //支付面板
+                                    me.openTenpayView(args).add(function (json) {
+                                        qv.zero.LoadingMark.hide();
+                                        if (json.resultCode == 0) {
+                                            //数据上报--红包发放量
+                                            me.OzReport(258368);
+                                        }
+                                    })
+                                }
+                            })
+                        } else {
+                            qv.zero.LoadingMark.hide();
+                            zMsg.show("当前QQ版本过低，建议升级!");
+                            return false;
+                        }
+                    },
+                    //检测页面是否在手机QQ内
+                    isMQQ: function () {
+                        return mqq.device.isMobileQQ();
+                    },
+                    //购买道具
+                    openTenpayView: function (args) {
+                        var cb = new qv.zero.CallBack();
+                        if (!this.isMQQ()) {
+                            setTimeout(function () {
+                                cb.execute(false);
+                            }, 0);
+                            return cb;
+                        }
+                        mqq.tenpay.openTenpayView(args, function (result) {
+                            console.log(result);
+                            cb.execute(result);
+                        })
+                        return cb;
+                    },
+                    //获取用户资料(uin,nick,skey)
+                    getUserInfo: function () {
+                        var cb = new qv.zero.CallBack();
+
+                        mqq.data.getUserInfo(function (result) {
+                            var userInfo = {};
+                            /*
+                            模拟数据
+                            result:{
+                                "skey":"Mmqr6Vk5WU",
+                                "pt4_token":"",
+                                "uin":"792013934",
+                                "nick":"assassinZJ",
+                                "data":{
+                                    "skey":"Mmqr6Vk5WU",
+                                    "pt4_token":"",
+                                    "uin":"792013934",
+                                    "nick":"assassinZJ"
+                                },
+                                code:0,
+                                msg:""
+                            }
+                            */
+                            if (result.code == 0) {
+                                userInfo = result.data;
+                                cb.execute(userInfo);
+                            }else{
+                                userInfo = {
+                                    uin:+zUtil.getUin()+"",
+                                    nick:me.hostInfo.nike,
+                                    skey:zUtil.getcookie('skey') + ''
+                                }
+                                cb.execute(userInfo);
+                            }
+                        });
+                        return cb;
+                    },
+                    isPass:function(num){
+                        return num > Math.random();
+                    },
+                    //查询手机可见区域高度
+                    queryMobileHeight:function(){
+                        var height = document.documentElement.clientHeight;
+                        if(height <= 525){
+//                            $(".gallery-thumbs").css("top","4.2rem");
+                            $(".main-box").css("bottom","-0.25rem");
+                            $(".main-list-wrap").css('height',"8.2rem");
+                            $(".m-copyright").css("margin","0.16rem auto 0.1rem");
+                        }
+                    },
+                    /*  测试CallBack中的any方法
+                    text1:function(){
+                        var cb = new qv.zero.CallBack();
+                        setTimeout(function(){
+                            cb.execute("text1");
+                        },3000)
+                        return cb;
+                    },
+                    text2:function(){
+                        var cb = new qv.zero.CallBack();
+                        setTimeout(function(){
+                            cb.execute("text1");
+                        },5000)
+                        return cb;
+                    }
+                     */
+                },
+                mounted: function () {
+                    this.queryMobileHeight();
+                    var me = this,
+                        closeFriendsCache = qv.zero.cache.get(closeFriendsKey), //获取缓存中的密友信息
+                        hostInfoCache = qv.zero.cache.get(hostInfoKey),   //获取缓存中的主人信息
+                        FirstComingCache = qv.zero.cache.get(FirstComingKey);   //获取缓存中的主人信息
+//                    alert(document.documentElement.clientHeight+"==="+document.documentElement.clientWidth);
+                    /*
+                    qv.zero.CallBack.any([this.text1(),this.text2()]).add(function(info){
+                        console.log(info);
+                        //模拟数据
+                        info = {
+                            data:"text1",
+                            index:0
+                        }
+                    })
+                     */
+                    /*
+                    * 如果有缓存，则直接赋值；
+                    * 若没有缓存，则判断是否需要开启开关
+                    */
+                    if(hostInfoCache){
+                        this.hostInfo = hostInfoCache;
+                    }else{
+                        if(!this.isPass(switchInfo[1]["switch"])){
+                            this.queryMyInfo();
+                        }
+                    }
+
+//                    if(closeFriendsCache){
+//                        this.closeFriends = closeFriendsCache;
+//                    }else{
+//                        if(!this.isPass(switchInfo[0]["switch"])){
+//                            this.queryCloseFriends();
+//                        }
+//                    }
+
+                }
+            })
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>es6的rest参数和扩展运算符</title>
+</head>
+<body>
+<script>
+    // rest参数的形式为：...变量名； 扩展运算符是三个点 (...).
+
+    /*
+    *   rest参数：用于获取函数的多余参数，不需要使用arguments对象了(将多余参数转化为数组)。
+    *   rest参数之后不能再有其他参数（即只能是最后一个参数），否则会报错。
+    */
+
+    function test(){
+        console.log([].slice.call(arguments));
+    }
+
+    function test1(...a){
+        console.log(a);
+    }
+    test(1,2,3);
+    test1(4,5,6);
+
+
+    // 扩展运算符可以看做是rest参数的逆运算，将一个数组转为用逗号分隔的参数序列
+    console.log(...[1,2,3]); // 1 2 3
+    console.log(1,...[2,3,4],5); // 1 2 3 4 5
+
+    function add(x,y){
+        return x+y;
+    }
+
+    var numbers = [4,38];
+    add(...numbers); //42
+
+    //替代apply方法调用函数
+    //es5写法
+    Math.max.apply(null,[14,3,77]);
+
+    //es6写法
+    Math.max(...[14,3,77]);
+    //等同于
+    Math.max(14,3,77);
+
+    //合并数组
+    var arr1 = ['a', 'b'];
+    var arr2 = ['c'];
+    var arr3 = ['d', 'e'];
+
+    // ES5的合并数组
+    arr1.concat(arr2, arr3);  // [ 'a', 'b', 'c', 'd', 'e' ]
+
+    //es6合并数组
+    [...arr1,...arr2,...arr3];
+</script>
+</body>
+</html>

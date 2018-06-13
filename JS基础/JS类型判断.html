@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var class2type = {};
+
+    // 生成class2type映射
+    "Boolean Number String Function Array Date RegExp Object Error".split(" ").map(function(item, index) {
+        class2type["[object " + item + "]"] = item.toLowerCase();
+    })
+
+    function type(obj) {
+        // 一箭双雕
+        if (obj == null) {
+            return obj + "";
+        }
+        return typeof obj === "object" || typeof obj === "function" ?
+            class2type[Object.prototype.toString.call(obj)] || "object" :
+            typeof obj;
+    };
+
+
+    function createXHR(){
+        if(window.XMLHttpRequest){
+            return new XMLHttpRequest();
+        }else if(window.ActiveXObject){
+            return new ActiveXObject("Microsoft Http");
+        }
+    }
+
+    function _ajax(method,url,data,cb){
+        var xhr = createXHR();
+        if(method == "GET" || method == "get"){
+            xhr.open(method,url+"?"+data,true);
+            xhr.send();
+        }else if(method == "POST" || method == "post"){
+            xhr.open(method,url,true);
+            xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xhr.send(data);
+        }
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                    cb && cb(xhr.responseText);
+                }else{
+                    console.log(xhr.status);
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>

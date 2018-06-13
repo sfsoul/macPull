@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现Mvvm数据双向绑定</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="text">
+    {{text}}
+</div>
+<script>
+    /*
+     var inputDom = document.getElementsByTagName("input")[0];
+     var bDom = document.getElementById("b");
+     var obj = {};
+     Object.defineProperty(obj,"hello",{
+     set:function(newVal){
+     inputDom.value = newVal;
+     bDom.innerHTML = newVal;
+     }
+     })
+
+     inputDom.addEventListener("keyup",function(e){
+     obj.hello = e.target.value;
+     })
+    */
+
+
+   function nodeToFragment(node,vm){
+       var flag = document.createDocumentFragment();
+       var child;
+       while(child = node.firstChild){
+           compile(child,vm);
+           flag.appendChild(child); //劫持node的所有子节点
+       }
+       return flag;
+   }
+
+
+   function compile(node,vm){
+       var reg = /\{\{(.*)\}\}/;
+       //节点类型为元素
+       if(node.nodeType === 1){
+           var attr = node.attributes;
+           //解析属性
+           for(var i=0;i<attr.length;i++){
+               if(attr[i].nodeName == "v-model"){
+                   var name = attr[i].nodeValue; //获取v-model绑定的属性名
+                   node.value = vm.data[name]; //将data的值赋给该node
+                   node.removeAttribute("v-model");
+               }
+           };
+       }
+       //节点类型为text
+       if(node.nodeType === 3){
+           if(reg.test(node.nodeValue)){
+               var name = RegExp.$1; //获取匹配到的字符串
+               name = name.trim();
+               node.nodeValue = vm.data[name]; //将data的值赋给该node
+           }
+       }
+   }
+
+   function Vue(options){
+       this.data = options.data;
+       var id = options.el;
+       var dom = nodeToFragment(document.getElementById(id),this);
+       console.log(dom);
+       //编译完成后，将dom返回到app中
+       document.getElementById(id).appendChild(dom);
+   }
+
+   var vm = new Vue({
+       el:'app',
+       data:{
+           text:"hello world"
+       }
+   })
+</script>
+</body>
+</html>

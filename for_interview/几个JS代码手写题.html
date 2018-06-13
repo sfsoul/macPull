@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>几个JS手写题目</title>
+</head>
+<body>
+    <script>
+        //Object.create的模拟实现
+        function createObj(o) {
+            function F(){}
+            F.prototype = o;
+            return new F();
+        }
+
+        function obj1(){}
+
+        obj1.prototype.getName = function(){
+            console.log("Hello");
+        }
+
+        var obj2 = createObj(obj1.prototype);
+        console.log(obj2);
+        console.log(obj2.__proto__ === obj1.prototype);
+
+
+        var arr = [1,1,10,10,"1",2,2,8,8];
+        //利用Object键值对 -- 对数组去重(对象的key唯一性)
+        function unique(arr){
+            var obj = {};
+            var newArr = [];
+            var len = arr.length;
+            for(var i=0;i<len;i++){
+                if(!obj[arr[i]]){
+                    obj[arr[i]] = arr[i];
+                    newArr.push(arr[i]);
+                }
+            }
+            return newArr;
+        }
+
+        console.log(unique(arr));
+    </script>
+</body>
+</html>

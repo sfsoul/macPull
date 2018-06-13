@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统计一个字符串出现最多的字母</title>
+</head>
+<body>
+<script>
+    var str = "afjghdfraaaasdenas";
+
+    function findMaxDuplicateChar(str){
+        if(str.length == 1){
+            return str;
+        }
+        let charObj = {};
+        for(let i=0;i<str.length;i++){
+            if(!charObj[str.charAt(i)]){
+                charObj[str.charAt(i)] = 1;
+            }else{
+                charObj[str.charAt(i)] += 1;
+            }
+        }
+        let maxChar = "", //存字母的变量
+            maxValue = 1; //字母出现过的次数统计
+        for(var k in charObj){
+            if(charObj[k] >= maxValue){
+                maxChar = k;
+                maxValue = charObj[k];
+            }
+        }
+        return maxChar;
+    }
+
+    var newStr = findMaxDuplicateChar(str);
+    console.log(newStr);
+</script>
+</body>
+</html>

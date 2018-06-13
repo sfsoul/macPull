@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>局部注册Vue组件</title>
+</head>
+<body>
+<div id="app">
+    <!--<child link="https://www.baidu.com"></child>-->
+    <input type="text" v-model="user">
+    <input type="text" v-model="age">
+    <input type="text" v-model="sex">
+    <user-component :user-name="user" :age="age" :sex="sex"></user-component>
+</div>
+
+<template id="userComponent">
+    <div>
+        <p>{{userName}}</p>
+        <p>{{age}}</p>
+        <p>{{sex}}</p>
+    </div>
+</template>
+<script src="../../lib/vue.js"></script>
+<script>
+    Vue.component("user-component",{
+        template:"#userComponent",
+        props:["userName","age","sex"]
+    })
+
+    window.vm = new Vue({
+        el:"#app",
+        data:{
+            user:"",
+            age:"",
+            sex:""
+        }
+    })
+</script>
+</body>
+</html>

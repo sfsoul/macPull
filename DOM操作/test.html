@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>just a test</title>
+</head>
+<body>
+<script>
+    window.onload = function(){
+        console.log("onload事件："+document.getElementById("app").innerHTML);
+    }
+
+    window.addEventListener("DOMContentLoaded",function(){
+        console.log("DOMContentLoaded事件："+document.getElementById("app").innerHTML);
+    })
+</script>
+<div id="app">
+    Hello World
+</div>
+</body>
+</html>

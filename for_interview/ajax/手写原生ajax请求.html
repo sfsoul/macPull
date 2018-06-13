@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手写原生ajax请求</title>
+</head>
+<body>
+<script>
+    function createXHR(){
+        if(window.XMLHttpRequest){
+            return new XMLHttpRequest();
+        }else{
+            //兼容IE5和IE6
+            return new ActiveXObject("Microsoft.XMLHttp");
+        }
+    }
+    var url = "https://baidu.com";
+    var xhr = createXHR();
+
+    //异步的
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+            //状态码为200至300之间或304都表示这一请求已经成功
+            if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                console.log(xhr.responseText);
+            }else{
+                //失败
+                console.log("Error: " + xhr.status);
+            }
+        }
+    }
+
+    // GET
+    xhr.open('GET', url,true);
+    xhr.send();
+
+    // POST -- 需要设置请求头
+    xhr.open('POST', url,true);
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhr.send(data);
+
+
+    function getXMLHttpRequest(){    /*
+     *   封装版本
+     *   get请求与post的区别：get将参数放入url中发送，post需要设置请求头部，将发送的数据data放入xhr.send(data)中。
+     */
+
+        var xhr;
+        if(window.XMLHttpRequest){
+            xhr = new XMLHttpRequest();
+        }else if(window.ActiveXObject){
+            xhr = new ActiveXObject("Mirosoft XMLHttp");
+        }else{
+            xhr = null;
+        }
+        return xhr;
+    }
+
+    function ajax(method,url,data,callback){
+         var xhr = getXMLHttpRequest();
+         if(method == "post" || method == "POST"){
+             xhr.open(method,url,true);
+             xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+             xhr.send(data);
+         }else if(method == "get" || method == "GET"){
+             xhr.open(method,url+"?"+data,true);
+             xhr.send();
+         }
+         xhr.onreadystatechange = function(){
+             if(xhr.readyState === 4){
+                 //状态码为200至300之间或304都表示这一请求已经成功
+                 if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                     callback(xhr.responseText);
+                 }else{
+                     //失败
+                     console.log("Error: " + xhr.status);
+                 }
+             }
+         }
+    }
+
+
+    /*
+    *   xhr具有一个open方法，open方法作用类似于初始化，并不会发起真正的请求。
+    *   send方法发送请求，并接受一个可选参数。
+    *   当请求方式为post时，可以将请求体的参数传入
+    *   当请求方式为get时，可以不传或传入null
+    *   不管是get还是post，参数都需要通过 encodeURIComponent 编码后拼接
+    *
+    *    xhr.readyStatus==0 尚未调用 open 方法
+         xhr.readyStatus==1 已调用 open 但还未发送请求（未调用 send）
+         xhr.readyStatus==2 已发送请求（已调用 send）
+         xhr.readyStatus==3 已接收到请求返回的数据
+         xhr.readyStatus==4 请求已完成
+    */
+    // ajax方法封装通过Promise方式实现回调
+    function ajax(options){
+        var url = options.url;
+        var method = options.method.toLocaleLowerCase() || "get";
+        var async = options.async;
+        var data = options.data;
+        var xhr = new XMLHttpRequest();
+
+        if(options.timeout && options.timeout > 0){
+            xhr.timeout = options.timeout;
+        }
+
+        return new Promise((resolve,reject) => {
+            xhr.ontimeout = () => reject && reject("请求超时");
+            xhr.onreadystatechange = () => {
+                if(xhr.readyState == 4){
+                    if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                        resolve && resolve(xhr.responseText);
+                    }else{
+                        reject && reject();
+                    }
+                }
+            }
+            xhr.onerror = err => reject && reject(err);
+
+            var paramArr = [];
+            var encodeData;
+            if(data instanceof Object){
+                for(let key in data){
+                    //暗示拼接需要通过 encodeURIComponent 进行编码
+                    paramArr.push(encodeURIComponent(key)+"="+encodeURIComponent(data[key]));
+                }
+                encodeData = paramArr.join("&");
+            }
+
+            if(method === "get"){
+                //检查url中是否存在 ？ 及其位置
+                var index = url.indexOf("?");
+                if(index === -1){
+                    url += "?";
+                }else if(index !== url.length - 1){
+                    url += "&";
+                }
+                //拼接url
+                url += encodeData;
+            }
+            xhr.open(method,url,async);
+            if(method === "get"){
+                xhr.send(null);
+            }else{
+                //post方式需要设置请求头
+                xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+                xhr.send(encodeData);
+            }
+        })
+    }
+
+    //使用方式
+    ajax({
+        url:"request url",
+        method:"get",
+        async:true,
+        timeout:1000,
+        data:{
+            name:"zj",
+            age:25
+        }
+    }).then(
+        res => console.log("请求成功: " + res),
+        err => console.log("请求失败: " + err)
+    )
+</script>
+</body>
+</html>

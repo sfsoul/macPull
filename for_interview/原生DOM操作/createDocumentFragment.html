@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>createDocumentFragment</title>
+</head>
+<body>
+<ul id="list"></ul>
+<button>添加标签li</button>
+<script>
+    /*
+    *   createDocumentFragment方法主要是用于添加大量节点到文档中时会使用到。
+    *   直接通过普通循环添加的缺点：每次一创建一个新的元素，然后添加到文档树中，此过程会造成浏览器的回流。
+    *   DocumentFragment不是文档树的一部分，它是保存在内存中的，所以不会造成回流问题。
+    */
+
+    var listDom = document.getElementById("list");
+    var btnDom = document.getElementsByTagName("button")[0];
+
+    btnDom.addEventListener("click",function(){
+        var fragmentDom = document.createDocumentFragment(); //文档碎片
+        for(var i=0;i<10;i++){
+            var liDom = document.createElement("li");
+            liDom.innerText = i+1;
+            fragmentDom.appendChild(liDom);
+        }
+        listDom.appendChild(fragmentDom);
+    },false)
+</script>
+</body>
+</html>

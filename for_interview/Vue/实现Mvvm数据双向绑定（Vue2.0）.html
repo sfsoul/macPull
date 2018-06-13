@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双向绑定</title>
+</head>
+<style>
+    #app{
+        text-align: center;
+    }
+</style>
+<body>
+<div id="app">
+    <form>
+        <input type="text" v-model="number">
+        <button type="button" @click="increment">增加</button>
+    </form>
+    <h3 v-bind="number"></h3>
+</div>
+<script>
+    function myVue(options){
+        this._init(options);
+    }
+
+    myVue.prototype._init = function(options){
+        this.$options = options;
+        this.$el = document.querySelector(options.el);
+        this.$data = options.data;
+        this.$methods = options.methods;
+
+        this._binding = {};
+        this._obverse(this.$data); //劫持数据
+        this._complie(this.$data); //解析模板
+    }
+
+    myVue.prototype._obverse = function(obj){
+        var value;
+        for(var key in obj){
+            if(obj.hasOwnProperty(key)){
+                this._binding[key] = {
+                    _directives:[]
+                };
+                value = obj[key];
+                if(typeof value === "object"){
+                    this._obverse(value);
+                }
+                var binding = this._binding[key];
+                Object.defineProperty(this.$data,key,{
+                    enumerable: true,
+                    configurable: true,
+                    get:function(){
+                        console.log(`获取${value}`);
+                        return value;
+                    },
+                    set:function(newVal){
+                        console.log(`更新${newVal}`);
+                        if(value !== newVal){
+                            value = newVal;
+                            binding._directives.forEach(function(item){
+                                item.update();
+                            })
+                        }
+                    }
+                })
+            }
+        }
+    }
+
+    window.onload = function(){
+        window.vm = new Vue({
+            el:"#app",
+            data:{
+                number:0
+            },
+            methods:{
+                increment:function(){
+                    this.number++;
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

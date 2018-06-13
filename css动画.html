@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css动画</title>
+    <style>
+        .app{
+            width: 200px;
+            height: 200px;
+            background: pink;
+            text-align: center;
+            line-height: 200px;
+        }
+        .active{
+            width: 400px;
+            height: 400px;
+            -webkit-transition: all 3s linear 1s;
+            -moz-transition: all 3s linear 1s;
+            -ms-transition: all 3s linear 1s;
+            -o-transition: all 3s linear 1s;
+            transition: all 3s linear 1s;
+            background: yellow;
+            transform:translate(100px,100px) rotate(90deg); /*可以支持连写*/
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background: grey;
+            border: 1px solid pink;
+            margin: 50px;
+            text-align: center;
+            line-height: 100px;
+            animation:move 2s linear 1s 2;
+            position: absolute;
+            left: 200px;
+            top:0;
+        }
+        @keyframes move {
+            from{
+                left: 0;
+            }
+            to{
+                left: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    Hello
+</div>
+<button>增加动画</button>
+<div id="box">
+    Animation
+</div>
+<script>
+    var btn = document.querySelector("button");
+    var appNd = document.getElementsByClassName("app");
+    console.log(btn);
+    btn.addEventListener("click",function(){
+        //方法一
+        appNd[0].classList.add("active");
+        //方法二
+        // appNd[0].className += " active";
+    })
+
+
+    var boxNd = document.getElementById("box");
+</script>
+</body>
+</html>

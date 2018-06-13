@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<script>
+    var bodyDom = document.body;
+    var divDom = document.createElement('div');
+    divDom.innerText = "Hello World!";
+    var textDom = document.createTextNode("哈哈哈");
+    divDom.appendChild(textDom);
+    bodyDom.appendChild(divDom);
+    var scriptDom = document.createElement("script");
+    scriptDom.setAttribute("src","../lib/vue.js");
+    var script = document.getElementsByTagName("script")[0];
+    bodyDom.appendChild(scriptDom);
+</script>
+</body>
+</html>

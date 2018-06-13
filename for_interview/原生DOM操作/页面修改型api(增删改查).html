@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM操作的增删改查</title>
+</head>
+<body>
+<div id="parent">
+    我是你父亲
+    <p id="child">嘻嘻哈哈</p>
+</div>
+<script>
+    /*
+    *   removeChild:删除指定的子节点并返回。
+    *   deleteChild指向被删除节点的引用，等于node。被删除的节点仍然存在于内存中，可以对其进行下一步操作。
+    */
+    var parentDom = document.getElementById("parent");
+    var childDom = document.getElementById("child");
+//    var deleteChild = parentDom.removeChild(childDom);
+    //保险写法
+    if(childDom.parentNode){
+        childDom.parentNode.removeChild(childDom);
+    }
+//    console.log(deleteChild);
+</script>
+</body>
+</html>

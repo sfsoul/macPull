@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-for列表渲染</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(item,key) in obj" :key="item.id">{{item}}<span>{{key}}</span></li>
+    </ul>
+    <h1>{{arr[0]}}</h1>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    window.vm = new Vue({
+        el:"#app",
+        data:{
+            obj:{
+                name:"张靖",
+                age:23,
+                sex:"man"
+            },
+            arr:[1,2,3]
+        }
+    })
+</script>
+</body>
+</html>

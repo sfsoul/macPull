@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>getElementsByClassName</title>
+</head>
+<body>
+<div id="father">
+    <p class="son test">1</p>
+    <p class="son test">2</p>
+    <p class="son">3</p>
+</div>
+<script>
+    var sonsNd = document.getElementsByClassName("son test");
+    var sonsNd1 = document.querySelectorAll(".son.test");
+    var parentNd = document.getElementById("father");
+
+    console.log(sonsNd.length+"==="+sonsNd1.length);
+</script>
+</body>
+</html>

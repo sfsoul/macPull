@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h1 v-bind="info"></h1>
+    <child :msg="childMsg"></child>
+</div>
+<script src="../lib/vue.js"></script>
+<script>
+    Vue.component("child",{
+        template:`
+            <div>
+                <h6>{{msg}}</h6>
+                <button @click="changeMsg">改变状态</button>
+            </div>
+        `,
+        props:["msg"],
+        data(){
+            return {
+                test:this.msg
+            }
+        },
+        methods:{
+            changeMsg(){
+                this.test = "哈哈";
+                // this.msg = "哈哈";
+            }
+        }
+    })
+
+
+    window.vm = new Vue({
+        el:"#app",
+        data:{
+            info:{
+                name:"zj",
+                age:24
+            },
+            childMsg:"Hello"
+        }
+    })
+</script>
+</body>
+</html>

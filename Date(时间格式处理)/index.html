@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>时间格式处理</title>
+</head>
+<body>
+<script>
+    //时间戳转化为具体时间格式(2018-05-15 3:55:10)
+    function timeStampToDate(timeStamp){
+        // var currentTimeStamp = new Date().getTime(); //获取当前时间戳
+        var timeStamp = new Date(timeStamp);
+        var Y = timeStamp.getFullYear() + "-",
+            M = (timeStamp.getMonth()+1 < 10 ? "0"+(timeStamp.getMonth()+1) : timeStamp.getMonth()+1) + "-",
+            D = timeStamp.getDate() + " ",
+            h = timeStamp.getHours() + ":",
+            m = timeStamp.getMinutes() + ":",
+            s = timeStamp.getSeconds();
+        return Y+M+D+h+m+s;
+    }
+</script>
+</body>
+</html>

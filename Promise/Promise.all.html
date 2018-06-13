@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise.all用法</title>
+</head>
+<body>
+<script>
+    var p1 = new Promise((resolve,reject)=>{
+        resolve("Hello")
+    })
+
+    p1.then(result=>result)
+     .catch(err=>err)
+
+    var p2 = new Promise((resolve, reject) => {
+        throw new Error('报错了');
+    })
+        .then(result => result)
+        .catch(e => e); //p2实例的错误被自身的catch事件捕获，导致后续状态变为resolved
+
+
+    Promise.all([p1, p2])
+        .then(result => console.log(result)) //输出 ["hello",Error：报错了]
+        .catch(e => console.log(e));
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现类似getElementsByClassName的功能</title>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    ul li{
+        list-style: none;
+    }
+    ul .list{
+        width:100px;
+        height:150px;
+        background: pink;
+        border:1px solid #333;
+        text-align: center;
+    }
+</style>
+<body>
+<ul>
+    <li class="list">1</li>
+    <li class="list">2</li>
+    <li class="list">3</li>
+</ul>
+<script>
+    function queryClassName(node, name) {
+        var starts = '(^|[ \n\r\t\f])',
+            ends = '([ \n\r\t\f]|$)';
+        var array = [],
+            regex = new RegExp(starts + name + ends),
+            elements = node.getElementsByTagName("*"),
+            length = elements.length,
+            i = 0,
+            element;
+
+        while (i < length) {
+            element = elements[i];
+            if (regex.test(element.className)) {
+                array.push(element);
+            }
+
+            i += 1;
+        }
+
+        return array;
+    }
+</script>
+</body>
+</html>

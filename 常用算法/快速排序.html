@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>快速排序</title>
+</head>
+<body>
+<script>
+    var arr = [10,1,100,40,5,88];
+
+    function quickSort(arr){
+        //判断类型是否为数组
+        if(Object.prototype.toString.call(arr) !== "[object Array]") return;
+        //数组长度小于1，不用排序
+        if(arr.length <= 1) return arr;
+        var midIdx = Math.floor(arr.length/2);
+        var midVal = arr.splice(midIdx,1)[0];
+        var left = [];
+        var right = [];
+        arr.forEach(function(item){
+            if(item <= midVal){
+                left.push(item);
+            }else{
+                right.push(item);
+            }
+        });
+
+        var leftArr = quickSort(left);
+        var rightArr = quickSort(right);
+        console.log(leftArr+"===="+rightArr);
+        return leftArr.concat(midVal,rightArr);
+    }
+
+    var newArr = quickSort(arr);
+    console.log(newArr);
+
+
+    //一行代码写快排
+    function quickSort1(a){
+        return a.length <= 1 ? a : quickSort1(a.slice(1).filter(item => item <= a[0])).concat(a[0],quickSort1(a.slice(1).filter(item => item > a[0])));
+    }
+
+
+    /*
+    *   排序数组有大量重复元素，使用基于三向切分快排。
+    *   原理：将数组切分为三个部分：大于基准元素，等于基准元素，小于基准元素。
+    */
+    function quickSort3Way(a){
+        if(a.length <= 1) return a;
+        var last = a.pop(),
+            left = [],
+            right = [],
+            mid = [last];
+
+        a.forEach(function(item){
+            if(item < last){
+                left.push(item);
+            }else if(item > last){
+                right.push(item);
+            }else{
+                mid.push(item);
+            }
+        });
+
+        var _left = quickSort3Way(left);
+        var _right = quickSort3Way(right);
+        return _left.concat(mid,_right);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test">
+    <h1>测试啊</h1>
+</div>
+<script>
+    var divDom = document.getElementById("test");
+    var nodeText = document.createTextNode("哈哈哈");
+    divDom.appendChild(nodeText);
+
+    var child1 = divDom.children;   //只返回元素节点
+    var child2 = divDom.childNodes; //返回父元素中的所有节点（包括文本节点也会一起返回）
+
+    console.log(divDom.nodeType+"==="+divDom.nodeName+"==="+divDom.tagName+"==="+divDom.nodeValue);
+    console.log(child1);
+    console.log(child2);
+</script>
+</body>
+</html>

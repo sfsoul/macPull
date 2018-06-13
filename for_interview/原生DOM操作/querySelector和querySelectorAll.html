@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div>
+        <span class="test">第三级的span</span>
+    </div>
+</div>
+<div class="test btn">
+    aaaaa
+</div>
+<input type="button" id="btnGet" value="获取test元素" />
+<script>
+
+    //querySelector返回第一个匹配的元素，若没有匹配的元素，则返回null。
+    document.getElementById("btnGet").addEventListener("click",function(){
+        var element = document.querySelector(".test");
+        alert(element.textContent);
+        var ele = document.querySelectorAll("span.test,div.test");
+        for(var i=0;i<ele.length;i++){
+            alert(ele[i].textContent);
+        }
+    })
+
+    //querySelectorAll返回的是所有匹配的元素，而且可以匹配多个选择符
+    var testNd = document.getElementsByClassName("btn")[0];
+    console.log(testNd.hasChildNodes());
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise</title>
+</head>
+<body>
+<script>
+    // class Promise {
+    //     constructor(executor) {
+    //         let resolve = success_value => {};
+    //         let reject = fail_reason => {};
+    //         executor(resolve, reject);
+    //     }
+    //     then(onFulFilled, onRejected) {}
+    // }
+
+    var p = new Promise((resolve,reject)=>{
+        resolve(100);
+    })
+
+    p.then(data=>{
+        console.log(data);
+        Promise.resolve(111); //会发生值穿透
+        // return Promise.resolve(1);
+        return 1;
+    }).then(data => {
+        console.log(data);
+        console.log(Object.prototype.toString.call(data));
+    });
+
+
+
+    //问：Promise.then中的回调为什么是异步执行？
+    /*
+    *   因为then总是返回Promise，xxx.then(a=>a)的效果实际上是 return new Promise(resolve=>resolve(a)),这个过程由引擎隐式完成的。
+    *   而Promise是一个Job，所以必然是异步的。
+    *
+    *   保障代码执行顺序的一致性。
+    *
+    */
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试JS执行顺序</title>
+</head>
+<body>
+<!--<script src="lib/1.js" defer></script>-->
+<!--<script src="lib/2.js" defer></script>-->
+<script>
+    function loadScript(src){
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.defer = true;
+        s.src = src;
+        document.getElementsByTagName("head")[0].appendChild(s);
+    }
+    loadScript("lib/1.js");
+    loadScript("lib/2.js");
+</script>
+</body>
+</html>

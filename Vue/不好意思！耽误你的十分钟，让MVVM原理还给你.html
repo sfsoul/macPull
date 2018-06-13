@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //创建一个Mvvm构造函数
+    function Mvvm(options = {}){
+        this.$options = options;
+        let data = this._data = this.$options.data;
+        //初始化computed，将this指向实例
+        initComputed.call(this);
+        //数据劫持
+        observe(data);
+
+        //数据代理  this代理了this._data
+        for(let key in data){
+            Object.defineProperty(this,key,{
+                configurable:true,
+                get(){
+                    return this._data[key]; //访问vm.a的时候就相当于访问vm._data.a的值
+                },
+                set(newVal){
+                    this._data[key] = newVal;
+                }
+            })
+        };
+
+        //数据编译
+        new Compile(options.el,this);
+    }
+
+    //创建一个Observe构造函数
+    function Observer(data){
+        let dep = new Dep();
+        //所谓数据劫持就是给对象增加get，set
+        for(let key in data){
+            let val = data[key];
+            observe(val); //递归继续向下找，实现深度的数据劫持
+            Object.defineProperty(data,key,{
+                configurable:true,
+                get(){
+                    Dep.target && dep.addSub(Dep.target); // 将watcher添加到订阅事件中 [watcher]
+                    console.log(val);
+                    return val;
+                },
+                set(newVal){
+                    if(val === newVal){
+                        return;
+                    }
+                    val = newVal; //如果以后再获取值(get)的时候，将刚才设置的值再返回去
+                    console.log("新值为："+newVal);
+                    observe(newVal); //当设置新值后，也需要把新值再去定义成属性(怕输入的新值为对象，所以需要再次执行observe方法)
+                    dep.notify(); //让所有watcher的update方法执行即可
+                }
+            });
+        }
+    }
+
+    function observe(data){
+        if(!data || typeof data !== "object") return;
+        return new Observer(data);
+    }
+
+    var obj = {
+        data:{
+            name:"zj",
+            love:{
+                name:"dmy"
+            },
+            age:25
+        }
+    }
+
+    observe(obj.data);
+    obj.data.name = "测试一下";
+
+    //创建Compile构造函数
+    function Compile(el,vm){
+        //将el挂载到实例上方便调用
+        vm.$el = document.querySelector(el);
+        let fragment = document.createDocumentFragment();
+
+        while(child = vm.$el.firstChild){ //直接将vm.$el.firstChild赋值给child，默认为true
+            fragment.appendChild(child); //将el中的内容放入内存中
+        }
+        //对el中内容进行替换
+        function replace(frag){
+            Array.from(frag.childNodes).forEach(node =>{
+                let txt = node.textContent;
+                let reg = /\{\{(.*?)\}\}/g;   // 正则匹配{{}}
+
+                //既是文本节点又有大括号的情况{{}}
+                if(node.nodeType === 3 && reg.test(txt)){
+                    console.log(RegExp.$1); //匹配到的第一个分组
+                    let arr = RegExp.$1.split(".");
+                    let val = vm;
+                    arr.forEach(key =>{
+                        val = val[key];
+                    });
+                    //用trim方法去除一下首尾空格
+                    node.textContent = txt.replace(reg,val).trim();
+
+                    //监听变化，给Watcher再添加两个参数，用来取新的值(newVal)给回调函数传参
+                    new Watcher(vm,RegExp.$1,newVal =>{
+                        node.textContent = txt.replace(reg,newVal).trim();
+                    });
+                }
+
+                //元素节点
+                if(node.nodeType === 1){
+                    let nodeAttr = node.attributes; //获取dom上的所有属性,是个类数组
+                    Array.from(nodeAttr).forEach(attr =>{
+                        let name = attr.name; //v-model type
+                        let exp = attr.value; //c       text
+                        if(name.include("v-")){
+                            node.value = vm[exp];
+                        }
+                        //监听变化
+                        new Watcher(vm,exp,function(newVal){
+                            node.value = newVal; //当watcher触发时会自动将内容放进输入框中
+                        });
+
+                        node.addEventListener("input",e=>{
+                            let newVal = e.target.value;
+                            //相当于赋了个新值，而值的改变会调用set，set中又会调用notify，notify中调用watcher的update方法实现了更新
+                            vm[exp] = newVal;
+                        });
+                    });
+                }
+                //如果还有子节点，继续递归replace
+                if(node.childNodes && node.childNodes.length){
+                    replace(node);
+                }
+            });
+        }
+        replace(fragment); //替换内容
+        vm.$el.appendChild(fragment); //再将文档碎片放入el中
+    }
+
+    //重写Watcher构造函数
+    function Watcher(vm,exp,fn){
+        this.fn = fn;
+        this.vm = vm;
+        this.exp = exp;
+        Dep.target = this;
+        let arr = exp.split(".");
+        let val = vm;
+        arr.forEach(key => {
+            val = val[key]; //获取到this.a.b，默认就会调用get方法
+        });
+        Dep.target = null;
+    }
+
+    Watcher.prototype.update = function(){
+        //notify的时候值已经更改了，再通过vm，exp来获取新的值
+        let arr = this.exp.split(".");
+        let val = this.vm;
+        arr.forEach(key => {
+            val = val[key]; //通过get获取到新的值
+        });
+        this.fn(val); //将每次拿到的新值去替换{{}}的内容即可
+    }
+
+    function initComputed(){
+        let vm = this;
+        let computed = this.$options.computed; //从options上拿到computed属性
+        // 得到的都是对象的key可以通过Object.keys转化为数组
+        Object.keys(computed).forEach(key =>{
+            Object.defineProperty(vm,key,{
+                // 这里判断是computed里的key是对象还是函数
+                // 如果是函数直接就会调get方法
+                // 如果是对象的话，手动调一下get方法即可
+                // 如： sum() {return this.a + this.b;},他们获取a和b的值就会调用get方法
+                // 所以不需要new Watcher去监听变化了
+                get:typeof computed[key] === "function" ? computed[key] : computed[key].get,
+                set(){}
+            })
+        })
+    }
+</script>
+</body>
+</html>

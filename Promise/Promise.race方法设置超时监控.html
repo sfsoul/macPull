@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise.then方法设置超时监控</title>
+</head>
+<body>
+<script>
+    //用Promise.race设置超时监控
+
+    function asyncLoadImg(src){
+        return new Promise((resolve,reject)=>{
+            const img = new Image();
+            img.onload = function(){
+                resolve(img);
+            }
+            img.src = src;
+        })
+    }
+
+    function timeout(){
+        return new Promise((resolve,reject)=>{
+            setTimeout(()=>reject("img not exist"),3000);
+        })
+    }
+
+    Promise.race([asyncLoadImg("../img/vue-生命周期.jpg"),timeout()]).then(data=>console.log(data)).catch(err=>console.log(err));
+</script>
+</body>
+</html>

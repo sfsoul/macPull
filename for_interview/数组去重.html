@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组去重</title>
+</head>
+<body>
+<script>
+    var arr = [1,1,6,2,6,6,9,9,2,2];
+
+    //双层循环
+    function unique(arr){
+        //res用来存储结果
+        var res = [];
+        var arrLen = arr.length;
+        var resLen = res.length;
+        for(var i=0;i<arrLen;i++){
+            for(var j=0;i<resLen;j++){
+                if(arr[i] === res[j]){
+                    break;
+                }
+            }
+            if(j === resLen){
+                res.push(arr[i]);
+            }
+        }
+        return res;
+    }
+
+    //indexOf（indexOf底层使用 === 进行判断）
+    function unique(arr){
+        if(Object.prototype.toString.apply(arr) !== "[object Array]") return "";
+        var newArr = [],
+            len = arr.length;
+        for(var i=0;i<len;i++){
+            if(newArr.indexOf(arr[i]) === -1){
+                newArr.push(arr[i]);
+            }
+        }
+        return newArr;
+    }
+
+    var test = unique(arr);
+    console.log(test);
+
+    //排序后去重 -- 将要去重的数组用sort方法排序后，相同值被排在一起。只需判断当前元素与上一个元素是否相同，相同则说明重复，不相同就添加进res
+    function unique1(arr){
+        if(Object.prototype.toString.apply(arr) !== "[object Array]") return "";
+        var newArr = [],
+            seen;
+        var sortrdArr = arr.concat().sort(),
+            len = sortrdArr.length;
+
+        console.log(sortrdArr);
+        for(var i=0;i<len;i++){
+            if(!i || seen !== sortrdArr[i]){
+                newArr.push(sortrdArr[i]);
+            }
+            seen = sortrdArr[i];
+        }
+        return newArr;
+    }
+    console.log(unique1(arr));
+
+    //es5 filter -- 两种方法：indexOf或者排序去重
+    //indexOf
+    function unique2(arr){
+        var res = arr.filter(function(item,idx,arr){
+            return arr.indexOf(item) === idx;
+        })
+        return res;
+    }
+
+    //排序去重
+    function unique3(arr){
+        var res = arr.concat().sort().filter(function(item,idx,arr){
+            return !item || item !== arr[idx - 1];
+        })
+        return res;
+    }
+
+    //ES6
+    var array = [1,2,1,1,"1"];
+    function unique4(arr){
+        return Array.from(new Set(arr));
+    }
+    //简化
+    function unique5(arr){
+        return [...new Set(arr)];
+    }
+    //再简化
+    var unique6 = arr => [...new Set(arr)];
+</script>
+</body>
+</html>

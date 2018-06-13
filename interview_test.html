@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面试测试</title>
+</head>
+<body>
+<ul id="list">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+</ul>
+<script>
+    // ajax发起get请求，参数需要带到url上面
+    function ajax(url,data){
+        let args = [];
+        for(let key in data){
+            //对参数进行转义
+            args.push(`${encodeURIComponent(key)} = ${encodeURIComponent(data[key])}`);
+        }
+        let search = args.join("&");
+        //判断当前url是否已有参数
+        // url += ~url.index("?") ? `&${search}` : `?${search}`;
+        if(url.indexOf("?") === -1){
+            url += "?" + search;
+        }else{
+            url += "&" + search;
+        }
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET",url);
+        xhr.send();
+    }
+
+
+    //手写原生ajax请求
+    function CreateXHR(){
+        if(window.XMLHttpRequest){
+            return new XMLHttpRequest();
+        }else if(window.ActiveXObject){
+            return new ActiveXObject("Microsoft Http");
+        }
+    }
+
+    function nativeAjax(method,url,data,cb){
+        var xhr = CreateXHR();
+        var data = formatData(data);
+        if(method == "GET" || method == "get"){
+            xhr.open(method,url+"?"+data,true);
+            xhr.send();
+        }else if(method == "POST" || method == "post"){
+            xhr.open(method,url,true);
+            xhr.setRequestHeader("Content-type","application/json");
+            xhr.send(data);
+        }
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                    cb && cb(xhr.responseText);
+                }else{
+                    console.log(`错误为：${xhr.status}`);
+                }
+            }
+        }
+    }
+
+    //对输入的参数进行编码
+    function formatData(data){
+        if(typeof data !== "object") return;
+        var arr = [];
+        var str;
+        for(var key in data){
+            arr.push(encodeURIComponent(key)+"="+encodeURIComponent(data[key]));
+        }
+        str = arr.join("&");
+    }
+
+
+
+    function Person(name){
+        this.name = name;
+    }
+    Person.prototype.getName = function(){
+        console.log(this.name);
+    }
+
+    //new的模拟实现
+    function MoniNew(fn){
+        if(typeof fn !== "function") return;
+        var obj = new Object();
+        var args = [].slice.call(arguments,1);
+        obj.__proto__ = fn.prototype;
+        var ret = fn.apply(obj,args);
+        return typeof ret === "object" ? ret || obj : obj;
+    }
+
+    var person = MoniNew(Person,"zj");
+    console.log(person);
+
+
+    //组合寄生式继承
+    function Parent(name){
+        this.name = name;
+    }
+
+    Parent.prototype.getName = function(){
+        console.log(this.name);
+    };
+
+    function Son(name,age){
+        Parent.call(this,name);
+        this.age = age;
+    }
+
+    Son.prototype = Object.create(Parent.prototype);
+    //注意子类原型上的方法需要放到后面才会生效
+    Son.prototype.getAge = function(){
+        console.log(this.age);
+    };
+    Son.prototype.constructor = Son;
+
+    var son = new Son("zj",25);
+    console.log(son);
+
+    //es6 继承
+    class Zhangwei{
+        constructor(name){
+            this.name = name;
+        }
+        getName(){
+            console.log(this.name)
+        }
+    }
+
+    class Zj extends Zhangwei{
+        constructor(name,age){
+            super(name);
+            this.age = age;
+        }
+        getAge(){
+            console.log(this.age);
+        }
+    }
+
+    var zj = new Zj("zj",25);
+    console.log(zj);
+
+    //快速排序
+    var arr = [100,1,8,30,22,80];
+    function quickSort(arr){
+        if(Object.prototype.toString.call(arr) !== "[object Array]") return;
+        if(arr && arr.length <= 1) return arr;
+        var midIdx = Math.floor(arr.length/2);
+        var midVal = arr.splice(midIdx,1)[0];
+        var left = [];
+        var right = [];
+        arr.forEach(function(item,idx){
+            if(item <= midVal){
+                left.push(item);
+            }else{
+                right.push(item);
+            }
+        })
+
+        var leftArr = quickSort(left);
+        var rightArr = quickSort(right);
+        return leftArr.concat(midVal,rightArr);
+    }
+
+    var newArr = quickSort(arr);
+    console.log(newArr);
+
+
+
+    //深拷贝
+    var obj = {
+        name:"zj",
+        age:25,
+        love:{
+            name:"dmy",
+            age:22
+        }
+    };
+
+    function deepCopy(obj){
+        if(typeof obj !== "object") return;
+        var newObj = obj instanceof Array ? [] : {};
+        for(let key in obj){
+            if(obj.hasOwnProperty(key)){
+                newObj[key] = typeof obj[key] === "object" ? deepCopy(obj[key]) : obj[key];
+            }
+        }
+        return newObj
+    }
+
+    var newObj = deepCopy(obj);
+    console.log(newObj);
+
+
+
+    //简单实现一个bind函数
+    var foo = {
+        value:1
+    };
+
+    function bar(name,age){
+        console.log(this.value);
+        console.log(name);
+        console.log(age);
+    }
+
+    var bindFoo = bar.bind(foo,"daisy");
+    bindFoo("18");
+    console.log(bindFoo);
+
+    // Function.prototype.bind2 = function (context) {
+    //
+    //     var self = this;
+    //     var args = Array.prototype.slice.call(arguments, 1);
+    //
+    //     var fNOP = function () {};
+    //
+    //     var fBound = function () {
+    //         var bindArgs = Array.prototype.slice.call(arguments);
+    //         return self.apply(this instanceof fNOP ? this : context, args.concat(bindArgs));
+    //     };
+    //
+    //     fNOP.prototype = this.prototype;
+    //     fBound.prototype = new fNOP();
+    //     return fBound;
+    // }
+
+
+
+
+    //es6
+    (function(){
+        /*
+            箭头函数:this是在定义的时候确定，而不是调用的时候。
+            箭头函数的this不会被call、apply、bind所改变。
+        */
+        var obj = {
+            fn:()=>{
+                console.log(this.name);
+            },
+            name:"zj"
+        };
+        window.name = "dmy";
+
+        obj.fn(); // dmy
+        obj.fn.call(obj); // dmy
+
+
+        //箭头函数返回一个对象，需要用()包裹起来
+        var fn = () => ({name:"zj",age:25});
+        console.log(fn());
+
+
+        //函数参数默认值 + 模板字符串
+        function test(name="zj",age=25){
+            console.log(`my name is ${name}, ${age} years old`);
+        }
+
+        test();
+
+        //解构赋值
+        var obj = {
+            name:"zj",
+            age:25
+        };
+
+        var {name,age} = obj;
+        console.log(name);
+        console.log(age);
+
+
+        //rest
+        function param(first,...all){
+            console.log(first);
+            console.log(all); //all本身就是一个数组，不用像arguments那样转成数组
+            console.log(Object.prototype.toString.call(all));
+        }
+
+        param("第一个","第二个","第三个");
+
+        //es6中 repeat方法实现:"zj".repeat(3);  输出"zjzjzj";
+        function hasRepeat(str,num){
+            if(num <= 0) return "";
+            return Function.prototype.repeat ? str.repeat(num) : Function.prototype.repeat = function(){
+                var str;
+                for(var i=0;i<num;i++){
+                    str += this;
+                }
+                return str
+            }
+        }
+
+        hasRepeat("dmy",3);
+
+        //Array.from将 类似数组的对象和可遍历的对象转化为数组
+        function toArray(){
+            console.log(arguments);
+            console.log(Array.from(arguments));
+        }
+
+        toArray(1,2,3);
+
+
+        //函数参数默认值
+        function defaultFn(a=1,b=100){
+            console.log(`${a}+${b}`);
+        }
+        //若传入undefined，将触发该参数等于默认值，null则没有这个效果。
+        defaultFn(undefined,null); // 输出 1+null
+
+
+        //const本质：并不是变量的值不得改动，而是变量指向的那个内存地址不得改动。
+        /*
+        *   对于简单类型的数据（数值、字符串、布尔值），值就保存在变量指向的那个内存地址，因此等同于常量。
+        *   但对于复合类型的数据（主要是对象和数组），变量指向的内存地址，保存的只是一个指针，const只能保证
+        *   这个指针是固定的，至于它指向的数据结构是不是可变的，就完全不能控制了。
+        */
+        const test1 = {name:"zj"};
+        test1.name = "dmy";
+        console.log(test1);
+
+
+        //Object.assign用于对象的合并，将源对象的所有可枚举属性，复制到目标对象。
+        /*
+        *   若目标对象与源对象有同名属性，或多个源对象有同名属性，
+        *   则后面的属性会覆盖前面的属性。
+        */
+        var target = {a:1,b:1};
+        var source1 = {b:2,c:2};
+        var source2 = {c:3};
+
+        Object.assign(target,source1,source2);
+        console.log(target); //{a:1,b:2,c:3}
+
+        /*
+        *   Object.assign拷贝的属性是有限制的，只拷贝源对象的自身属性（不拷贝继承属性），
+        *   也不拷贝不可枚举的属性（enumerable:false）
+        */
+        function NewPerson(name){
+            this.name = name;
+        };
+        NewPerson.prototype.age = 25; //不会拷贝原型上的方法
+        var p = new NewPerson("zj");
+        Object.assign(target,p);
+        console.log(target); //{a:1,b:2,c:3,name:"zj"}
+
+
+        //属性的遍历 -- ES6共有5种方法可以遍历对象的属性
+        /*
+        *   for...in 循环遍历对象自身的和继承的可枚举属性。
+        *   Object.keys(obj) 返回一个数组，包括对象自身的（不含继承的）所有可枚举属性。
+        *   Object.getOwnPropertyNames(obj) 返回一个数组，包含对象自身的所有属性（不含Symbol属性，但是包括不可枚举属性）的键名。
+        */
+    })();
+
+
+
+    //一道题目:问 f能够取到a，b吗？原理是什么？
+    var F = function(){};
+    Object.prototype.a = function(){};
+    Function.prototype.b = function(){};
+    var f = new F(); // f只能访问到a，但是F可以访问a，b
+
+    /*
+    *   f是F的实例对象，其原型链为：f.__proto__ => [F.prototype].__proto__ => [Object.prototype].__proto__ => null
+    *
+    *   F是构造函数，是Function的实例，他的原型链为：
+    *   F.__proto__ => [Function.prototype].__proto__ => [Object.prototype].__proto__ => null
+    */
+
+
+    var listNd = document.querySelector("#list");
+    var liNds = document.querySelectorAll("li");
+    var len = liNds.length;
+
+    for(var i=0;i<len;i++){
+        liNds[i].addEventListener("click",function(e){
+            e.stopPropagation(); //阻止事件冒泡
+            alert(`我自身的索引是：${e.target.innerHTML}`)
+        },false)
+    }
+
+
+    listNd.addEventListener("click",function(e){
+        var ev = e || window.event;
+        var target = ev.target || ev.srcElement;
+        if(target.nodeName === "LI"){
+            alert(`当前我的子元素索引为：${target.innerHTML}`);
+        }
+    })
+
+
+    class Haha{
+        constructor(name){
+            this.name = name;
+        }
+        getName(){
+            console.log(this.name);
+        }
+    }
+
+    class Hehe extends Haha{
+        constructor(name,age){
+            super(name);
+            this.age = age;
+        }
+        getName(){
+            console.log("我叫张靖");
+        }
+    }
+    var hehe = new Hehe("zj",25);
+    console.log(hehe);
+
+    console.log(Hehe.__proto__ === Haha);
+    console.log(Hehe.prototype.__proto__ === Haha.prototype);
+
+    //Object.getPrototypeOf方法用于从子类上获取父类
+    console.log(Object.getPrototypeOf(Hehe) === Haha); //true   判断一个类是否继承了另一个类
+
+    //Vue的双向绑定原理
+
+</script>
+</body>
+</html>

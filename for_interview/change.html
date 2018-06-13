@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> </title>
+</head>
+<body>
+<script>
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for(var i = 0; i < strs.length; i ++) {
+                theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+    var req = GetRequest();
+    var adtag = req["adtag"] || req["ADTAG"] || 'adtag.279847';
+    window.location.replace("https://youxi.vip.qq.com/m/act/83e7cce658_qhmy_279847.html?_wv=1&_wwv=4&adtag="+adtag);
+</script>
+</body>
+</html>

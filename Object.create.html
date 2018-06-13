@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object.create</title>
+</head>
+<body>
+<script>
+    //使用Object.create(null)创建得到的是一个很纯的空对象。不会继承Object内置对象上的方法
+    // o.__proto__ === Object.prototype; false
+    var o = Object.create(null);
+
+    var obj = new Object();
+
+    console.log(o);
+    console.log(obj);
+
+
+    //通过Object.create实现继承
+    // Shape - 父类(superclass)
+    function Shape() {
+        this.x = 0;
+        this.y = 0;
+    }
+
+    // 父类的方法
+    Shape.prototype.move = function(x, y) {
+        this.x += x;
+        this.y += y;
+        console.info('Shape moved.');
+    };
+
+    // Rectangle - 子类(subclass)
+    function Rectangle() {
+        Shape.call(this); // call super constructor.
+    }
+
+    // 子类续承父类
+    Rectangle.prototype = Object.create(Shape.prototype); //本质上就是让 Rectangle.prototype.__proto__ === Shape.prototype 来实现继承
+    Rectangle.prototype.constructor = Rectangle;
+
+    var rect = new Rectangle();
+
+    console.log('Is rect an instance of Rectangle?',
+        rect instanceof Rectangle); // true
+    console.log('Is rect an instance of Shape?',
+        rect instanceof Shape); // true
+    rect.move(1, 1); // Outputs, 'Shape moved.'
+</script>
+</body>
+</html>

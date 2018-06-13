@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用v-for时添加唯一的key</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(item,idx) in list" :key = idx>
+            {{item.name}}
+            <p>{{item.age}}</p>
+        </li>
+    </ul>
+</div>
+<script src="../lib/vue.js"></script>
+<script>
+    window.vm = new Vue({
+        el:"#app",
+        data:{
+            list:[
+                {name:"zj",age:25},
+                {name:"dmy",age:225},
+                {name:"sdad",age:2425},
+            ]
+        }
+    })
+</script>
+</body>
+</html>

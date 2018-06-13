@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类的实现</title>
+</head>
+<body>
+<script>
+    /*
+    *   需要注意的：一般会把共有方法放在类的原型上，而不会采用this.login = function(){}这种写法。
+    *   因为只有这样，才能让多个实例引用同一个共有方法，从而避免重复创建方法的浪费。
+    */
+
+    // function GithubUser(username,password){
+    //     //private属性
+    //     let _password = password;
+    //     //public属性
+    //     this.username = username;
+    //     //public方法(可被实例继承)
+    //     GithubUser.prototype.login = function(){
+    //         console.log(this.username + "要登录Github，密码是" + _password);
+    //     }
+    // }
+    //
+    // //静态方法（私有方法）
+    // GithubUser.getPublicServices = function(){
+    //     return ["login"];
+    // };
+
+
+    //寄生组合式继承的核心方法
+    function inherit(child,parent){
+        //继承父类的原型
+        const p = Object.create(parent.prototype);
+        //重写子类的原型
+        child.prototype = p;
+        //重写被污染的子类的constructor
+        p.constructor = child;
+    }
+
+    //父类
+    function GithubUser(username,password){
+        let _password = password;
+        this.username = username;
+    }
+
+    GithubUser.prototype.login = function(){
+        console.log(this.username + "要登录Github，密码是" + _password);
+    }
+
+    //子类
+    function JuejinUser(username,password){
+        GithubUser.call(this,username,password); //继承属性
+        this.articles = 3;
+    }
+
+    //实现原型上的方法
+    inherit(JuejinUser,GithubUser);
+
+    //在原型上添加新方法
+    JuejinUser.prototype.readArticle = function(){
+        console.log("Read article");
+    };
+
+    /*
+    *   1.子类继承了父类的属性和方法，同时，属性没有被创建在原型链上，因此多个子类不会共享同一个属性；
+    *   2.子类可以传递动态参数给父类！
+    *   3.父类的构造函数只执行了一次！
+    *
+    */
+    const juejinUser1 = new JuejinUser('ulivz','xxx');
+    console.log(juejinUser1);
+</script>
+</body>
+</html>

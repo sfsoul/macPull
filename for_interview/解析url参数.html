@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var url = "http://www.domain.com/?user=anonymous&id=123&id=456&city=%E5%8C%97%E4%BA%AC&d&enabled";
+    /*自己实现*/
+//    function queryString(str){
+//        if(typeof str !== "string"){
+//            return;
+//        }
+//        var decodeUrl = decodeURIComponent(str);
+//        console.log(decodeUrl);
+//        var idx = decodeUrl.indexOf("?");
+//        var queryString = decodeUrl.substring(idx+1);
+//        console.log(queryString);
+//        var queryArr = queryString.split("&");
+//        console.log(queryArr);
+//        var newObj = {};
+//        queryArr.forEach(function(item,idx){
+//            var newArr = item.split("=");
+//            if(!newObj[newArr[0]]){
+//                newObj[newArr[0]] = newArr[1];
+//            }
+//        })
+//        return newObj;
+//    }
+//
+//    console.log(queryString(url));
+
+    function parse(str){
+        if(typeof str !== "string"){
+            return {};
+        }
+
+        var paramObj = {};
+        var paramArr = decodeURI(str).split("&");
+        for(var i=0;i<paramArr.length;i++){
+            var tmp = paramArr[i].split("=");
+            var key = tmp[0];
+            var value = tmp[1] || true;
+
+            //处理数字
+            if(typeof value === 'string' && isNaN(Number(value)) === false){
+                value = Number(value);
+            }
+
+            if(typeof paramObj[key] === "undefined"){
+               paramObj[key] = value;
+            }else{
+                var newValue = Array.isArray(paramObj[key]) ? paramObj[key] : [paramObj[key]];
+                newValue.push(value);
+                paramObj[key] = newValue;
+            }
+        }
+        return paramObj;
+    }
+
+    console.log(parse(url));
+
+
+    //es6
+    function parse(str){
+        if(typeof str !== "string"){
+            return {};
+        }
+
+        return decodeURI(str).split("&").map(param => {
+            const tmp = param.split("=");
+            const key = tmp[0];
+            let value = tmp[1] || true;
+            if(typeof value === "string" && isNaN(Number(value)) === false){
+                value = Number(value);
+            }
+
+            return {key,value};
+        }).reduce((params,item) => {
+            const {key,value} = item;
+            if(typeof params[key] === "undefined"){
+                params[key] = value;
+            }else{
+                params[key] = Array.isArray(params[key]) ? params[key] : [params[key]];
+                params[key].push(value);
+            }
+            return params;
+        },{});
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>继承</title>
+</head>
+<body>
+<script>
+    function Parent(name){
+        this.name = name;
+    }
+    Parent.prototype.getName = function(){
+        console.log(this.name);
+    }
+
+    function Son(name,age){
+        Parent.call(this,name);
+        this.age = age;
+    }
+
+    Son.prototype = Object.create(Parent.prototype); //让Son.prototype.__proto__ === Parent.prototype,实现原型链继承
+    Son.prototype.constructor = Son;
+
+    var son = new Son("zj",25);
+    console.log(son);
+    console.log(son.__proto__ === Son);
+
+
+    /*
+    *   实现 var person = new Person("jim");
+    *   person.setAge(21).setPosition("developer").sayHi();
+    *   输出 ‘Hello,my name is jim,21 years old, I am a developer’
+    */
+    function Person(name){
+        this.name = name;
+    }
+    Person.prototype.setAge = function(age){
+        this.age = age;
+        return this;
+    }
+    Person.prototype.setPosition = function(job){
+        this.job = job;
+        return this;
+    }
+    Person.prototype.sayHi = function(){
+        console.log(`Hello,my name is ${this.name},${this.age} years old,I am a ${this.job}`)
+    }
+
+    var person = new Person("zj");
+    person.setAge(21).setPosition("developer").sayHi();
+</script>
+</body>
+</html>

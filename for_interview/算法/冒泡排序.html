@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>冒泡排序</title>
+</head>
+<body>
+<script>
+    var arr = [10,20,1,6,100,60];
+
+    //冒泡排序算法：依次比较大小，小的和大的进行位置上的交换
+    function bubbleSort(arr){
+        if(Object.prototype.toString.call(arr) !== "[object Array]") return "";
+        var len = arr.length;
+        for(let i=0;i<len-1;i++){
+            for(let j = i+1;j<len;j++){
+                if(arr[i] > arr[j]){
+                    let tem = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = tem;
+                }
+            }
+        }
+        return arr;
+    }
+
+    var newArr = bubbleSort(arr);
+    console.log(newArr);
+</script>
+</body>
+</html>

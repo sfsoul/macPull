@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>随机生成指定长度的字符串</title>
+</head>
+<body>
+<script>
+    function randomString(n){
+        var str = "abcdefghijklmnopqrstuvwxyz9876543210";
+        var tmp = "",
+            i = 0,
+            l = str.length;
+        for(i = 0;i<n;i++){
+            tmp += str.charAt(Math.floor(Math.random()*l));
+        }
+        return tmp;
+    }
+
+    var newStr = randomString(8);
+    console.log(newStr);
+
+
+    //先把字符串转为数组，遍历产生随机索引即可
+    function test(n){
+        var str = "abcdefghijklmnopqrstuvwxyz9876543210";
+        var arr = str.split("");
+        console.log(arr);
+        var len = arr.length;
+        var newArr = [];
+        for(var i=0;i<n;i++){
+            var randomIdx = Math.floor(Math.random()*len);
+            console.log(randomIdx);
+            newArr.push(arr[randomIdx]);
+        }
+        return newArr.join("");
+    }
+
+    var newArr = test(10);
+    console.log(newArr);
+</script>
+</body>
+</html>

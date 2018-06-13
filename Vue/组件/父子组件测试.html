@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件通信</title>
+</head>
+<body>
+<div id="app">
+    {{message}}
+    <child :init-counter="0"></child>
+    <button @click="handleEvent">resolve</button>
+
+    <my-component @increace="receiveFun"></my-component>
+    <h1>当前传过来的值为：{{num}}</h1>
+</div>
+<script src="../../lib/vue.js"></script>
+<script>
+    Vue.component("my-component",{
+        template:"<div><button @click='handleAddFun'>增加</button></div>",
+        data(){
+            return {
+                counter:0
+            }
+        },
+        methods:{
+            handleAddFun(){
+                this.counter++;
+                this.$emit("increace",this.counter);
+            }
+        }
+    });
+
+    Vue.component("child",{
+        template:"<button @click='handleClick'>showCount {{counter}}</button>",
+        props:{initCounter:Number},
+        data(){
+            return {
+                counter:this.initCounter
+            }
+        },
+        methods:{
+            handleClick(){
+                //通过 父链$parent  访问父组件属性
+                this.$parent.message = "new Message";
+            }
+        }
+    });
+
+    window.vm = new Vue({
+        el:"#app",
+        data:{
+            num:0,
+            message:""
+        },
+        methods:{
+            receiveFun(val){
+                console.log(val);
+                this.num = val;
+            },
+            handleEvent(){
+                this.$child.counter = 10;
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOMContentLoaded事件</title>
+</head>
+<body>
+<script>
+    function ready(fn){
+        if(document.addEventListener){
+            document.addEventListener("DOMContentLoaded",function(){
+                document.removeEventListener("DOMContentLoaded",arguments.callee,false);
+                fn();
+            },false);
+        }else if(document.attachEvent){
+            //如果IE(确保当前页面是在iframe中加载时，事件依旧会被安全触发)
+            document.attachEvent('onreadystatechange',function(){
+                if(document.readyState == "complete"){
+                    document.detachEvent("onreadystatechange",arguments.callee);
+                    fn();
+                }
+            });
+
+            //如果是IE且页面不在iframe中时，轮询调用doScroll 方法检测DOM是否加载完毕
+            if(document.documentElement.doScroll && typeof window.frameElement === "undefined"){
+                try{
+                    document.documentElement.doScroll('left');
+                }catch(error){
+                    return setTimeout(arguments.callee,20);
+                };
+                fn();
+            }
+        }
+    };
+</script>
+</body>
+</html>

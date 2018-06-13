@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用innerHTML添加元素</title>
+</head>
+<body>
+<ul id="list">
+
+</ul>
+<script>
+    var listNd = document.querySelector("#list");
+    //createElement方式
+    console.time();
+    for(var i=0;i<10;i++){
+        var liDom = document.createElement("li");
+        liDom.innerText = i+1;
+        listNd.appendChild(liDom);
+    }
+    console.timeEnd();
+
+
+    //innerHTML方式（推荐这种写法）因为DOM的操作减少了，只需要操作一次dom
+    console.time();
+    var _html = "";
+    for(var i=0;i<10;i++){
+        _html += `<li>${i}</li>`;
+    }
+    listNd.innerHTML = _html;
+    console.timeEnd();
+
+    let pNd = document.createElement("p");
+    pNd.innerHTML = "Hello <b>World</b>";
+    listNd.appendChild(pNd);
+</script>
+</body>
+</html>

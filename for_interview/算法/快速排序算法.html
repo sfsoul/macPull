@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>快速排序算法</title>
+</head>
+<body>
+<script>
+    /*
+    * 快速排序三步骤：
+    *   1.在需要排序的数组中，任选一个元素作为"基准"。
+    *   2.将小于基准和大于基准的元素分别放到两个新的数组中，等于基准的元素可以放在任一数组。
+    *   3.对于两个新的数组不断重复第一步第二步，直到数组只剩下一个元素，此时step2的两个数组
+    *   已经有序，排序结果也很容易得到了(leftArray+基准+rightArray)。
+    */
+    var arr = [10,100,8,5,200,1];
+    function quickSort(arr) {
+        if(Object.prototype.toString.call(arr) !== "[object Array]") return new Error("arguments must be a Array");
+        if(arr.length <= 1) return arr;
+        var mid = ~~(arr.length/2),
+            midItem = arr.splice(mid,1)[0],
+            leftArr = [],
+            rightArr = [];
+        arr.forEach(function(item,idx){
+            if(item <= midItem){
+                leftArr.push(item);
+            }else{
+                rightArr.push(item);
+            }
+        })
+        console.log(leftArr+"==="+rightArr);
+        var _left = quickSort(leftArr);
+        var _right = quickSort(rightArr);
+        return _left.concat(midItem,_right);
+    }
+
+    var newArr = quickSort(arr);
+    console.log(newArr);
+
+    /*
+    *  若需要排序的数组有大量重复元素，可用基于三向切分的快速排序大幅度提高效率
+    *  简单说：将数组切分为三部分，大于基准元素，等于基准元素，小于基准元素。
+    *  设置一个mid数组用来保存等于基准元素的元素集合。
+    */
+    function quickSort3Way(arr){
+        if(Object.prototype.toString.call(arr) !== "[object Array]") return new Error("arguments must be a Array");
+        if(arr.length <= 1) return arr;
+        var last = arr.pop(),
+            left = [],
+            right = [],
+            mid = [last];
+        arr.forEach(function(item){
+            if(item < last){
+                left.push(item);
+            }else if(item > right){
+                right.push(item);
+            }else{
+                mid.push(item);
+            }
+        });
+        var _left = quickSort3Way(left);
+        var _right = quickSort3Way(right);
+        return _left.concat(mid,_right);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+#egamePendant {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	z-index:19;
+	-webkit-transform: translateY(100%);/*Hide before init*/
+}
+/*-----------------Left:ICON-----------------*/
+#egamePendant .ep-left{
+	width: 20%;
+	height: auto;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	margin-bottom: 15%;
+	background: url(//imgcache.qq.com/club/common/lib/zero/widgets/egamependant/images/spr.png);
+	background-size: 338%;
+    background-position: 0 178%;
+	transition : transform 0.7s ease;
+    -webkit-transition : transform 0.7s ease;
+}
+/*Fly*/
+#egamePendant .ep-left.ep-icon-move{
+    transform : translate3d(-100%, 0,0);
+    -webkit-transform : translate3d(-100%, 0,0);
+}
+/*Logo*/
+#egamePendant .ep-left .ep-l-logo{
+	width: 76%;
+	height: 73%;
+	background: url(//imgcache.qq.com/club/common/lib/zero/widgets/egamependant/images/spr.png);
+	background-size: 410%;
+	background-position: 0 219%;
+	position: absolute;
+	top: 6%;
+	left: 1%;
+	animation: logorotate 2.5s linear infinite;
+	-webkit-animation: logorotate 2.5s linear infinite;
+}
+@keyframes logorotate{
+	0% {
+		transform: rotateY(0deg);
+		-webkit-transform: rotateY(0deg);
+	}
+	50%{
+		transform: rotateY(0deg);
+		-webkit-transform: rotateY(0deg);
+	}
+	75%{
+		transform: rotateY(0deg);
+		-webkit-transform: rotateY(0deg);
+	}
+	100%{
+		transform: rotateY(180deg);
+		-webkit-transform: rotateY(180deg);
+	}
+}
+/*Notice*/
+#egamePendant .ep-left .ep-l-notice{
+	height: 25%;
+	position: absolute;
+	bottom:0;
+	left:26%;
+	overflow: hidden;
+	width: 54%;
+}
+.ep-left .ep-l-notice .ep-l-n-txt{
+	font-size: 80%;
+	line-height: 160%;
+	width:300%;
+	height: 100%;
+	color: #ffd980;
+	position: relative;
+	white-space:nowrap;
+	animation: text-moving 4s linear infinite;
+	-webkit-animation: text-moving 4s linear infinite;
+}
+@-webkit-keyframes text-moving {
+	0% {
+	    -webkit-transform: translate3d(100%,0,0) 
+	}
+	100% {
+	    -webkit-transform: translate3d(-100%,0,0) 
+	}
+}
+
+/*----------------Right:Panel----------------*/
+#egamePendant .ep-right {
+	position: relative;
+	display: none;
+	opacity: 0;
+	overflow: hidden;
+}
+#egamePendant .ep-right .ep-box{
+	width: 100%;
+	height: 100%;
+	background: url(//imgcache.qq.com/club/common/lib/zero/widgets/egamependant/images/spr.png);
+	background-size:100%;
+	background-position: 0 0;
+	color: #ffd980;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+/*Btn*/
+#egamePendant .ep-right .ep-btn-back{
+	width: 20px;
+    height: 20px;
+	background: url(//imgcache.qq.com/club/common/lib/zero/widgets/egamependant/images/spr.png);
+	background-size:2180%;
+	background-position: 0 177.5%;
+	position: absolute;
+	top: 4%;
+    right: 2%;
+	z-index: 10;
+}
+#egamePendant .ep-right .ep-btn-lapp{
+	width: 20%;
+	display: block;
+	height: 10.2%;
+	background: url(//imgcache.qq.com/club/common/lib/zero/widgets/egamependant/images/spr.png);
+	background-size:400%;
+	background-position: 0 174%;
+	color:#000000;
+	position: absolute;
+	right: 2%;
+    bottom: 3%;
+	z-index: 10;
+	line-height: 200%;
+    text-align: center;
+}
+/*Swiper*/
+#egamePendant .ep-right .ep-swiper{
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+#egamePendant .ep-right  .swiper-wrapper .swiper-slide{
+    width: 62%;
+    height: auto;
+    margin-top:9%;
+    margin-bottom: 9%;
+    position: relative;
+}
+/*Anchor top title*/
+#egamePendant .ep-right .ep-a-title{
+	width: 100%;
+	height: 20px;
+	position: absolute;
+	top: -20px;
+	left: 0;
+	overflow: hidden;
+}
+#egamePendant .ep-right .ep-a-title .ep-a-t-icon{
+	width: 14px;
+    height: 14px;
+    margin: 3px 1px;
+	background: url(//imgcache.qq.com/club/common/lib/zero/widgets/egamependant/images/spr.png);
+    background-size: 3000%;
+    background-position: 0 180%;
+	float: left;
+}
+#egamePendant .ep-right .ep-a-title .ep-a-t-text{
+	width:90%;
+	height: 100%;
+	font-size: 12px;
+	float: left;
+	line-height: 20px;
+}
+/*Anchor bottom desc*/
+#egamePendant .ep-right .ep-a-b-desc{
+	width: 100%;
+    position: absolute;
+    bottom: -25px;
+    overflow: auto;
+	left: 0;
+	overflow: auto;
+}
+#egamePendant .ep-right .ep-a-b-desc .ep-a-b-icon{
+	width: 48px;
+    height: 18px;
+    background: url(//imgcache.qq.com/club/common/lib/zero/widgets/egamependant/images/spr.png);
+    background-size: 1000%;
+    background-position: 0 184%;
+	margin: 1px 0;
+	margin-right: 10px;
+	float: left;
+}
+#egamePendant .ep-right .ep-a-b-desc .ep-a-b-txt{
+	width: 70%;
+	overflow: hidden;
+	white-space: nowrap;
+	line-height: 20px;
+    font-size: 13px;
+	color: #FFFFFF;
+	float: left;
+}
+/*Anchor middle info*/
+#egamePendant .ep-right .ep-a-info{
+	width: 100%;
+	height: 24px;
+	color: #FFFFFF;
+	background: rgba(0,0,0,0.8);
+	position: absolute;
+	bottom: 0;
+	overflow: auto;
+}
+#egamePendant .ep-right .ep-a-info .ep-a-i-icon{
+	border-radius: 100%;
+	width: 18px;
+    height: 18px;
+    margin: 3px 5px;
+	display: inline-block;
+	float: left;
+	margin-right: 2%;
+	/* margin-left: 0.2rem;
+	margin-top: 0.1rem; */
+}
+#egamePendant .ep-right .ep-a-info span{
+	line-height: 24px;
+    font-size: 10px;
+}
+#egamePendant .ep-right .ep-a-info .ep-a-i-fans{
+	color: #ffd57b;
+}
+/*Anchor cover*/
+#egamePendant .ep-right .ep-btn-playvideo{
+	display: block;
+	overflow: hidden;
+	width: 100%;
+}
+#egamePendant .ep-right .ep-btn-playvideo .ep-video-img{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+#egamePendant .ep-right .ep-btn-playvideo .ep-video-img>div{
+	width: 27%;
+	height: 49%;
+	position: absolute;
+	top: 23%;
+	left: 37%;
+	background: url(//imgcache.qq.com/club/common/lib/zero/widgets/egamependant/images/spr.png);
+	background-size: 270%;
+	background-position: 60% 198%;
+}
+#egamePendant .ep-right .ep-btn-playvideo .ep-video-containor{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+/*When cur active, block the title desc*/
+#egamePendant .ep-right .ep-a-title, #egamePendant .ep-right .ep-a-b-desc{
+	display: none;
+}
+#egamePendant .ep-right .swiper-slide-active .ep-a-title, #egamePendant .ep-right .swiper-slide-active .ep-a-b-desc{
+	display: block;
+}
+
+
+
+

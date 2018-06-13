@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断是否为数组类型</title>
+</head>
+<body>
+<script>
+    function isArray(arr){
+        if(Array.isArray){
+            return Array.isArray(arr);
+        }else{
+            Object.prototype.toString.call(arr);
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一道关于Promise应用的面试题</title>
+</head>
+<body>
+<script>
+    //需求：红灯三秒亮一次，绿灯一秒亮一次，黄灯两秒亮一次；如何让三个灯不断交替重复亮灯？
+
+    function red(){
+        console.log("red");
+    }
+    function green(){
+        console.log("green");
+    }
+    function yellow(){
+        console.log("yellow");
+    }
+
+    var tic = function(timer,cb){
+        return new Promise((resolve,reject)=>{
+            setTimeout(function(){
+                cb && cb();
+                resolve("亮灯啦！");
+            },timer);
+        });
+    };
+
+    var d = new Promise(function(resolve,reject){resolve();});
+
+    var step = function(def){
+        def.then(function(){
+            return tic(3000,red);
+        }).then(function(){
+            return tic(2000,green);
+        }).then(function(){
+            return tic(1000,yellow);
+        }).then(function(){
+            step(def)
+        })
+    }
+
+//    step(d);
+</script>
+</body>
+</html>

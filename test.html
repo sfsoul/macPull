@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function CreateXHR(){
+        if(window.XMLHttpRequest){
+            return new XMLHttpRequest();
+        }else{
+            return new ActiveXObject("Microsoft HTTP");
+        }
+    }
+
+    function sendAjax(method,url,data,cb){
+        var xhr = new CreateXHR();
+        var data = formatData(data);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                    cb && cb(xhr.responseText);
+                }else{
+                    console.log("Error: " + xhr.status);
+                }
+            }
+        };
+        if(method == "GET" || method == "get"){
+            xhr.open(method,url+"?"+data,true);
+            xhr.send();
+        }else if(method == "POST" || method == "post"){
+            xhr.open(method,url,true);
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xhr.send(data);
+        }
+    }
+
+    function formatData(data){
+        var arr = [];
+        if(Object.prototype.toString.call(data) !== "[object Object]") return;
+        for(var key in data){
+            arr.push(encodeURIComponent(key)+"="+encodeURIComponent(data[key]));
+        }
+        arr = arr.join("&");
+        return arr;
+    }
+
+
+    //深拷贝
+    function deepCopy(obj){
+        if(typeof obj !== "object") return;
+        var newObj = obj instanceof Array ? [] : {};
+        for(var key in obj){
+            if(obj.hasOwnProperty(key)){
+                newObj[key] = typeof obj[key] === "object" ? deepCopy(obj[key]) : obj[key];
+            }
+        }
+        return newObj;
+    }
+
+    var obj = {
+        name:"zj",
+        age:25,
+        love:{
+            name:"dmy"
+        }
+    }
+
+    var ss = deepCopy(obj);
+    console.log(ss);
+</script>
+</body>
+</html>

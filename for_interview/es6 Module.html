@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ES6 Module</title>
+</head>
+<body>
+<!--<script type="module">-->
+    <!--//在script标签上面加上type="module",即可使用import功能-->
+    <!--import {cube, test, name,obj} from './main.js';-->
+    <!--console.log(cube(3));-->
+    <!--test();-->
+    <!--console.log(`My name is ${name}`);-->
+
+    <!--console.log(obj);-->
+<!--</script>-->
+<script src="main.js"></script>
+<script>
+    var ss = (function(){
+        var myGrades = [93, 95, 88, 0, 55, 91];
+
+        function test(){
+            console.log(myGrades);
+        }
+        return {
+            test:test
+        };
+    })();
+</script>
+</body>
+</html>

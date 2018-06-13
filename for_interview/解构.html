@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解构</title>
+</head>
+<body>
+<script>
+    const targetArray = [1,[2,3],4];
+    const formater = "[a,[b],c]";
+
+    const destructuringArray = (values,keys) =>{
+        try{
+            const obj = {};
+            if(typeof keys === 'string'){
+                keys = JSON.parse(keys.replace(/\w+/g, '"$&"'));
+            }
+            const iterate = (values,keys) =>
+                    keys.forEach((key,i) => {
+                        if(Array.isArray(key)) {
+                            iterate(values[i],key)
+                        }else{
+                            obj[key] = values[i];
+                        }
+                    })
+            iterate(values,keys);
+            return obj;
+        }catch (e){
+            console.error(e.message);
+        }
+    }
+</script>
+</body>
+</html>

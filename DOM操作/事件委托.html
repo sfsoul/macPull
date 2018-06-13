@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件委托</title>
+    <style>
+        ul,li{
+            list-style: none;
+        }
+        li{
+            width: 100px;
+            height: 50px;
+            background: pink;
+            margin: 10px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 18px;
+        }
+        li span{
+            width: 30px;
+            height: 30px;
+            background: grey;
+        }
+    </style>
+</head>
+<body>
+<ul id="list">
+    <li>1</li>
+    <li>
+        2
+        <span>Hello</span>
+    </li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+<script>
+    var listNd = document.querySelector("#list");
+    console.log(listNd);
+    var liDoms = document.querySelectorAll("li");
+    var len = liDoms.length;
+    listNd.addEventListener("click",function(e){
+        var e = e || window.event;
+        var target = e.target || e.srcElement;
+        console.log(target);
+        if(target.tagName == "LI"){
+            alert(target.innerHTML);
+        }else if(target.parentElement.tagName == "LI"){
+            alert(target.parentElement.innerHTML)
+        }
+    })
+
+    var liNd = document.createElement("li");
+    liNd.textContent = len+1;
+    listNd.appendChild(liNd);
+</script>
+</body>
+</html>

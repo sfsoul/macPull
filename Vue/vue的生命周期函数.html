@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue的生命周期</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{msg}}</h1>
+    <p v-show="isShow">{{msg}}</p>
+</div>
+<script src="../lib/vue.js"></script>
+<script>
+    /*
+    *  实例化vue发生了什么？
+    *   1.触发beforeCreate钩子函数 -- 组件实例刚被创建，此时无法访问到el属性和data属性等。
+    *   2.对data进行双向绑定，初始化方法(Observer Data && init events)
+    *   3.触发created钩子函数 -- 组件实例创建完成，属性已绑定，但DOM还未生成，$el属性还不存在。
+    *   4.将模板编译成函数(compile template into render function) -- 将模板template编译成AST树、render函数(new Watcher 将模板与数据建立联系)以及staticRenderFns函数(通过diff算法优化dom更新)；运行render方法，返回一个vnode对象(virtual dom)
+    *   5.触发beforeMount钩子函数 -- 模板编译/挂载之前
+    *   6.触发mounted钩子函数 -- 模板编译/挂在之后
+    *   7.修改msg的值，触发beforeUpdate钩子函数 -- 此时，元素的真实dom内容还未改变
+    *   8.重新渲染虚拟dom，并通过diff算法对比vnode节点差异更新真实dom(virtual DOM re-render and patch)
+    *   9.触发updated钩子函数 -- 此时，元素的真实dom内容已经改变。
+    *   10.调用app.$destroy()函数对组件进行销毁，触发beforeDestroy钩子函数 -- 此时内容还都是能正常访问的
+    *   11.销毁数据监听，子组件和解除事件监听！
+    *   12.触发destroyed钩子函数 -- 实例销毁后虽然dom和书写方法都还存在，但改变它们都将不再生效！
+    */
+
+
+    window.vm = new Vue({
+        el:'#app',
+        data:{
+            msg:"Hello",
+            isShow:true
+        },
+        methods:{
+            init(){
+                console.log("这是一个方法！");
+            }
+        },
+        //在实例初始化之后，数据观测(data observer)和event/watcher事件配置之前被调用。
+        beforeCreate:function(){
+            console.log("beforeCreate:" + this.msg);
+            console.log("beforeCreate:" + this.$el);
+            // console.log("beforeCreate:" + this.init());
+        },
+        /*
+        *   在实例创建完成后被立即调用。此时实例已完成以下的配置：数据观测，属性和方法的运算，
+        *   watch/event事件回调。然而，挂载阶段还没开始，$el属性目前不可见。
+        */
+        created:function(){
+            console.log("created:" + this.msg);
+            console.log("created:" + this.$el);
+            console.log("beforeCreate:" + this.init());
+            this.msg = "哈哈";
+            this.isShow = false;
+            var appNd = document.getElementById("app");
+            console.log(appNd);
+        },
+        //在挂载开始之前被调用：相关的render函数首次被调用。
+        beforeMount:function(){
+            console.log("beforeMount:");
+            console.log(this.msg);
+            console.log(this.$el);
+            var h1Nd = document.querySelector("h1");
+            console.log(h1Nd);
+            h1Nd.innerHTML = "啊啊啊"
+        },
+        mounted:function(){
+            console.log("mounted");
+            console.log(this.msg);
+            console.log(this.$el);
+        },
+        //数据更新时调用，发生在虚拟DOM打补丁之前。适合在更新之前访问现有的DOM，比如手动移除已添加的事件监听器。
+        beforeUpdate:function(){
+            console.log("beforeUpdate");
+            console.log(this.msg);
+            console.log(this.$el);
+            //此时元素的真实dom内容还未改变
+            console.log(this.$el.innerHTML);
+        },
+        updated:function(){
+            console.log("updated:");
+            console.log(this.msg);
+            console.log(this.$el);
+            //此时元素的真实dom内容已经改变
+            console.log(this.$el.innerHTML);
+        },
+        //实例销毁之前调用。此时，实例仍然完全可用。
+        beforeDestroy:function(){
+            console.log("beforeDestroy:");
+            console.log(this.msg);
+            console.log(this.$el);
+        },
+        //Vue实例销毁后调用。调用后，Vue实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
+        destroyed:function(){
+            console.log("destroyed");
+            console.log(this.msg);
+            console.log(this.$el);
+        }
+    })
+</script>
+</body>
+</html>

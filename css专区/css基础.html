@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css基础</title>
+    <style>
+        span{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            float: left;
+        }
+
+        h1{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            float: left;
+        }
+        .clearfix:after{
+            content: '';
+            display: block;
+            clear: both;
+            height: 0;
+            overflow: hidden;
+            visibility: hidden;
+        }
+
+        .wrap{
+            width:200px;
+            height: 200px;
+            background: orange;
+            margin: 100px;
+            padding: 20px;
+            /*box-sizing: content-box;*/
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<div id="app" class="clearfix">
+    <span>Hello</span>
+    <h1>hello</h1>
+    <p>我是一段很长的话语</p>
+    <h2>sdadasdas</h2>
+</div>
+
+<div class="wrap">
+    测试
+    <h1 style="width: 100px;" class="test">哈哈哈</h1>
+</div>
+<script>
+    var wrapNd = document.getElementsByClassName("wrap");
+    var h1Nd = document.getElementsByClassName("test");
+    console.log(wrapNd[0].offsetWidth);
+    console.log(wrapNd[0].style.width);
+    console.log(h1Nd[0].style.width);
+</script>
+</body>
+</html>

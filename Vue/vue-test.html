@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-test</title>
+</head>
+<body>
+<div id="app">
+    <div>
+        <h1>{{personInfo.name}}</h1>
+        <h1>{{personInfo.age}}</h1>
+        <h1>{{personInfo.sex}}</h1>
+        <h1>{{personInfo.love}}</h1>
+        <p>{{personInfo}}</p>
+    </div>
+    <button @click="addProperty">添加属性</button>
+    <child></child>
+    <child></child>
+    <child></child>
+</div>
+<script src="../lib/vue.js"></script>
+<script>
+    Vue.component("child",{
+        template:"<h3>{{msg}}</h3>",
+        data(){
+            return {
+                msg:"Hello World"
+            }
+        }
+    });
+
+
+    window.vm = new Vue({
+        el:"#app",
+        data:{
+            personInfo:{
+                name:"zj"
+            }
+        },
+        methods:{
+            addProperty(){
+                // this.$set(this.personInfo,"age",25);
+                // this.$set(this.personInfo,"sex","man");
+
+                //为对象personInfo一次增加多个属性
+                this.personInfo = Object.assign({},this.personInfo,{"age":25,"sex":"man","love":"dmy"});
+            }
+        }
+    })
+</script>
+</body>
+</html>

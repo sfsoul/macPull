@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断两个对象是否相等</title>
+</head>
+<body>
+<script>
+    /*
+    * 基本数据类型(string、number)是通过值来比较的，
+    * 而对象(Date、Array)及普通对象通过指针指向的内存中的地址来做比较。
+    */
+    var obj1 = {
+        name: "Benjamin",
+        sex : "male"
+    };
+
+    var obj2 = {
+        name: "Benjamin",
+        sex : "male"
+    };
+
+    function isObjectValueEqual(a,b){
+        var aProps = Object.getOwnPropertyNames(a);
+        var bProps = Object.getOwnPropertyNames(b);
+
+        if(aProps.length != bProps.length){
+            return false;
+        }
+
+        for(var i=0;i<aProps.length;i++){
+            var propName = aProps[i];
+            if(a[propName] !== b[propName]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    console.log(isObjectValueEqual(obj1,obj2));
+
+    function isEqual(a,b){
+        if(typeof a !== "object" || typeof b !== "object") return;
+        var aProp = Object.keys(a);
+        var bProp = Object.keys(b);
+        console.log(aProp+"===="+bProp);
+        for(var i=0,len=aProp.length;i<len;i++){
+            var propName = aProp[i];
+            if(a[propName] !== b[propName]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    console.log(isEqual(obj1,obj2));
+</script>
+</body>
+</html>

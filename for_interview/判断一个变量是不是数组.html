@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断一个变量是不是数组</title>
+</head>
+<body>
+<script>
+    var arr = [1,2,3];
+    //es5
+    function isArray(arr){
+        return Object.prototype.toString.call(arr) === "[object Array]";
+    }
+
+    //instanceof
+    arr instanceof Array //true
+
+    //es5
+    Array.isArray(arr);
+
+    //封装完整体
+    function isArray(arr){
+        if(Array.isArray){
+           return Array.isArray(arr);
+        }else{
+           return Object.prototype.toString.call(arr) === "[object Array]";
+        }
+    }
+
+    isArray(arr);
+</script>
+</body>
+</html>

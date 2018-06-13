@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    #box{
+        position: relative;
+        padding:100px;
+        background:green;
+    }
+    /*#son{*/
+        /*position: absolute;*/
+        /*left:50%;*/
+        /*top: 50%;*/
+        /*-webkit-transform: translate(-50%,-50%);*/
+        /*-moz-transform: translate(-50%,-50%);*/
+        /*-ms-transform: translate(-50%,-50%);*/
+        /*-o-transform: translate(-50%,-50%);*/
+        /*transform: translate(-50%,-50%);*/
+        /*background: pink;*/
+    /*}*/
+
+    /*或者设置 子元素的宽高*/
+    /*#son{*/
+        /*width:200px;*/
+        /*height:200px;*/
+        /*position: absolute;*/
+        /*left:50%;*/
+        /*top:50%;*/
+        /*margin-left: -100px;*/
+        /*margin-top: -100px;*/
+    /*}*/
+
+    /*绝对定位方式+四个方向置0*/
+    #son{
+        margin:auto;
+        position: absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+        width:100px;
+        height:100px;
+        text-align: center;
+        line-height:100px;
+    }
+</style>
+<body>
+<div id="box">
+    <p id="son">我是儿子</p>
+</div>
+</body>
+</html>

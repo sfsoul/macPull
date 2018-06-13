@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的生命周期</title>
+</head>
+<body>
+<div id="app">
+    <!--<h1>{{a}}</h1>-->
+    {{a}}
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    /*
+    *   beforeCreated:el和data并未初始化
+    *   created:完成data数据的初始化，el没有
+    *   beforeMount:完成了el和data初始化
+    *   mounted:完成挂载
+    */
+
+    window.vm = new Vue({
+        el:"#app",
+        data:{
+            a:"vue.js"
+        },
+        beforeCreate: function() {
+            console.log('创建前');
+            console.log(this.a);
+            console.log(this.$el);
+        },
+        created: function() {
+            console.log('创建之后');
+            console.log(this.a);
+            console.log(this.$el);
+        },
+        beforeMount: function() {
+            console.log('mount之前');
+            console.log(this.a);
+            console.log(this.$el);
+        },
+        mounted: function() {
+            console.log('mount之后');
+            console.log(this.a);
+            console.log(this.$el);
+        },
+        beforeUpdate: function() {
+            console.log('更新之前');
+            console.log(this.a);
+            console.log(this.$el);
+            console.log(this.$el.innerHTML);
+        },
+        updated: function() {
+            console.log('更新完成');
+            console.log(this.a);
+            console.log(this.$el);
+            console.log(this.$el.innerHTML);
+        },
+        beforeDestroy: function() {
+            console.log('组件销毁之前');
+            console.log(this.a);
+            console.log(this.$el);
+
+        },
+        destroyed: function() {
+            console.log('组件销毁之后');
+            console.log(this.a);
+            console.log(this.$el);
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>评论系统demo</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .i-comment-area{
+            width: 300px;
+            position: relative;
+            display: inline-block;
+            font-size: 14px;
+        }
+        .i-comment-area .i-textarea{
+            width: 100%;
+            height: auto;
+            vertical-align: bottom;
+            line-height: 1.5;
+            padding: 4px 7px;
+            border: 1px solid #dddee1;
+            border-radius: 4px;
+            color: #495060;
+            background-color: #fff;
+        }
+        .i-comment-area .i-textarea:focus{
+            box-shadow: none;
+            outline: 0;
+            border-color: #2d8cf0;
+        }
+        .i-comment-submit{
+            background-color: #2d8cf0;
+            border-radius: 4px;
+            padding: 6px 10px;
+            display: inline-block;
+            color: #fff;
+            cursor: pointer;
+            user-select: none;
+            margin-top: 10px;
+        }
+        #simple-comment{
+            width: 500px;
+        }
+        #simple-comment .title{
+            display: block;
+            font-weight: bolder;
+            font-size: 18px;
+            margin-top: 15px;
+            padding: 7px 0px;
+            border-bottom: 1px solid #ccc;
+        }
+        .comment-list li{
+            padding: 10px 0px;
+            border-bottom: 1px solid #ccc;
+        }
+        .comment-list li span{
+            display: block;
+            padding: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <i-comment @content="showCommentValue"></i-comment>
+    <h1>展示评论</h1>
+    <p>{{show}}</p>
+    <ul class="comment-list">
+        <li v-for="(item,index) in commentList">
+            <span>{{ item.time }}</span>
+            <span>{{ item.content }}</span>
+        </li>
+    </ul>
+</div>
+
+<template id="comment-component">
+    <div class="i-comment-area">
+        <textarea cols="30" rows="10" v-model="commentValue" placeholder="请输入内容" class="i-textarea"></textarea>
+        <div class="i-comment-submit" @click="handleSubmit">
+            <span>提交</span>
+        </div>
+    </div>
+</template>
+<script src="../../lib/vue.js"></script>
+<script>
+    Vue.component("i-comment",{
+        template:"#comment-component",
+        data(){
+            return {
+                commentValue:""
+            }
+        },
+        methods:{
+            handleSubmit(){
+                if(this.commentValue.length < 1){
+                    alert("请输入评论");
+                    return;
+                }
+                console.log(`当前输入内容:${this.commentValue}`);
+                this.$emit("content",this.commentValue);
+                this.commentValue = ""
+            }
+        }
+    })
+
+    window.vm = new Vue({
+        el:"#app",
+        data:{
+            show:"",
+            commentList:[]
+        },
+        methods:{
+            showCommentValue(val){
+                console.log(val);
+                // this.show = val ? val : "当前无人评论";
+                this.commentList.push({
+                    time:new Date().toLocaleString(),
+                    content:val
+                })
+            }
+        },
+        mounted(){
+            console.log(this.$children[0].$data.commentValue);
+        }
+    })
+</script>
+</body>
+</html>

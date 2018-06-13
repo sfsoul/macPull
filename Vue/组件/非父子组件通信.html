@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>非父子组件通信</title>
+</head>
+<body>
+<div id="app">
+    {{msg}}
+    <child></child>
+</div>
+<script src="../../lib/vue.js"></script>
+<script>
+    /*
+    *   基本原理：通过设置一个空的Vue实例作为总线（bus），触发组件通过调用bus实例的$emit方法，
+    *   绑定对应的事件，接收组件通过调用bus实例的$on方法，实现信息的接收。
+    */
+
+    //创建vue实例作为 总线
+    const bus = new Vue();
+
+    Vue.component("child",{
+        template:"<div><button @click='handleClick'>Dispatch</button></div>",
+        methods:{
+            handleClick(){
+                bus.$emit("showMessage","this is from childMsg");
+            }
+        }
+    })
+
+    window.vm = new Vue({
+        el:"#app",
+        data:{
+            msg:""
+        },
+        mounted(){
+            // 通过监听组件挂在完毕事件，监听对应的 showMessage 事件
+            bus.$on("showMessage",(msg)=>{
+                this.msg = msg;
+            })
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise异步加载图片</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding:0;
+    }
+    #box{
+        margin:20px auto;
+        width:200px;
+        height: 200px;
+    }
+</style>
+<body>
+<div id="box">
+
+</div>
+<script>
+    var box = document.getElementById("box");
+//    var img = new Image();
+//    img.src = "../img/2222.jpg";
+
+    function downloadImg(src){
+       return new Promise((resolve,reject)=>{
+           var img = new Image();
+           img.onload = function(){
+               resolve(img);
+           }
+           img.onerror = function(){
+               reject(new Error("img not exist"));
+           }
+           img.src = src;
+       })
+    }
+
+    Promise.all([downloadImg("../img/2222.jpg"),downloadImg("../img/8603442.jpg"),downloadImg("../img/63690558_p0_master1200.jpg")]).then((data)=>{
+        data.forEach((item,idx) =>{
+            box.appendChild(item);
+        })
+    })
+
+//    downloadImg("../img/2222.jpg").then((data)=>{
+//        box.appendChild(data);
+//    })
+</script>
+</body>
+</html>

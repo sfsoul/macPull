@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attribute和Property</title>
+</head>
+<body>
+<input type="text" id="name" name="user" class="form-control" myAttr="my-attri" value="hello" data-control="text" />
+<script>
+    var input = document.querySelector("input");
+    console.log(input.attributes);
+    var len = input.attributes.length;
+    for(var i=0;i<len;i++){
+        console.log(input.attributes[i].nodeName+"===="+input.attributes[i].nodeValue);
+    }
+</script>
+</body>
+</html>

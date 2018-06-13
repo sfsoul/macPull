@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>求一个数组中第K大的数字</title>
+</head>
+<body>
+<script>
+    var arr = [10,100,1,200,40,80,4];
+    function maxOfArr(arr,n){
+        if(Object.prototype.toString.apply(arr) !== "[object Array]") return new Error("arguments must be a array");
+        var newArr = arr.sort(function(a,b){
+            return a - b;
+        })
+        console.log(newArr);
+        return newArr[newArr.length - n];
+    }
+
+    var num = maxOfArr(arr,3);
+    console.log(num);
+</script>
+</body>
+</html>

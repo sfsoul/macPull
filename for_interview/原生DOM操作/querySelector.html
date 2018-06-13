@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>querySelectorAll</title>
+</head>
+<body>
+<ul id="list">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+<script>
+    var liDom = document.querySelectorAll("li"); //静态的
+
+    var liDom1 = document.getElementsByTagName("li");
+
+    var newLiDom = document.createElement("li");
+    newLiDom.textContent = "我是新的li标签";
+    var listDom = document.getElementById("list");
+    listDom.appendChild(newLiDom);
+
+    console.log(liDom+"==="+liDom.length);
+    console.log(liDom1+"==="+liDom1.length);
+</script>
+</body>
+</html>

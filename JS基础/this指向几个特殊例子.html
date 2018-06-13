@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this指向几个特殊例子</title>
+</head>
+<body>
+<script>
+    /*
+    * 这里的bar其实是引用了obj.foo的地址，这个地址指向的是一个函数，
+    * 也就是说bar的调用其实符合“独立函数调用”规则。所以它的this不是obj。
+    */
+
+    function foo() {
+        console.log( this.a );
+    }
+    var obj = {
+        a: 2,
+        foo: foo
+    };
+    var bar = obj.foo;
+    var a = "xxxxx";
+    bar(); // xxxxx
+
+    //这段代码隐藏的一个操作：fn = obj.foo;所以也相当于是独立调用者。
+    setTimeout( obj.foo ,100); // xxxxx
+
+    setTimeout(function(){
+        obj.foo();
+    },100); // 2
+
+
+    window.val = 1;
+    var obj = {
+        val: 2,
+        dbl: function() {
+            this.val *= 2;
+            val *= 2;
+            console.log(val);
+            console.log(this.val);
+        }
+    }
+    obj.dbl(); // 2 4
+    var func = obj.dbl;
+    func(); // 8 8
+
+
+    var length = 10;
+
+    function fn() {
+        console.log(this.length);
+    }
+
+    const obj = {
+        length: 5,
+        method: function(fn) {
+            fn();
+            //指向了地址
+            const fun = arguments[0];
+            fun();
+        }
+    };
+
+    obj.method(fn, 1); //10,10
+</script>
+</body>
+</html>

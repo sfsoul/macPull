@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h1>
+        测试一下下咯
+        <p>Hello world</p>
+    </h1>
+</div>
+<script>
+    var appNd = document.querySelector("#app");
+    var fragment = document.createDocumentFragment();
+    var child;
+
+    while (child = appNd.firstChild){
+        fragment.appendChild(child);
+    }
+    console.log(fragment);
+
+    //发布订阅模式   订阅和发布：如[fn1,fn2,fn3];
+    function Dep(){
+        //一个数组(存放函数的事件池)
+        this.subs = [];
+    }
+    Dep.prototype = {
+        addSub(sub){
+            this.subs.push(sub);
+        },
+        notify(){
+            //绑定的方法，都有一个update方法
+            this.subs.forEach(sub => sub.update());
+        }
+    };
+
+    //监听函数
+    function Watcher(fn){
+        this.fn = fn; //将fn放到实例上
+    }
+    Watcher.prototype.update = function(){
+        this.fn();
+    }
+
+    let watcher = new Watcher(() => console.log(111));
+    let dep = new Dep();
+    dep.addSub(watcher); //将watcher放到数组中,watcher自带update方法， => [watcher]
+    dep.addSub(watcher);
+    dep.notify(); // 111, 111
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise面试题目</title>
+</head>
+<body>
+<script>
+    /*
+    *   第一轮事件循环：先执行宏任务，主script，new Promise立即执行，输入【3】，执行p这个new Promise操作，
+    *   输出【7】，发现setTimeout，将回调放入下一轮任务队列（Event Queue），p的then，称为then1，放入微任务队列，
+    *   发现first的then，叫then2，放入微任务队列。执行console.log(4)，输出【4】，宏任务执行结束。
+    *   再执行微任务，执行then1，输出【1】，执行then2，输出【2】。到此，第一轮事件循环结束。开始第二轮。
+    *
+    *   第二轮事件循环：先执行宏任务里面的，也就是setTimeout的回调，输出【5】。resolve不会生效，因为p这个Promise
+    *   的状态一旦改变就不会再改变了。所以最终输出3、7、4、1、2、5.
+    *
+    */
+
+    const first = () => (new Promise((resolve,reject) =>{
+        console.log(3);
+        let p = new Promise((resolve,reject) => {
+            console.log(7);
+            setTimeout(() => {
+                console.log(5);
+                resolve(6);
+            },0)
+            resolve(1);
+        });
+        resolve(2);
+        p.then((arg) =>{
+            console.log(arg);
+        });
+    }));
+
+    first().then((arg) => {
+        console.log(arg);
+    });
+    console.log(4);
+
+    //参考文章：https://juejin.im/post/59e85eebf265da430d571f89
+</script>
+</body>
+</html>

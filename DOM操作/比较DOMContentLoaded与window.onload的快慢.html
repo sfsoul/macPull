@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>比较DOMContentLoaded与window.onload的快慢.html</title>
+</head>
+<body>
+<div id="showMsg"></div>
+<div>
+    <img src="http://ww1.sinaimg.cn/large/ae49ba57gy1fe9zofelhdj20xc0xc42s.jpg" alt="">
+    <img src="http://ww1.sinaimg.cn/large/ae49ba57gy1fe9zofahw3j20m80etq4a.jpg" alt="">
+    <img src="http://ww1.sinaimg.cn/large/ae49ba57gy1fe9zoi3ny6j20l20dw4gd.jpg" alt="">
+    <img src="http://ww1.sinaimg.cn/large/ae49ba57gy1fe9zog3tauj20m80et0uw.jpg" alt="">
+    <img src="http://ww1.sinaimg.cn/large/ae49ba57gy1fe9zofi2o5j20m80ettaq.jpg" alt="">
+    <img src="http://ww1.sinaimg.cn/large/ae49ba57gy1fe9zohjuvhj20tb0cdwvp.jpg" alt="">
+</div>
+<script src="lib/domReady.js"></script>
+<script>
+    /*
+    * 说下DOMContentLoaded与onload的区别
+    * DOMContentLoaded:就是当一个 HTML 文档被加载和解析完成后，DOMContentLoaded 事件便会被触发。
+    * onload:当页面上的所有资源都被加载完之后才会触发，包括图片、视频等等.
+    * DOMContentLoaded事件是优先于onload事件执行的
+    *
+    * 在浏览器的NetWork面板可以看到 DOMContentLoaded与onload事件执行花费的时间
+    */
+
+
+    var d = document;
+    var msgBox = d.getElementById("showMsg");
+    var imgs = d.getElementsByTagName("img");
+    var time1 = null,
+        time2 = null;
+    myReady(function() {
+        msgBox.innerHTML += "dom已加载！<br>";
+        time1 = new Date().getTime();
+        msgBox.innerHTML += "时间戳：" + time1 + "<br>";
+    });
+    window.onload = function() {
+        msgBox.innerHTML += "onload已加载！<br>";
+        time2 = new Date().getTime();
+        msgBox.innerHTML += "时间戳：" + time2 + "<br>";
+        msgBox.innerHTML += "domReady比onload快：" + (time2 - time1) + "ms<br>";
+    };
+
+</script>
+</body>
+</html>

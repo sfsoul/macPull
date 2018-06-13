@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跨域</title>
+</head>
+<body>
+<script>
+    /*
+    *   跨域产生来源于浏览器的同源策略，指协议、域名、端口三者都相同的情况下，
+    *   才允许访问cookie、localStorage或者发送ajax请求。
+    */
+
+
+    //为什么禁止跨域？
+    /*
+    *   跨域访问会带来许多安全问题。如，cookie一般用于状态控制，常用于存储登录的信息，若
+    *   允许跨域访问，那么别的网站只需要一段脚本就可以获取你的cookie，从而冒充你的身份去登录网站，
+    *   造成非常大的安全问题。
+    */
+
+
+    //JSONP跨域
+    function addScriptTag(src){
+        var script = document.createElement("script");
+        script.setAttribute("type","text/javascript");
+        script.src = src;
+        document.body.appendChild(script);
+    }
+
+    window.onload = function(){
+        addScriptTag("http://example.com/ip?callback=foo");
+    }
+
+    function foo(data){
+        console.log(data);
+    }
+</script>
+</body>
+</html>

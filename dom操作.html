@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom操作</title>
+</head>
+<body>
+<div id="app">
+    <ul id="list">
+        <li class="list">1</li>
+        <li class="list">2</li>
+        <li class="list">3</li>
+        <li class="list">4</li>
+        <li class="list">5</li>
+        <li class="list">6</li>
+    </ul>
+    <button>克隆节点</button>
+</div>
+<script>
+    var appNd = document.querySelector("#app");
+    var listNd = document.querySelector("ul");
+    var listNd1 = document.getElementsByTagName("ul");
+    var liNds = document.getElementsByClassName("list");
+    console.log(listNd);
+    console.log(listNd1);
+    console.log(liNds);
+    var btnNd = document.querySelector("button");
+
+
+    btnNd.addEventListener("click",function(){
+        var cloneNd = listNd1[0].cloneNode(true);
+        document.body.appendChild(cloneNd);
+    },false);
+</script>
+</body>
+</html>

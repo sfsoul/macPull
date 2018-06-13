@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生dom api练习</title>
+</head>
+<body>
+<div id="app" data-index="app">
+    <ul id="list">
+        <li class="btn">1</li>
+        <li class="btn">2</li>
+        <li class="btn">3</li>
+        <li class="btn">4</li>
+        <li class="btn">5</li>
+        <li class="btn">6</li>
+    </ul>
+</div>
+<button>克隆节点</button>
+<script>
+    var appNd = document.getElementById("app");
+    var appNdChildren = appNd.children;
+    var appNdChildNodes = appNd.childNodes;
+
+
+    var liNd = document.getElementsByClassName("btn");
+    console.log(liNd);
+
+    console.log(appNdChildren);
+    console.log(appNdChildNodes);
+
+    //事件代理
+    var listNd = document.getElementById("list");
+    var listNd1 = document.querySelector("#list");
+
+    //获取ul下的第一个元素节点
+    var firstElement = listNd.firstElementChild;
+
+    //获取ul下的第一个节点（元素节点或者文本节点）
+    var firstChild = listNd.firstChild;
+
+    console.log(firstElement);
+    console.log(firstChild);
+
+    console.log(listNd);
+    console.log(listNd1);
+    listNd.addEventListener("click",function(e){
+        console.log(e);
+        var e = e || window.event;
+        var target = e.target || e.srcElement;
+        if(target.nodeName === "LI"){
+            alert(target.innerHTML);
+        }
+    },false)
+
+    var buttonNd = document.getElementsByTagName("button")[0];
+
+    buttonNd.addEventListener("click",function(){
+        var newAppNd = appNd.cloneNode(true);
+        document.body.appendChild(newAppNd);
+    },false)
+</script>
+</body>
+</html>

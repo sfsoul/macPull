@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS专题之深浅拷贝</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<script>
+    /*
+    *   深浅拷贝的原理：
+    *   对于字符串类型，浅复制是对值的复制；对于对象来说，浅复制是对对象地址的复制，并没有开辟
+    *   新的栈（没有开辟新的内存空间），也就是复制的结果是两个对象指向同一个地址（指向堆中的同一个地址），
+    *   修改其中一个对象的属性，则另一个对象的属性也会改变。
+    *   而深复制则是开辟新的内存空间，两个对象对应两个不同的地址，修改一个对象的属性，不会改变另一个对象的属性。
+    */
+
+
+    var obj = {
+        name:"zj",
+        obj1:{
+            name:"dmy"
+        },
+        arr:[1,2,3]
+    }
+    //浅拷贝实现
+    var shallowCopy = function(obj){
+        //只拷贝对象
+        if(typeof obj !== "object") return;
+        //根据obj的类型判断是新建一个数组还是对象
+        var newObj = obj instanceof Array ? [] : {};
+        //遍历obj，并且判断是obj的属性才拷贝
+        for(var key in obj){
+            if(obj.hasOwnProperty(key)){
+                newObj[key] = obj[key];
+            }
+        }
+        return newObj;
+    }
+
+    //深拷贝实现
+    var deepCopy = function(obj){
+        if(typeof obj !== "object") return;
+        var newObj = obj instanceof Array ? [] : {};
+        for(var key in obj){
+            if(obj.hasOwnProperty(key)){
+                newObj[key] = typeof obj[key] === "object" ? deepCopy(obj[key]) : obj[key];
+            }
+        }
+        return newObj;
+    }
+</script>
+</body>
+</html>

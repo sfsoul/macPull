@@ -1,0 +1,554 @@
+
+<!DOCTYPE HTML>
+<!--headTrap<body></body><head></head><html></html>-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="author" content="templatable by shinelgz@2014">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>test</title>
+    <meta itemprop="name" content="GT全新篇章"/>
+    <meta itemprop="image" content="https://imgcache.gtimg.cn/vipstyle/game/act/pagemaker_shine/1490843949864/longzhu.png" />
+    <meta name="description" itemprop="description" content="听说你缺一些龙石？福利嘉年华海量龙石大奖等你来~" />
+    <link rel="stylesheet" href="//imgcache.gtimg.cn/vipstyle/mobile/tmpl/common/css/style.css?t=20151228" /><script>var _templateid = "gamecommon_v2";</script>
+    <script src="//imgcache.gtimg.cn/club/common/lib/notifyWebStatus.js?max_age=86400000&t=20160818"></script>
+    <script>window.liteJsBridge && liteJsBridge.notifyWebStatus({'status': 11});</script>
+</head>
+<body>
+<div class="zero-ui-dialog zero-ui-dialog-notice" style="opacity:1;" id="loading"><div class="zero-dialog-notice-container"><i class="zero-ui-loading zero-ui-loading-white"></i></div></div><div class="act-wrapper main" style="opacity:0;" data-mname="main"><div class="act-content" data-mname="body"><div class="bulletin" id="container" style="display:none;"></div><div class="act-mod static-img" data-createtime="1511927485124"><div id="hhhbbb">
+    <style>
+        body{background: white;}
+        #returnByPassword{
+            border: 1px solid black;
+            padding: 10px
+        }
+        #returnByPassword p {
+            border: 1px solid red;
+            word-wrap: break-word;
+            word-break: normal;
+        }
+        #allBtn>a{
+            border: 1px solid black;
+            margin: 10px;
+            padding: 10px;
+            display: inline-block;
+        }
+
+        #hbForm .one-div{
+            border: 1px solid black;
+            padding-left: 5px;
+            margin: 5px 0;
+        }
+
+        ._hide{
+            display: none;
+        }
+    </style>
+    <div id="hbForm">
+        <!-- <div class="one-div">
+            <h3>最外层 数据</h3>
+            <p id="total_amount">
+                total_amount 单位分
+                <br>
+                <input type="checkbox" checked="checked"><input type="text" value="1">
+            </p>
+            <p>appInfo：<input type="text" placeholder="默认空" id="appInfo"></p>
+            <p>come_from：<input type="text" placeholder="默认空" id="come_from"></p>
+        </div> -->
+    </div>
+    <div id="allBtn">
+        <a href="#" id="qianghb" style="cursor: pointer;">【按钮】抢红包</a><a href="#" id="typeMoneyNum" style="cursor: pointer;">【按钮】包红包</a>
+        <a href="#" id="refreshPage" style="cursor: pointer;">【按钮】刷新页面</a>
+    </div>
+    <div id="returnByPassword">
+        <h3>LOG：</h3>
+        <a href="#" id="clearLog" style="cursor: pointer;">清空</a>
+        <div id="logs"></div>
+    </div>
+</div></div></div></div>
+<script type="text/javascript" src="//imgcache.gtimg.cn/c/=/club/mobile_web/zepto.min-1.1.6.js,/club/game/zero/zero.m.min-6.0.1.js,/club/common/lib/zero/widgets/autofixed/AutoFixedTemplate.js?max_age=86400000&v=5.0"></script>
+<script> var __esmqq = true; </script><script>if(window.location.protocol !== 'https:'){!function(a){function b(a){var b=new RegExp("(^|&)"+a+"=([^&]*)(&|$)"),c=location.search.substr(1).match(b);return null!=c?decodeURIComponent(c[2]):null}function c(){var a="iframe_hijack_redirected";if(b(a))f(0);else if(self!=top){var c=location.href,d=c.split("#");d[0]+=location.search?"&"+a+"=1":"?"+a+"=1";try{top.location=d.join("#")}catch(e){}}}function d(){if(a.XMLSerializer){var b=(new XMLSerializer).serializeToString(document);if(b=b.replace(/<script>[\s\S]*<\/script>/g,""),b.indexOf("<!--headTrap")>=0&&b.indexOf("<!--tailTrap")>=0){var c=b.indexOf("<!--headTrap<body></body><head></head><html></html>-->"),d=b.indexOf("<!--tailTrap<body></body><head></head><html></html>-->");(0>c||0>d)&&f(3)}}}function e(a){var b=a?a.srcElement:document.documentElement;if(b.outerHTML){for(var c=/(https?:)?\/\/[a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6}(:[0-9]{1,6})?\/?[^'")\s]*/gi,d=/^(https?:)?\/\/([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})/i,e=[],g=[b],h=b.getElementsByTagName("*"),i=0;i<h.length;i++)g.push(h[i]);for(var i=0;i<g.length;i++){var j=g[i],l=null;if("IMG"==j.nodeName.toUpperCase()&&j.src&&d.test(j.src))l=[j.src];else if("LINK"==j.nodeName.toUpperCase()){var m=j.getAttribute("href");m&&d.test(m)&&(l=[m])}else"STYLE"==j.nodeName.toUpperCase()?l=j.innerHTML.match(c):"IFRAME"==j.nodeName.toUpperCase()&&j.src&&d.test(j.src)?l=[j.src]:j.getAttribute("style")&&(l=j.getAttribute("style").match(c));if(l){for(var n=!1,o=0;o<l.length;o++){var p=d.exec(l[o]);p&&p[2]&&k.test(p[2])||(e.push(l[o]),n=!0)}n&&j.setAttribute("style","display:none;position:fixed;top:10000px;")}}e.length&&(a&&b.setAttribute("style","display:none;position:fixed;top:-10000px;"),f(a?2:1,e))}}function f(a,b){if(!l[a]){l[a]=!0;var c={project_id:j,department_id:i,hijack_type:a,page_url:location.href,blocked:1};if(b&&(c.ad_url=b.join("||")),1==a){for(var d=document.head.outerHTML,e=document.body.children,f=0;f<e.length;f++){var g=e[f];"IFRAME"==g.nodeName.toUpperCase()&&g.src&&0!=g.src.indexOf("http")||(d+=g.outerHTML)}d=d.replace(/<script[^>]*>[\s\S]*?<\/script>/gi,""),d=d.replace(/<style[^>]*>[\s\S]*?<\/style>/gi,""),c.html_dom=d}setTimeout(function(){h(c)},500)}}function g(){50*Math.random()<1&&h({project_id:j,department_id:i,pv:1})}function h(a){var b=[];for(var c in a)b.push(c+"="+encodeURIComponent(a[c]));var d=new XMLHttpRequest;d.open("POST","http://hijack.qq.com/cgi/r",!0),d.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),d.send(b.join("&"))}var i,j,k=/^.*\.(qq\.com|gtimg\.cn|qlogo\.cn|qpic\.cn|sogoucdn\.com)$/i,l={};a.HijackReport={init:function(a){i=a.departmentId,j=a.projectId,a.whiteReg&&(k=a.whiteReg)},watch:function(){a.addEventListener("DOMNodeInserted",e),c(),document.addEventListener("DOMContentLoaded",function(){e(),d(),g()},!1)}}}(window);try{HijackReport.init({departmentId: 1,projectId: 23});HijackReport.watch();}catch(e){}}</script><script>
+    function initHongbao(){
+        $('body').on('click', 'a[href="#"]', function(e){e.preventDefault();});
+        var args = {};
+        //渲染相关
+        var render = function(){
+            var level = zMsg.getFormData(4);
+            level.forEach(function(item){
+                var id = item.name.split('.');
+                makeDiv(zMsg.getFormData(item.fid), id[id.length-1], item.name);
+            });
+        };
+        var $hbForm = $('#hbForm')
+        var makeDiv = function(arr, title, level){
+            var html1 = '<div class="one-div" id="{title}" data-level="{level}"><h3>{title} 字段</h3>{html}</div>';
+            var html2 = '<p class="{show}" id="{en_name}"><span>{en_name}</span> {cn_name} <br> <input type="checkbox" {ischecked}> <input data-type="{type}" type="text" value="{value}" placeholder="{placeholder}"> </p>';
+            var _html2 = []
+            arr.forEach(function(item,index){
+                _html2.push( zUtil.sprintf( html2, $.extend({ show: item.isshow==1 ? '_show' : '_hide', ischecked : item.checked==1 ? 'checked="checked"' : '' },item) ) );
+            })
+            var result = zUtil.sprintf(html1, {
+                title : title,
+                html :  _html2.join(""),
+                level : level,
+            });
+            $hbForm.append(result);
+        }
+        var getDivInfo = function(){
+            args = {}; //初始化
+            var all = $hbForm.find('div.one-div'), $oneDiv;
+            $.each(all, function(index,oneDiv){
+                $oneDiv = $(oneDiv);
+                var level = $oneDiv.attr('data-level').split('.');
+                var target;
+                //生成首层之后的结构
+                level.forEach(function(levelKey){
+                    if(levelKey == 'outer'){
+                        target = args;
+                    }else{
+                        (typeof target[levelKey] !== "object") && (target[levelKey] = {})
+                        target = target[levelKey];
+                    }
+                });
+                //收集数据
+                makeObj( $oneDiv, target, level[level.length-1] );
+            });
+            return args;
+        }
+        var makeObj = function( $oneDiv, target, keyName ){
+            //默认字段补充
+            switch(keyName){
+                case "outer" :
+                    target.userId = loginUserInfo.uin;
+                    target.userName = loginUserInfo.nick;
+                    break;
+                case "extra_data" :
+                    target.skey = loginUserInfo.skey;
+                    target.skey_type = "2";
+                    target.name = args.nick;
+                    break;
+            }
+
+            var $allP = $oneDiv.find('p'), $p;
+            $.each($allP, function(index,p){
+                $p = $(p);
+                if( $p.hasClass('_show') && $p.find('input:checked').length ){
+                    var _keyName = $p.attr('id');
+                    var $text = $p.find('input[type="text"]');
+                    var type = $text.attr('data-type');
+                    var val = $text.val();
+                    switch(type){
+                        case 'str' :
+                            val = val+'';
+                            break;
+                        case 'int':
+                            val = +val;
+                            break;
+                    }
+                    target[_keyName] = val;
+                }
+            })
+        }
+        //展示请求信息
+        var logPage = function(msg){
+            var _msg = "", tpl;
+            if( msg instanceof Array ){
+                msg.forEach(function(item,index){
+                    tpl = item;
+                    if(typeof tpl === 'object'){
+                        tpl = JSON.stringify( tpl );
+                    }
+                    _msg += tpl;
+                });
+                tolog(_msg);
+            }else{
+                tolog(JSON.stringify(msg));
+            }
+
+            function tolog(m){
+                $('#logs').append('<p>'+ m +'</p>');
+            }
+        }
+        var isMQQ = function(){
+            return mqq.device.isMobileQQ();
+        }
+        //获取登录用户基本数据
+        var getUserInfo = function(){
+            var _callback = new qv.zero.CallBack();
+            if(!isMQQ()){
+                setTimeout(function(){
+                    _callback.execute({
+                        uin : +zUtil.getUin()+'',
+                        nick : +zUtil.getUin()+'',
+                        skey : zUtil.getcookie('skey')+''
+                    });
+                },0)
+                return _callback;
+            }
+
+            var ee = arguments.callee;
+            //skey会过期不做缓存
+            /*if(ee.cache){
+             setTimeout(function(){
+             _callback.execute(ee.cache);
+             },0)
+             return _callback;
+             }*/
+            mqq.data.getUserInfo(function(result) {
+                ee.cache = result||{} //uin,nick,skey,sid
+                _callback.execute(ee.cache);
+            });
+            return _callback;
+        }
+        var openTenpayView = function(args){
+            var _callback = new qv.zero.CallBack();
+            if(!isMQQ()){
+                setTimeout(function(){
+                    _callback.execute(false);
+                },0);
+                return _callback;
+            }
+            mqq.tenpay.openTenpayView(args, function(result) {
+                _callback.execute(result);
+            });
+            return _callback;
+        }
+        <!--包红包-->
+        $('#typeMoneyNum').click(function(){
+            qv.zero.LoadingMark.show();
+            getUserInfo().add(function(loginUserInfo){
+                window.loginUserInfo = loginUserInfo;
+                var args = getDivInfo();
+                console.log(args);
+                logPage(['【openTenpayView 请求参数】<br>',args]);
+                openTenpayView(args).add(function(json){
+                    qv.zero.LoadingMark.hide();
+                    json === false && (json = 'not in moblie qq');
+                    try {
+                        logPage(['【openTenpayView 返回结果】<br>',json]);
+                    } catch (e) {
+                        logPage(e)
+                    }
+                })
+            });
+        });
+        <!--按钮 刷新页面-->
+        $('#refreshPage').click(function(){
+            window.location.reload();
+        });
+        <!--清空操作-->
+        $('#clearLog').click(function(){
+            $('#logs').html('');
+        });
+        render();
+        var _mqqInvoke = function(namespace, method, params, callback){
+            if (mqq.__isWkWebView) {
+                params.callback = mqq.callback(callback);
+                mqq.invoke(namespace, method, params);
+            } else {
+                mqq.invoke(namespace, method, params, callback);
+            }
+        };
+        var qianghb = function(){
+            var bid = (zURL.get('bid') || 10)+"";
+            var viewid = (zURL.get('viewid') || 10)+"";
+            var listid = zURL.get('listid'); //红包ID
+            var feedsid = zURL.get('feedsid'); //业务id
+            if(listid == ""){
+                zMsg.show('url params [listid] is empty');
+                return;
+            }
+            if(feedsid == ""){
+                zMsg.show('url params [feedsid] is empty');
+                return;
+            }
+            //{"bid":"10","viewid":"10","extstr":{"listid":"1","feedsid":"1234"}}
+            var _args = {"bid":bid,"viewid":viewid,"extstr":{"listid":listid+"","feedsid":feedsid+""}};
+            _args.extstr = JSON.stringify(_args.extstr);
+            var callback = function(json){
+                logPage(['【notifyViewUpdate 调用结果】<br>',json]);
+            };
+            logPage(['【notifyViewUpdate 请求参数】<br>',_args]);
+
+            //命名空间
+            var arr = ['qw_charge','notifyViewUpdate',_args, function(json){
+                callback(json)
+            }]
+            try{
+                console.log(arr);
+                _mqqInvoke.apply(null, arr);
+            }catch(e){
+                logPage(['【notifyViewUpdate error catch】<br>',e.toString()]);
+            }
+
+        }
+        $('#qianghb').click(function(){
+            qianghb();
+        });
+    }
+
+
+</script>
+<script type="text/javascript" data-id="mainfn">
+
+    page = new qv.zero.Page({
+        jsonid : 88324,
+        game : "sgame",
+        cache : 1511927452353,
+        mqqEnv : true,
+        onlyMobile:true,
+        isOpenSQView : window.__esmqq || false,
+        redirectUrl:"",
+        hideTips:true,
+        preloads : ['SQGameManager','AmsEz'],
+        changebtns : [],
+        afterInit : function(){
+
+            initHongbao();
+
+            zHttp.bindRequestWidget({onReady : function(args, json){
+                if( zURL.get('care') ){//兼容关怀
+                    args.care = zURL.get('care');
+                }
+            }});
+            var loading = $('div.zero-ui-dialog,div.zero-ui-dialog-notice');
+            loading && $.each(loading,function(index,item){ //防止重复Loading
+                $(item).attr('id') === 'loading' && $(item).hide();
+            });
+            zUtil.isAndroid() && $('body > div.act-wrapper.main > div.act-content > div').css({'transform': 'scale(1.002)'});
+            var gc = page.getGameConfig(this.game), me = this;
+            this.isPCGame = gc.c > 1;
+            if(!this.isPCGame){
+                qv.zero.SQGameManager.isInstalled(this, function(ret){
+                    if(!ret){
+                        $('.startbg').each(function(i, el){
+                            el.src = el.getAttribute('data-src');
+                        });
+                        initbgimg();
+                    }
+                });
+            }
+
+            var showAndhide = this.isIOS ? function(i) {if(i.getAttribute('data-plat') === '2'){i.style.display = 'none';}} :
+                this.isAndroid ? function(i) {if(i.getAttribute('data-plat') === '1'){i.style.display = 'none';}} :
+                    null;
+            showAndhide && [].forEach.call(document.querySelectorAll('[data-plat]'), showAndhide);
+
+            setTimeout(function(){
+                if (me.page_open_time) {
+                    if ((+new Date()-me.page_open_time)/60000>10) {
+                        _expire(me.page_open_time);
+                    }
+                }
+            }, 500);
+
+            me.initbtnbginfo();
+            me.setbuttombg();
+
+            (function(exp){
+                var PAY = exp.PAY || (exp.PAY = {});
+                if(!PAY.showPay){
+                    PAY.showPay = function (months) {
+                        OZ.report({operType: '点击' , operDesc: '开通会员'});
+                        zUtil.require('//imgcache.gtimg.cn/club/platform/lib/pay/smartpay.simplify.js', function(){
+                            qw.smartPay.openService({
+                                data : null,
+                                aid : page.pcfg.aid,
+                                type : "svip",
+                                month : months || 1,
+                                onPayCallback : function(result){
+                                    if(result && result.ret == 0){
+                                        OZ.report({operType: '点击' , operDesc: '开通会员-成功'});
+                                    }
+                                }
+                            });
+                        });
+                    }
+                }
+            })(window);
+
+            window.liteJsBridge && liteJsBridge.notifyWebStatus({'status': 13});//上报状态
+
+        },
+        initbtnbginfo: function(){
+            var list = this.btnbginfo = {}, me = this;
+            $('a[data-click_pic]').each(function(i, item){
+                var mod = $(item);
+                var joinactid = mod.attr('data-query_actid'), path = mod.attr('data-click_pic'), count = mod.attr('data-change_condition') || 0, actid = mod.data('actid');
+                if(joinactid && path && actid && count){
+                    me.changebtns.push(+actid);//记录会改变背景的按钮
+                    (list[joinactid] || (list[joinactid] = [])).push({'actid' : actid, 'path' : path, 'count' : count, 'mod' : mod, nodename : mod[0].nodeName.toLowerCase()});
+                }
+            });
+        },
+        setbuttombg : function(id){
+            var list = this.btnbginfo, me = this;
+            for(var i in list){
+                if(list.hasOwnProperty(i)){
+                    var data = list[i];
+                    if(data.length == 0 || (id && data.filter(function(i){return i.actid == id}).length == 0)){
+                        continue;
+                    }
+                    zHttp.request({actid:i, _c:'view', nocache:1}, function(json){
+                        if(json.ret === 0 && json.data.op.join){
+                            var recode = json.data.op.join, num, nodename, count, mod;
+                            for(var j = data.length-1;j>=0;--j){
+                                num = recode[data[j]] || 0;
+                                nodename = data[j].nodename;
+                                count = data[j].count;
+                                mod = data[j].mod;
+                                if(num >= count){
+                                    $('a[data-click_pic][data-actid="'+ actid +'"]').off('click');
+                                    if(nodename === 'img'){
+                                        mod.attr('src', path);
+                                    } else {
+                                        mod.css('background-image', 'url('+ path +')');
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        },
+        isChangeBtn: function(actid){
+            return $.inArray(actid, this.changebtns) > -1;
+        },
+        getFromCache : function(key, defaultval){
+            key = zUtil.getUin() + '/' + key;
+            var nt = +new Date, obj;
+            try { obj = JSON.parse(localStorage.getItem(key)); } catch (e){ return defaultval; }
+            if(!obj) return defaultval;
+            if(nt > obj.exp){ //过期
+                try { localStorage.setItem(key, null); } catch (e){}
+                return defaultval;
+            }
+            return obj.v || defaultval;
+        },
+        setToCache : function(key, val, stamp){
+            try{
+                key = zUtil.getUin() + '/' + key;
+                var value = '', obj = {v: val};
+                if(stamp > 0){
+                    obj.exp = (+new Date()) + (+stamp);
+                }
+                value = JSON.stringify(obj);
+                localStorage.setItem(key, value);
+            } catch (e){ }
+        },
+        followQQGame :function (cb){
+            var me = this, key = '__followQQGame__', o_val = this.getFromCache(key);
+            if(o_val){
+                cb(o_val);
+            } else {
+                zHttp.send({actid :124652}, function(r){
+                    o_val = { isfollow : (r.ret !== 40100) }; //默认关注了
+                    me.setToCache(key, o_val, 43200000);
+                    cb(o_val);
+                });
+            }
+        },
+        followGameCenter :function (cb){
+            var me = this, key = '__followGameCenter__', o_val = this.getFromCache(key);
+            if(o_val){
+                cb(o_val);
+            } else {
+                if (window.mqq && mqq.compare("5.7") >= 0) { //只有版本大于
+                    var id = mqq.android ? '489' : '490';
+                    mqq.invoke('lebaPlugin', 'getPluginStatus', {
+                        id: id, callback: mqq.callback(function (json) {
+                            o_val = {isOpen: json.isOpen};
+                            me.setToCache(key, o_val, 43200000);
+                            cb(o_val);
+                        })
+                    });
+                } else {
+                    o_val = {isOpen: 1};
+                    me.setToCache(key, o_val, 43200000);
+                    cb(o_val);
+                }
+            }
+        },
+        //关注游戏号
+        followGameNum :function(puin,cb){
+            var me=this, key='__followGameNum__',o_val= this.getFromCache(key);
+            if(o_val){
+                cb(o_val);
+            } else {
+                zHttp.send({actid :163921,puin: puin}, function(r){
+                    var is_follow_puin = r.data.rule.is_follow_whitelist_puin
+                    o_val = { isfollow : is_follow_puin};
+                    me.setToCache(key, o_val, 43200000);
+                    cb(o_val);
+                });
+            }
+        },
+        report : function (data) {
+            this.addReadyFire(function () {
+                var appid = '';
+                try{ appid = qv.zero.Idip[this.game.toLocaleLowerCase()].appid;} catch (e){ appid = '';}
+                qv.zero.report.ToGameCenter($.extend(true, {
+                    'appid': appid,
+                    'actid': this.jsonid,
+                    src: this.jsonid
+                }, data));
+            });
+        },
+        openOfficalAccount : function (uin){
+            var isQQ = mqq && mqq.device && mqq.device.isMobileQQ(); isQQ ? mqq.ui.showOfficalAccountDetail({uin:String(uin),showAIO:true}) : (window.location.href = 'http://share.mp.qq.com/cgi/share.php?uin='+uin+'&jumptype=1&card_type=public_account')
+        }
+    });
+
+    function initbgimg(){
+        $('img[data-src]').each(function(){
+            var me = $(this), src = me.data('src');
+            if(src){
+                me.attr('src', src);
+            }
+        });
+    }
+
+    zHttp.bindRequestWidget({onComplete : function(args, json){
+        if(page.isChangeBtn(args.actid)){
+            $('a[data-click_pic][data-actid="'+ args.actid +'"]').each(function(i, item){
+                page.setbuttombg(args.actid);
+            });
+        }
+    }});
+
+</script>
+<script type="text/javascript" data-id="changeModuleBackgroundBySystem">	if(page.isIOS || page.isAndroid){
+    var _attrn = page.isIOS ? 'src-ios' : 'src-and';
+    $('.box-img img').each(function(i,img){
+        var $img = $(img), av = $img.attr(_attrn);
+        if(av){
+            $img.attr('src',av);
+        }
+    });
+}
+
+</script>
+
+<script>
+    var __share_info = {share_url:("http://youxi.vip.qq.com/m/act/6edcc66c85_sgame_88324.html?_wv=1&pvsrc=310".replace(/^https?:/,window.location.protocol)),title:"GT全新篇章",desc:"听说你缺一些龙石？福利嘉年华海量龙石大奖等你来~",image_url:("http://imgcache.gtimg.cn/vipstyle/game/act/pagemaker_shine/1490843949864/longzhu.png".replace(/^https?:/,window.location.protocol)),sourceName:"QQ手游",puin:"2747277822"};
+    page.addReadyFire(function(){
+        if(window.mqq && mqq.ui && mqq.ui.setOnShareHandler){
+            mqq.ui.setOnShareHandler(function(type){
+                __share_info.share_type = type;
+                __share_info.back = true;
+                mqq.ui.shareMessage(__share_info, function(ret) {
+                    page.emit && page.emit("system.shared", ret);
+                });
+            });
+        }
+        (typeof page.zPageReady === "function") && page.zPageReady();
+    })
+</script>
+<script>window.liteJsBridge && liteJsBridge.notifyWebStatus({'status': 12});</script>
+</body>
+</html>
+<!--tailTrap<body></body><head></head><html></html>-->

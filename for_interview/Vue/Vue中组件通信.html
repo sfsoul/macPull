@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中组件通信</title>
+</head>
+<body>
+<div id="app">
+    <!--<child :msg="flag"></child>-->
+    <child :msg="flag"></child>
+    <my-child @son-test="fatherTest"></my-child>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    //将组件的msg与父组件的数据flag绑定在一起。改变vm.flag的值会对组件数据进行重新渲染
+    Vue.component("child",{
+        props:{
+            msg:{
+                type:String
+            }
+        },
+        data(){
+            return {
+                name:"测试"
+            }
+        },
+        template:`<h1>
+                    {{msg}}
+                    <p>{{name}}</p>
+                 </h1>`
+    })
+
+    Vue.component("myChild",{
+        template:"<button @click='test'>点我试试呗</button>",
+        data(){
+            return {
+                name:"张靖"
+            }
+        },
+        methods:{
+            test(){
+                this.$emit("son-test",this.name);
+            }
+        }
+    })
+
+
+    window.vm = new Vue({
+        el:"#app",
+        data:{
+            flag:"测试啊"
+        },
+        methods:{
+            fatherTest(name){
+                console.log(name);
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取url上参数</title>
+</head>
+<body>
+<script>
+    function getUrlQuery(key){
+        var url = window.location.href;
+        var queryStr;
+        var idx;
+        var arr = [];
+        var val;
+        var strArr;
+        if(!url || url.length <= 1) return;
+        if(url.indexOf("?") === -1){
+            return;
+        }else{
+            idx = url.indexOf("?");
+            queryStr = url.substr(idx+1);
+        }
+        arr = queryStr.split("&");
+        arr.forEach(function(item,idx){
+            strArr = item.split("=");
+            if(key === strArr[0]){
+                val = strArr[1];
+            }
+        })
+        return val;
+    }
+
+    console.log(getUrlQuery("ss"));
+</script>
+</body>
+</html>

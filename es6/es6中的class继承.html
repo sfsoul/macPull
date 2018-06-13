@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>es中的class继承</title>
+</head>
+<body>
+<script>
+    class A{
+        constructor(name){
+            this.name = name;
+        }
+        getName(){
+            console.log(this.name);
+        }
+    }
+
+    class B extends A{
+        constructor(name,age){
+            super(name);
+            this.age = age;
+        }
+        getAge(){
+            console.log(this.age);
+        }
+    }
+
+    var b = new B("zj",25);
+    console.log(b);
+    console.log(b.__proto__ === B.prototype);
+    console.log(B.prototype.__proto__ === A.prototype);
+
+
+
+
+    //详见知乎链接：https://www.zhihu.com/question/38292361
+    class Cat {
+        constructor(name) {
+            this.name = name;
+        }
+
+        speak() {
+            console.log(this.name + ' makes a noise.');
+        }
+    }
+
+    class Lion extends Cat {
+        constructor(name, color) {
+            super(name); // 这个super指向什么呢?   相当于Cat.prototype.constructor.call(this,name);为子类添加属性
+            this.color = color;
+        }
+
+        speak() {
+            super.speak(); // 这个super又指向什么？ 相当于Cat.prototype.speak.call(this),执行了一次父类的speak方法
+            console.log(this.name + ' roars.');
+        }
+    }
+
+    let a = {
+        toString(){
+            return 'My little pony' + super.toString(); //这里的super又指向什么
+        }
+    }
+
+    var lion = new Lion("tiger","pink");
+    console.log(lion);
+</script>
+</body>
+</html>

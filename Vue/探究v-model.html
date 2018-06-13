@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>探究v-model</title>
+</head>
+<style>
+    [v-cloak]{
+        display: none;
+    }
+</style>
+<body>
+<div id="app" v-cloak>
+    <!--<input type="text" v-model="msg">-->
+
+    <!--模拟v-model的实现-->
+    <input type="text" :value="msg" @input="entryFunc($event.target.value)">
+    <h1>{{msg}}</h1>
+</div>
+<script src="../lib/vue.js"></script>
+<script>
+    window.vm = new Vue({
+        el:"#app",
+        data:{
+            msg:"表单信息"
+        },
+        methods:{
+            entryFunc(val){
+                this.msg = val;
+            }
+        }
+    })
+</script>
+</body>
+</html>

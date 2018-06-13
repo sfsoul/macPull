@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>异步加载JS文件</title>
+</head>
+<body>
+<script src="lib/vue.js"></script>
+<script>
+    //这种加载方式在加载执行完之前会阻止onload事件的触发
+    (function(){
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "lib/lib-flexible.js";
+        var x = document.getElementsByTagName("script")[0];
+        x.parentNode.insertBefore(s,x);
+    })();
+
+    //onload时的异步加载
+    (function(){
+        function async_load(){
+            var s = document.createElement("script");
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "lib/lib-flexible.js";
+            var x = document.getElementsByTagName("script")[0];
+            x.parentNode.insertBefore(s,x);
+        }
+        if(window.addEventListener){
+            window.addEventListener("load",async_load,false);
+        }else{
+            window.attachEvent("onload",async_load);
+        }
+    })();
+
+
+//    异步加载JS文件，并执行相应回调函数
+    function async_load(src,callback){
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = src;
+        var loaded;
+        var x = document.getElementsByTagName("script")[0];
+        if(typeof callback === "function"){
+            s.onload = s.onreadystatechange = function(){
+                if(!loaded && (!s.readyState || /loaded|complete/.test(s.readyState))){
+                    s.onload = s.onreadystatechange = null;
+                    loaded = true;
+                    callback();
+                }
+            }
+        }
+        x.parentNode.insertBefore(s,x);
+    }
+
+    async_load("1.js",function(){
+        test();
+    })
+
+
+    //test 自己写的版本
+    (function(){
+        function test(src,callback){
+            var s = document.createElement("script");
+            s.type = "text/javascript";
+            s.src = src;
+            s.async = true;
+            var scriptDom = document.getElementsByTagName("script")[0];
+            scriptDom.parentNode.insertBefore(s,scriptDom);
+            s.onload = function(){
+                callback && callback();
+            }
+        }
+        test("1.js",function(){
+//            console.log(111);
+            loadFile();
+        });
+    })()
+</script>
+</body>
+</html>

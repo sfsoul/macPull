@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flex方案</title>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    #father{
+        width:400px;
+        height:400px;
+        background: yellow;
+        display: flex;
+        display:-webkit-flex;
+        align-items: center;      /*垂直居中*/
+        justify-content: center; /*水平居中*/
+    }
+</style>
+<body>
+<div id="father">
+    <p id="son">我是儿子</p>
+</div>
+<script>
+    /*
+    *   只需要设置父节点的属性，无需设置子元素。
+    *   缺点：有兼容性问题。
+    */
+</script>
+</body>
+</html>

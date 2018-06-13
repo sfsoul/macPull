@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数科里化</title>
+</head>
+<body>
+<script>
+    //原文链接：https://segmentfault.com/q/1010000004342477
+
+    /*
+    *   当一个对象转换成原始值时，先查看对象是否有valueOf方法，如果有并且返回值是一个原始值，
+        那么直接返回这个值，否则没有valueOf或返回的不是原始值，那么调用toString方法，返回字符串表示
+    */
+
+
+    //valueOf的优先级高于toString，即先执行valueOf方法（前提是valueOf返回的值是基本数据类型），再执行toString方法
+    function add(x){
+        var sum = x;
+        var temp = function(y){
+            sum = sum * y;
+            return temp;
+        }
+        temp.toString = function(){
+            return sum;
+        }
+        temp.valueOf = function(){
+            return sum;
+        }
+        return temp;
+    }
+
+    console.log(+add(2));
+    console.log(+add(2)(3));
+</script>
+</body>
+</html>

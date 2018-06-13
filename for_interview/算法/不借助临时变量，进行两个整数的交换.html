@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>交换两个整数</title>
+</head>
+<body>
+<script>
+    var a = 20;
+    var b = 40;
+
+    function swap(a,b){
+        b = b - a;
+        a = a + b;
+        b = a - b;
+        return [a,b];
+    }
+
+    var newVal = swap(a,b);
+    console.log(newVal);
+</script>
+</body>
+</html>

@@ -1,0 +1,502 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<base href="//imgcache.gtimg.cn/vipstyle/game/act/zj/278546/">
+<meta name="applicable-device" content="mobile">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,maximum-scale=1"/>
+<meta name="robots" content="all"/>
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Tencent-TGideas"/>
+<meta name="Copyright" content="Tencent"/>
+<meta name="Keywords" content="精英战队限量邀请" />
+<meta itemprop="name" content="来加入我的拳皇精英战队" />
+<meta itemprop="image" content="//imgcache.gtimg.cn/vipstyle/game/act/zj/278546/ossweb-img/sharelogo.png" />
+<meta name="description" itemprop="description" content="正版拳皇格斗手游，【仅限一次】精英战队招募启动，领128元成长基金！" />
+<link rel="stylesheet" href="css/index.css">
+<title>【拳皇命运】精英战队招募</title>
+<style>
+    [v-cloak]{
+        display: none;
+    }
+</style>
+<script>
+(function (win,doc){
+    if (!win.addEventListener) return;
+    var html=document.documentElement;
+    function setFont()
+    {
+        var cliWidth=html.clientWidth;
+        html.style.fontSize=100*(cliWidth/640)+'px';
+    }
+    win.addEventListener('resize',setFont,false);
+    setFont();
+})(window,document);
+</script>
+
+</head>
+<body>
+<div class="wrap" id="app" v-cloak>
+    <div class="head">
+        <h1 class="hidden">精英战队限量邀请</h1>
+        <p class="hidden">组建2人战队 领128元战队成长基金</p>
+        <!-- 已预约样式名为"btn-ordered" -->
+        <!--预约模块-->
+        <a href="javascript:void(0);" :class="[isYuyue ? 'btn-ordered' : 'btn-order','spr']" title="立即预约" @click="reservation" v-text="isYuyue ? '已预约' : '立即预约'"></a>
+        <p class="p1">预约即领特瑞<span>绝版时装</span></p>
+        <img src="ossweb-img/img1.png" class="img1" height="114" width="114" alt="预约即领特瑞绝版时装" />
+    </div>
+    <div class="cont">
+        <div class="creat">
+            <h2 class="hidden">组建战队</h2>
+            <p class="creat-p1">游戏上线当天截止战队组建</p>
+            <!--组建战队-->
+            <ul class="creat-list">
+                <li><img :src="teamInfo.hostAvatar" height="86" width="86" alt="成员" /></li>
+                <li><img :src="teamInfo.guestAvatar" height="86" width="86" alt="成员" @click="!teamInfo.isFull && inviteFriends()"/></li>
+            </ul>
+            <p class="creat-num">我的2人战队<span>{{teamInfo.isFull ? 2 : 1}}/2</span></p>
+            <!--三元内部嵌套三元 isYuyue判断是否预约  teamInfo.isFull判断战队成员是否满员-->
+            <!--<a href="javascript:void(0);" class="btn-invt spr" title="邀请加入" @click="joinTeam" v-text="isGuest ? '预约并加入战队' : (isYuyue ? (teamInfo.isFull ? '战队组建完毕' : '邀请加入') : '预约并创建战队')"></a>-->
+            <a href="javascript:void(0);" class="btn-invt spr" title="邀请加入" @click="joinTeam" v-text="isYuyue ? (teamInfo.isFull ? '战队组建完毕' : '邀请加入') : '预约并创建战队'" v-if="!isGuest"></a>
+            <a href="javascript:void(0);" class="btn-invt spr" title="邀请加入" @click="!teamInfo.isFull && joinTeam()" v-text="isYuyue ? (teamInfo.isFull ? '战队组建完毕' : '加入战队') : '预约并加入战队'" v-else></a>
+        </div>
+        <div class="collect">
+            <h2 class="hidden">价值128元战队成长基金</h2>
+            <p class="collect-p1">游戏上线后战队成员达到对应条件可领取礼包礼包单用户限领一次</p>
+            <a href="javascript:;" class="btn-collect spr" title="收藏活动" @click="collectActivity">收藏活动</a>
+        </div>
+        <div class="register">
+            <strong class="hidden">战队队员注册游戏</strong>
+            <ul class="clearfix">
+                <li><img src="ossweb-img/reg-img1.png" height="166" width="166" alt="银币x8888" /><p>银币x8888</p></li>
+                <li><img src="ossweb-img/reg-img2.png" height="166" width="166" alt="血之契约x10" /><p>血之契约x10</p></li>
+                <li><img src="ossweb-img/reg-img3.png" height="166" width="166" alt="1级活跃宝石x1" /><p>1级活跃宝石x1</p></li>
+            </ul>
+            <!-- 开发注意,领取灰态样式名为"btn-wlq" -->
+            <!--<a href="javascript:void(0);" class="btn-lq spr" title="立即领取" @click="receive(278625)" v-text="isReceive ? '立即领取' : '游戏上线后可领取'">立即领取</a>-->
+            <a href="javascript:void(0);" :class="[teamInfo.isFull ? 'btn-lq' : 'btn-wlq','spr']" title="立即领取" @click="receive(278625)" v-text="isReceive ? '立即领取' : '游戏上线后可领取'">立即领取</a>
+        </div>
+        <div class="reword">
+            <ul class="clearfix">
+                <!--领奖模块-->
+                <li v-for="(item,idx) in prizeList" :key="idx">
+                    <strong class="hidden">{{item.content}}</strong>
+                    <img :src="item.src" alt="奖品名称" height="130" width="236">
+                    <p>{{item.prizeName}}</p>
+                    <a href="javascript:void(0);" class="spr" title="立即领取" @click="receive(item.actid)">立即领取</a>
+                </li>
+            </ul>
+        </div>
+        <div class="play">
+            <h2 class="hidden">正版拳皇玩法揭秘</h2>
+            <!--gif动图-->
+            <ul class="clearfix">
+                <li>
+                    <h3 class="hidden">经典街机还原</h3>
+                    <img src="ossweb-img/play-img1.gif" height="172" width="272" alt="经典街机还原" />
+                </li>
+                <li>
+                    <h3 class="hidden">3v3自由组合</h3>
+                    <img src="ossweb-img/play-img2.gif" height="172" width="272" alt="3v3自由组合" />
+                </li>
+                <li>
+                    <h3 class="hidden">实时公平竞技</h3>
+                    <img src="ossweb-img/play-img3.gif" height="172" width="272" alt="实时公平竞技" />
+                </li>
+            </ul>
+        </div>
+        <div class="rule">
+            <a href="javascript:void(0);" title="活动规则" @click="showRule">活动规则</a>
+        </div>
+    </div>
+    <div class="foot">
+        COPYRIGHT &#169 1998 - 2018 TENCENT.ALL RIGHTS RESERVED.<br />
+        腾讯公司 版权所有
+    </div>
+</div>
+<script src="//imgcache.gtimg.cn/c/=/club/mobile_web/zepto.min-1.1.6.js,/club/game/zero/zero.m.min-6.0.1.js?max_age=86400000&v=5.0"></script>
+<script src="../dist/tool.js"></script>
+<script src="../dist/vue.js"></script>
+<script type="text/javascript">
+    window.page = new qv.zero.Page({
+        jsonid: 278546,
+        game: 'qhmy',
+        mqqEnv: true,
+        onlyMobile: true,
+        isOpenSQView: true,
+        redirectUrl: "",
+        nickName:"",
+        preloads: ['SQGameManager','FavoriteManager','cache','AreaSvrSelector'],
+        afterInit: function () {
+            qv.zero.Login.ensure();
+            this.initVue();
+            //解决安卓出现不了三个点的问题
+            setTimeout(function () {
+                mqq.ui.setWebViewBehavior({'navTextColor': '#000'});
+            }, 500)
+            this.queryNickName();
+            mqq.invoke('ui', 'webviewCanScroll', {"enable": false});
+        },
+        //查询主人态昵称
+        queryNickName:function(){
+            var nickNameKey = page.jsonid + "_nickNameKey_" + zUtil.getUin(); //主人态昵称
+            var cache = qv.zero.cache.get(nickNameKey);
+
+            if(cache){
+                page.nickName = cache;
+                page.shareMessage(page.nickName);
+            }else{
+                zHttp.send({
+                    actid:279030
+                },function(json){
+                    console.log(json);
+                    if(json.ret == 0){
+                        page.nickName = json.data.op;
+                        qv.zero.cache.add(nickNameKey,page.nickName,30*24*3600*1000);
+                    }else{
+                        page.nickName = "xxx";
+                    }
+                    page.shareMessage(page.nickName);
+                })
+            }
+        },
+        //右上角分享
+        shareMessage:function(nickName){
+            var title = zUtil.sprintf('来加入{nickname}的拳皇精英战队!', {nickname : nickName ? nickName : "我"});
+            console.log(title);
+            mqq.ui.setOnShareHandler(function (type) {
+                type = type || 0;
+                window.vm.shareContent(nickName,type);
+//                mqq.ui.shareMessage({
+//                    title: title,
+//                    desc: window.vm.shareInfo.desc,
+//                    share_type: type,
+//                    share_url: window.vm.shareInfo.url+"&invite_uin="+zUtil.getUin(),
+//                    image_url: window.vm.shareInfo.img,
+//                    back: true,
+//                    sourceName: "QQ手游"
+//                }, function(json){
+//                    if(json.retCode == 0){
+//                        zHttp.send({actid:window.vm.shareInfo.actid})
+//                    }
+//                });
+            });
+        },
+        initVue:function(){
+            var isYuyueKey = page.jsonid + "_isYuyueKey_" + zUtil.getUin(); //是否预约key
+            var isFullKey = page.jsonid + "_isFullKey_" + zUtil.getUin(); //战队是否满员key
+
+            window.vm = new Vue({
+                el:"#app",
+                data:{
+                    ruleInfo:tool.getStaticData(2)[0],
+                    isYuyue:false, //是否预约
+                    isGuest:false, //是否主客人态
+                    iosActid:278594,
+                    andActid:278595,
+                    collectActivityInfo:tool.getStaticData(3)[0],
+                    //战队信息
+                    teamInfo:{
+                        hostAvatar:"ossweb-img/img1.png", //主人头像
+                        guestAvatar:"ossweb-img/pic1.png",//客人头像
+                        teamId:"", //战队ID
+                        isFull:false, //是否满员
+                        members:[] //存放战队成员QQ号
+                    },
+                    prizeList:[
+                        {src:"ossweb-img/rew-img1.png",content:"战队成员达到20级",prizeName:"银币x8888 经验药水x20 1级强化石x20",actid:278626},
+                        {src:"ossweb-img/rew-img1.png",content:"战队成员达到40级",prizeName:"绑钻x50 银币x28888 升星晶体x20",actid:278627},
+                        {src:"ossweb-img/rew-img2.png",content:"队员达到荣耀黄金",prizeName:"银币x8888 技能书x1 安迪碎片x1",actid:278628},
+                        {src:"ossweb-img/rew-img2.png",content:"队员达到荣耀铂金",prizeName:"银币x18888 技能书x2  安迪碎片x2",actid:278629}
+                    ],
+                    shareInfo:tool.getStaticData(1)[0],//分享内容
+                    tipsMsgInfo:tool.getStaticData(6),
+                    packageInfo:tool.getStaticData(7)[0], //领取礼包对应静态数据
+                    nickName:"",
+                    isReceive:false  //是否可以领取
+                },
+                methods:{
+                    //查询是否参与指定活动（查看用户是否预约）
+                    queryIsJoinActivity:function(){
+                        var me = this;
+                        var cache = qv.zero.cache.get(isYuyueKey);
+
+                        if(cache){
+                            this.isYuyue = true;
+                        }else{
+                            zHttp.send({
+                                actid:278568
+                            },function(json){
+                                console.log(json);
+                                if(json.ret == 20126){
+                                    //已预约
+                                    me.isYuyue = true;
+                                    qv.zero.cache.add(isYuyueKey,true,30*3600*24*1000);
+                                }
+                            })
+                        }
+                    },
+                    //预约
+                    reservation:function(){
+                        var me= this;
+                        var args = {
+                            iosActid:this.iosActid,
+                            andActid:this.andActid,
+                            cb:function(tjActid,ret){
+                                if(ret == 0 || ret == 10603){
+                                    me.isYuyue = true; //改变按钮状态
+                                }
+                                var msg = zMsg.getRetMsg(tjActid, ret).m;
+                                zMsg.show(msg);
+                            }
+                        }
+
+                        function orderGame(args) {
+                            var isIOS = zUtil.isIOS(),
+                                iosActid = args.iosActid || 0,
+                                andActid = args.andActid || 0,
+                                tjActid = isIOS ? iosActid : andActid,
+                                platid = isIOS ? 2 : 1,
+                                page = args.page || window.page,
+                                cb = args.cb,
+                                orderUrl = location.protocol + '//info.gamecenter.qq.com/cgi-bin/gc_gameinfo_v2_fcgi?param={"key":{"param":{"tt":' + platid + ',"appid":"' + getAppidByGame(page.game) + '","source":"' + page.jsonid + '"},"module":"gc_gameinfo_v2","method":"subscribeUpcomingGameV2"}}&g_tk=' + zUtil.getToken();
+                            //获取游戏appid
+                            function getAppidByGame(game) {
+                                game = game.charAt(0).toLocaleUpperCase() + game.substr(1);
+                                return window.AMD_game[game].a;
+                            }
+
+                            zHttp.ajax({
+                                url: orderUrl,
+                                callback: function (json) {
+                                    var ret = -1;
+                                    switch (+zUtil.getValueFromObj(json, 'data.key.retBody.result')) {
+                                        case 0 :
+                                            ret = 0;
+                                            zHttp.send({actid: tjActid});
+                                            break;
+                                        //已经预约
+                                        case 1995001 :
+                                            ret = 10603;
+                                            break;
+                                    }
+                                    var msg = zMsg.getRetMsg(tjActid, ret).m;
+                                    if (cb) {
+                                        cb(tjActid,ret);
+                                    } else {
+                                        zMsg.show(msg);
+                                    }
+                                }
+                            });
+                        }
+                        //已经预约过的，就直接返回
+                        if(this.isYuyue){
+                            return false;
+                        }else{
+                            orderGame(args);
+                        }
+                    },
+                    //邀请好友(通过teamInfo.isFull字段来控制)
+                    inviteFriends:function(){
+                        this.shareContent(page.nickName,0);
+                    },
+                    //分享内容
+                    shareContent:function(nickName,type){
+                        var me = this;
+                        var title = zUtil.sprintf('来加入{nickname}的拳皇精英战队!', {nickname : nickName ? nickName : "我"});
+                        console.log(title);
+
+                        mqq.ui.shareMessage({
+                            title: title,
+                            desc: this.shareInfo.desc,
+                            share_type: type,
+                            share_url:this.shareInfo.url+"&invite_uin="+zUtil.getUin()+"&teamid="+this.teamInfo.teamId,
+                            image_url: this.shareInfo.img,
+                            back: true,
+                            sourceName: "QQ手游"
+                        },function(json){
+                            if(json.retCode == 0){
+                                zHttp.send({actid:me.shareInfo.actid})
+                            }
+                        });
+                    },
+                    joinTeamNew:function(teamid){
+                        var me = this;
+                        zHttp.syrequest({
+                            actid:278581,
+                            team_id:teamid
+                        },function(json,actid,fn){
+                            console.log(json);
+                            if(json.ret == 0){
+                                me.teamInfo.guestAvatar = window.location.protocol+"//q.qlogo.cn/g?b=qq&s=100&nk="+zUtil.getUin(); //客人头像
+                                me.teamInfo.isFull = true;
+                                zMsg.show("恭喜您加入队伍！");
+                            }else if(json.ret == 70297){
+                                zMsg.show("没找到该队伍信息");
+                            }else if(json.ret == 70298){
+                                zMsg.show("该队伍已经满员了，无法加入！");
+                            }else if (json.ret == 70299) {
+                                zMsg.show('您已经在一个队伍了，不能加入其他队伍哦！');
+                            }
+                        })
+                    },
+                    //加入队伍(分为多种情况)
+                    joinTeam:function(){
+                        var me = this;
+                        var team_id = zURL.get("teamid") ? zURL.get("teamid") : "";
+                        var invite_uin = zURL.get("invite_uin") ? Number(zURL.get("invite_uin")) : "";
+
+                        //战队成员未满
+                        if(!this.teamInfo.isFull){
+                            //未预约，则先预约
+                            if(!this.isYuyue){
+                                this.reservation(); //预约
+                                if(this.isGuest){
+                                    this.joinTeamNew(team_id);
+                                }else{
+                                    this.shareContent(page.nickName,0);
+                                }
+                            }else{
+                                if(this.isGuest){
+                                    this.joinTeamNew(team_id);
+                                }else{
+                                    this.shareContent(page.nickName,0);
+                                }
+                            }
+                        }else{
+                            //战队组建完毕
+                            return false;
+                        }
+                    },
+                    //收藏活动
+                    collectActivity:function(){
+                        var actid = this.collectActivityInfo["actid"];
+                        var url = this.collectActivityInfo["url"];
+                        tool.collectActivity(actid,url)
+                    },
+                    showRule:function(){
+                        zMsg.show(this.ruleInfo.text);
+                    },
+                    //查询组队信息(查询并创建)
+                    queryTeamInfo:function(){
+                        var me = this;
+                        var cache = qv.zero.cache.get(isFullKey);
+                        //缓存 -- 若当前members已满员，就不发起请求
+                        if(cache){
+                            console.log(cache);
+                            this.teamInfo.members = Object.keys(cache.members);
+                            this.teamInfo.isFull = true;
+                            this.teamInfo.hostAvatar = window.location.protocol+"//q.qlogo.cn/g?b=qq&s=100&nk="+this.teamInfo.members[0];
+                            this.teamInfo.guestAvatar = window.location.protocol+"//q.qlogo.cn/g?b=qq&s=100&nk="+this.teamInfo.members[1];
+                        }else{
+                            zHttp.syrequest({
+                                actid:278580
+                            },function(json,actid,fn){
+                                console.log(json);
+                                if(json.ret == 0){
+                                    me.teamInfo.teamId = json.data.op.id; //队伍唯一ID
+                                    me.teamInfo.members = Object.keys(json.data.op.members);
+                                    if(me.isGuest){
+                                        //客态 -- 取invite_uin作为主人头像
+                                        me.teamInfo.hostAvatar = window.location.protocol+"//q.qlogo.cn/g?b=qq&s=100&nk="+zURL.get("invite_uin");
+                                    }else{
+                                        me.teamInfo.hostAvatar = window.location.protocol+"//q.qlogo.cn/g?b=qq&s=100&nk="+me.teamInfo.members[0];
+                                    }
+                                    //成员人数达到2人
+                                    if(me.teamInfo.members.length == 2){
+                                        //展示客人头像
+                                        me.teamInfo.guestAvatar = window.location.protocol+"//q.qlogo.cn/g?b=qq&s=100&nk="+me.teamInfo.members[1];
+                                        me.teamInfo.isFull = true;
+//                                        qv.zero.cache.add(isFullKey,true,30*3600*24*1000);
+                                        qv.zero.cache.add(isFullKey,json.data.op,30*3600*24*1000);
+                                    }
+                                }
+                            })
+                        }
+                    },
+                    //检查URL上面的字段
+                    checkUrlInfo:function(){
+                        var cb = new qv.zero.CallBack();
+                        var me = this;
+                        var team_id = zURL.get("teamid") ? zURL.get("teamid") : "";
+                        var invite_uin = zURL.get("invite_uin") ? Number(zURL.get("invite_uin")) : "";
+
+                        if(invite_uin && invite_uin !== zUtil.getUin() && team_id) {
+                            this.isGuest = true;
+                        }
+                        cb.execute(true);
+                        return cb;
+                    },
+                    //领取奖励
+                    receive:function(actid){
+                        //当前时间小于 游戏上线开始时间
+                        if(!this.isReceive){
+                            zMsg.show(this.packageInfo["msg"]);
+                        }else{
+                            this.initAreaSvrSelector(actid);
+                        }
+                    },
+                    //区服信息
+                    initAreaSvrSelector:function(actid){
+                        var isReceiveKey = page.jsonid + "_isReceiveKey_"+actid+"_" + zUtil.getUin(); //领取key
+                        var cache = qv.zero.cache.get(isReceiveKey);
+
+                        if(cache){
+                            zMsg.show("亲，你已经领取过奖励了！");
+                        }else{
+                            var ass = new qv.zero.AreaSvrSelector({
+                                game:"qhmy",
+                                send: function (json) {
+                                    console.log(json);
+                                    var partition = json.partition || "";  //区服信息
+                                    var roleid = json.roleid || "";  //角色信息
+                                    zHttp.syrequest({
+                                        actid:actid,
+                                        checkInstall: true,
+                                        partition:partition,
+                                        roleid:roleid
+                                    },function(json,actid,fn){
+                                        console.log(json);
+                                        if(json.ret == 0){
+                                            zMsg.show("恭喜您成功领取奖励！");
+                                            //添加缓存
+                                            qv.zero.cache.add(isReceiveKey,true,30*24*3600*1000);
+                                        }else if(json.ret == 70326){
+                                            zMsg.show(me.tipsMsgInfo[0]["msg"]);
+                                        }else{
+                                            zHttp.showResponse(json,json.actid,fn);
+                                        }
+                                    })
+                                }
+                            });
+                            ass.show();
+                        }
+                    },
+                    //比较时间(当前时间戳与游戏上线时间戳)
+                    compareTime:function(){
+                        var now = +new Date();
+                        var activityStartTimeStamp = new Date(this.packageInfo["date"].replace(/-/g,"/")).getTime();
+//                        var activityStartTimeStamp = new Date("2015-02-02 00:00:00").getTime();
+
+                        if(now > activityStartTimeStamp){
+                            this.isReceive = true;
+                        }
+                    }
+                },
+                mounted:function(){
+                    var me = this;
+                    this.checkUrlInfo().add(function(json){
+                        if(json){
+                            me.queryTeamInfo();
+                        }
+                    });
+                    this.queryIsJoinActivity();
+                    this.compareTime();
+                }
+            })
+        }
+    })
+</script>
+</body>
+</html>
